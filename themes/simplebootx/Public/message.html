@@ -1,0 +1,20 @@
+<div class="index-con3">
+	<div class="container index-message">
+		<div class="row">
+			<div class="col-xs-12">
+				<header class="title">				
+					<h1>Message</h1>
+					<p><span>Mail:&nbsp;thinkpower@cntinkpower.com</span><span>Tel:&nbsp;+86-0755-33985960</span></p>					
+				</header>		
+				<form action="{:U('api/guestbook/addmsg')}" method="post" class="message-form">
+					<input type="hidden" name="type" value="1">
+					<input type="text" name="mainname" placeholder="Name">
+					<input type="text" name="company" placeholder="Company">
+					<input type="text" name="email" placeholder="Email">
+					<textarea name="msg" id="" class="message" placeholder="Message"></textarea>
+					<input type="submit" value="Submit" class="submit-btn">
+				</form>		 
+			</div>
+		</div>
+	</div>
+</div>

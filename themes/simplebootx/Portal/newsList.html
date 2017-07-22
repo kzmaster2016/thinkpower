@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="player video vidmate movie mxplayer vlc Bollywood">
+    <meta name="description" content="All-around high definition media player">
+	<link rel="icon" href="images/ico_logo.png" type="image/x-icon" />
+	<base href="__TMPL__Public/assets/">
+	<title>News List</title>	
+	<!--common-->
+	<link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/response.css">
+	<!-- slick -->
+	<!-- <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css"> -->
+	<!-- fullpage -->
+	<!-- <link rel="stylesheet" type="text/css" href="plugins/fullpage/fullpage.css"> -->
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  	<!--[if lt IE 9]>
+  	<script src="plugins/html5shiv.js"></script>
+  	<script src="plugins/respond.min.js"></script>
+  	<![endif]-->
+  	<script type="text/javascript">
+
+  	</script>
+
+</head>
+<body class="pcbody about-page">
+	<input type="hidden" value="0" class="active-maninav">
+	<tc_include file="Public:nav" />
+
+	<div class="banner-con">
+		<img src="images/banner/company.jpg" alt="">
+	</div>
+
+	<div class="company-con">
+		<div class="container">
+			<div class="row">
+				<ul class="company-nav">
+					<li><a href="{:U('Company/about')}">About</a></li>
+					<li><a href="{:U('Company/leader')}">Leadship</a></li>
+					<li class="active"><a href="{:U('Company/news')}">News</a></li>
+					<li><a href="{:U('Company/successfulCase')}">Successful Case</a></li>
+					<li><a href="###">Support</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="news-con">
+			<div class="container">
+				<volist name="lists['posts']" id="vo">
+				<php>
+					$smeta=json_decode($vo['smeta'],true); 
+					$day=$vo['post_date'];
+
+				</php>
+
+				<div class="row news-item">
+					<div class="col-sm-3 item-cover"><img src="{:sp_get_asset_upload_path($smeta['thumb'])}" alt=""></div>
+					<div class="col-sm-2 item-data">
+						<span class="date">{$vo.post_date|strtotime|date="d",###}</span>
+						<span class="month">{$vo.post_date|strtotime|date="M",###}</span>
+					</div>
+					<div class="col-sm-7 item-con">
+						<h4><a href="{:U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a></h4>
+						<p>{$vo.post_excerpt|msubstr=0,256}</p>
+						<a href="{:U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">READ MORE</a>
+					</div>
+				</div>	
+				</volist>			
+			</div>
+			<div class="pagination">
+				<ul>{$lists['page']}</ul>
+			</div>
+		</div>
+		  
+	</div>
+
+	<tc_include file="Public:message"/>
+
+	<tc_include file="Public:footer"/>
+
+	 
+</body>
+</html>
