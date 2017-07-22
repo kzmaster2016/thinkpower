@@ -2,9 +2,6 @@
 .DS_Store
 .project
 .settings
-/data/
-!/data/index.html
-!/data/runtime/index.html
 .idea
 
 
