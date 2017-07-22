@@ -1,0 +1,16 @@
+[ 2017-07-20T15:33:12+08:00 ] ::1 /index.php/user/index/is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000526s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000881s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000339s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002165s ]
+NOTIC: [8] Undefined index: url D:\AppServ\www\application\Common\Controller\AppframeController.class.php 第 22 行.
+
+[ 2017-07-20T15:34:09+08:00 ] ::1 /index.php/user/index/is_login
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000624s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001426s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000340s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002879s ]
+NOTIC: [8] Undefined index: url D:\AppServ\www\application\Common\Controller\AppframeController.class.php 第 22 行.
+
