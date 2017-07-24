@@ -18,7 +18,7 @@
 .other-prod .other-prod-list .prod-item{width: 150px;height: 150px;}
 .other-prod .other-prod-list .prod-item a h4{font-size: 22px; line-height: 30px;margin: 40px 0 0;}
 .other-prod .other-prod-list .prod-item a p{font-size: 12px;padding: 0;}
-.container{width: 100%;}
+/*.container{width: 100%;}*/
 .header .con2>.container{width: 970px;}
 .intro-wrap .intro-con .section{width: 1000px;}
 .intro-wrap .intro-con .list1{padding: 80px 0 110px;}
@@ -58,4 +58,7 @@
 .other-prod .other-prod-list .prod-item{width: 120px;height: 120px;margin: 0 50px;}
 .intro-wrap .intro-con .section{width: 760px;padding: 50px;min-height: auto;}
 .about-con .bg{position: absolute;right: 0;top: 0;width: 100%;height: 100%;background: url(../images/bg/about_4.jpg) center center/cover no-repeat;}
+.header .main-nav{float: none;}
+.header .main-nav li{float: none;text-align: center;}
+.header .main-nav li a{line-height: 40px;}
 }

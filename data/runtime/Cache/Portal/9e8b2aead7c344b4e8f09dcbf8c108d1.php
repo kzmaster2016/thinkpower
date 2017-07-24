@@ -97,6 +97,7 @@
 					</tr>
 				</thead>
 				<?php if(is_array($posts)): foreach($posts as $key=>$vo): ?><tr>
+					 
 					<td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="<?php echo ($vo["id"]); ?>" title="ID:<?php echo ($vo["id"]); ?>"></td>
 					<?php if(!empty($term)): ?><td><input name="listorders[<?php echo ($vo["tid"]); ?>]" class="input input-order" type="text" size="5" value="<?php echo ($vo["listorder"]); ?>"></td><?php endif; ?>
                     <td><b><?php echo ($vo["id"]); ?></b></td>
@@ -106,7 +107,7 @@
 							<?php echo ($vo["post_title"]); endif; ?>
 					</td>
 					<td><?php echo ((isset($vo["user_nicename"]) && ($vo["user_nicename"] !== ""))?($vo["user_nicename"]):$vo.user_login); ?></td>
-					<td>分类名称</td>
+					<td><?php echo ($vo["term_name"]); ?></td>
 					<td><?php echo ($vo["post_hits"]); ?></td>
 					<!-- <td>
 						<?php if(!empty($vo["comment_count"])): ?><a href="javascript:parent.open_iframe_dialog('<?php echo U('comment/commentadmin/index',array('post_id'=>$vo['id']));?>','评论列表')"><?php echo ($vo["comment_count"]); ?></a>

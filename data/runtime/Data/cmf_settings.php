@@ -1,1 +1,0 @@
-a:1:{s:16:"banned_usernames";s:0:"";}

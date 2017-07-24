@@ -77,9 +77,12 @@
 	<div class="company-con">	
 		<div class="solution-con">
 			<div class="container">
+				<div class="row detailhd alignm">
+					<h3><?php echo ($post_title); ?></h3>			 
+				</div>	
 				<div class="row detailbd">
 					<?php echo ($post_content); ?>
-					<div class="introduce">
+					<!-- <div class="introduce">
 						With the emergency of sharing device, <br/>
 						such as sharing bike,sharing car,the GPS<br/>
 						is helping the sharing company to manage the devices remotely.
@@ -109,7 +112,7 @@
 								<p>The payment of user will be decided by the using time,while the open and closure of the lock will help to decide the using time.</p>
 							</li>
 						</ul>
-					</div>
+					</div> -->
 				</div>			 
 			</div>		 
 		</div>	

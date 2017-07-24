@@ -89,9 +89,9 @@ class ApiService {
     	    $page->setLinkWraper("li");
     	    $page->__set("PageParam", $page_param);
             if(sp_is_mobile()){
-                $pagesetting= array("listlong" => "2", "prev" => "上一页", "next" => "下一页", "list" => "*", "disabledclass" => "");
+                $pagesetting= array("listlong" => "2", "prev" => "prev", "next" => "next", "list" => "*", "disabledclass" => "");
             }else{
-                $pagesetting=array("listlong" => "4", "first" => "首页", "last" => "尾页", "prev" => "上一页", "next" => "下一页", "list" => "*", "disabledclass" => "");
+                $pagesetting=array("listlong" => "4", "first" => "first", "last" => "last", "prev" => "prev", "next" => "next", "list" => "*", "disabledclass" => "");
             }
     	    $page->SetPager('default', $pagetpl,$pagesetting);
     	    

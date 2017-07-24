@@ -95,7 +95,7 @@
 						<div class="jianjie">
 							<h4>Chief Executive Officer</h4>
 							<h3>Hardy Xia</h3>
-							<p>Nobody can casually succeed,it comes from the thoroughself-control and the will.</p>
+							<p>We believe M2M will change our ordinary life, pleasure to be the pioneer.</p>
 						</div>
 					</li>
 					<li class="inblockt">
@@ -103,7 +103,7 @@
 						<div class="jianjie">
 							<h4>Chief Technology Officer</h4>
 							<h3>Jason Wang</h3>
-							<p>Nobody can casually succeed,it comes from the thoroughself-control and the will.</p>
+							<p>The passion and persistence for software is running in my blood.</p>
 						</div>
 					</li>
 					<li class="inblockt">
@@ -111,7 +111,7 @@
 						<div class="jianjie">
 							<h4>Hardware Manager</h4>
 							<h3>Loe Liu</h3>
-							<p>Nobody can casually succeed,it comes from the thoroughself-control and the will.</p>
+							<p>A gentle man should hold the outer world with broad mind.</p>
 						</div>
 					</li>
 					<li class="inblockt">
@@ -119,7 +119,7 @@
 						<div class="jianjie">
 							<h4>Vice General Manager</h4>
 							<h3>Tie Zhou</h3>
-							<p>Nobody can casually succeed,it comes from the thoroughself-control and the will.</p>
+							<p>There is no perfect end, while our product is on the way.</p>
 						</div>
 					</li>
 
@@ -127,8 +127,11 @@
 			</div>
 		</div>
 		<div class="company-about-ban">
-			<img src="images/bg/about_2.jpg" alt="">
-		</div>	 
+			<div class="container">
+				<div class="row"><img src="images/picpng/company_1.png" alt=""></div>		
+			</div>	
+		</div>
+		
 	</div>
 
 	<div class="index-con3">

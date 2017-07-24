@@ -4,11 +4,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="player video vidmate movie mxplayer vlc Bollywood">
-    <meta name="description" content="All-around high definition media player">
+    <meta name="keywords" content="<?php echo ($site_seo_keywords); ?>" />
+	<meta name="description" content="<?php echo ($site_seo_description); ?>">
 	<link rel="icon" href="images/ico_logo.png" type="image/x-icon" />
 	<base href="/themes/simplebootx/Public/assets/">
-	<title>Home</title>	
+	<title><?php echo ($site_name); ?></title>	
 	<!--common-->
 	<link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
@@ -189,24 +189,15 @@
 				</div>
 			</div>
 			<div class="row events-con">
+				<?php if(is_array($lists['posts'])): $i = 0; $__LIST__ = $lists['posts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; $smeta=json_decode($vo['smeta'],true); $day=$vo['post_date']; ?>
+
 				<div class="col-sm-4 item">
-					<div class="img-cover"><img src="images/tippng/tip_1.jpg" alt=""></div>
-					<h5>3G GPS Vehicle</h5>
-					<p>3G GPS Vehicle</p>
-					<a href="###">More&emsp;<i class="fa fa-arrow-right"></i></a>
-				</div>
-				<div class="col-sm-4 item">
-					<div class="img-cover"><img src="images/tippng/tip_2.jpg" alt=""></div>
-					<h5>Be our distributor</h5>
-					<p>To achieve win-win between Think Power and brand agents</p>
-					<a href="###">More&emsp;<i class="fa fa-arrow-right"></i></a>
-				</div>
-				<div class="col-sm-4 item">
-					<div class="img-cover"><img src="images/tippng/tip_3.jpg" alt=""></div>
-					<h5>ROADMAP</h5>
-					<p>New products released quaterly every year</p>
-					<a href="###">More&emsp;<i class="fa fa-arrow-right"></i></a>
-				</div>
+					<div class="img-cover"><img src="<?php echo sp_get_asset_upload_path($smeta['thumb']);?>" alt=""></div>
+					<h5><a href="<?php echo U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']));?>"><?php echo ($vo["post_title"]); ?></a></h5>
+					<p><?php echo (msubstr($vo["post_excerpt"],0,256)); ?></p>
+					<a href="<?php echo U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']));?>">More&emsp;<i class="fa fa-arrow-right"></i></a>
+				</div><?php endforeach; endif; else: echo "" ;endif; ?>
+				 
 			</div>
 		</div>
 	</div>

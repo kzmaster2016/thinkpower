@@ -177,9 +177,7 @@
 	<script src="js/tool.js"></script>
 	<script type="text/javascript" src="plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="plugins/slick/slick.min.js"></script>
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/videoplayer.jquery-1.0.js"></script>
-
+	<!-- <script src="js/jquery.nicescroll.js"></script> -->
 	<script type="text/javascript" src="plugins/jquery.mousewheel.js"></script>
 	<script src="js/main.js"></script>
 

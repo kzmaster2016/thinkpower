@@ -73,7 +73,7 @@
 	</div>					
 </div>
 	<div class="banner-con product-banner">
-		<img src="images/product/banner_2.jpg" alt="">
+		<img src="images/product/prodcatbanner_1.jpg" alt="">
 	</div>
 
 	<div class="productdeatil-con">

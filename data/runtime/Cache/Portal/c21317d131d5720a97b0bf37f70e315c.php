@@ -82,7 +82,7 @@
 				<ul class="company-nav">
 					<li><a href="<?php echo U('Company/about');?>">About</a></li>
 					<li><a href="<?php echo U('Company/leader');?>">Leadship</a></li>
-					<li class="active"><a href="<?php echo U('Company/news');?>">News</a></li>
+					<li class="active"><a href="<?php echo U('News/index');?>">News</a></li>
 					<li><a href="<?php echo U('Company/successfulCase');?>">Successful Case</a></li>
 					<li><a href="###">Support</a></li>
 				</ul>
@@ -105,8 +105,8 @@
 					</div>
 				</div><?php endforeach; endif; else: echo "" ;endif; ?>			
 			</div>
-			<div class="pagination">
-				<ul><?php echo ($lists['page']); ?></ul>
+			<div class="container pagepagination-wrap">
+				<ul class="pagination"><?php echo ($lists['page']); ?></ul>
 			</div>
 		</div>
 		  

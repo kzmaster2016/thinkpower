@@ -81,57 +81,46 @@
 				<ul class="company-nav">
 					<li><a href="<?php echo U('Company/about');?>">About</a></li>
 					<li><a href="<?php echo U('Company/leader');?>">Leadship</a></li>
-					<li><a href="<?php echo U('Company/news');?>">News</a></li>
+					<li><a href="<?php echo U('News/index');?>">News</a></li>
 					<li class="active"><a href="<?php echo U('Company/successfulCase');?>">Successful Case</a></li>
 					<li><a href="###">Support</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="case-con">
-			<div class="container">
-				<div class="row case-item child-fr clearfix">
-					<div class="case-cover"><img src="images/picjpg/case_1.jpg" alt=""></div>
-					<div class="case-jianjie">
-						<div class="intro">
-							<strong>Think Power</strong>is VP2003 was connected with fuel sensor,which was uesd to detect the fuel volumes
-							,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes
-						</div>
-						<a href="###" class="link">Let me see</a>
+			<div class="container caselist-con">
+				<?php if(is_array($lists['posts'])): $i = 0; $__LIST__ = $lists['posts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; $smeta=json_decode($vo['smeta'],true); $day=$vo['post_date']; ?>
+				<div class="row case-item clearfix">
+					<div class="col-sm-6 case-cover">
+						<!-- <img src="<?php echo sp_get_asset_upload_path($smeta['thumb']);?>" alt=""> -->
+						<img src="<?php echo sp_get_asset_upload_path($smeta['photo']['0']['url']);?>" alt="" class="img1">
+						<img src="<?php echo sp_get_asset_upload_path($smeta['photo']['1']['url']);?>" alt="" class="img2">
+						 
 					</div>
-				</div>
-				<div class="row case-item child-fl clearfix">
-					<div class="case-cover"><img src="images/picjpg/case_1.jpg" alt=""></div>
-					<div class="case-jianjie">
+					<div class="col-sm-6 case-jianjie">
+						<h3 class="hd"><?php echo ($vo["post_title"]); ?></h3>
 						<div class="intro">
-							<strong>Think Power</strong>is VP2003 was connected with fuel sensor,which was uesd to detect the fuel volumes
-							,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes
+							<?php echo (msubstr($vo["post_excerpt"],0,256)); ?>
 						</div>
-						<a href="###" class="link">Let me see</a>
+						<a href="<?php echo U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']));?>" class="link">learn more</a>
 					</div>
-				</div>
-				<div class="row case-item child-fr clearfix">
-					<div class="case-cover"><img src="images/picjpg/case_1.jpg" alt=""></div>
-					<div class="case-jianjie">
+				</div><?php endforeach; endif; else: echo "" ;endif; ?>
+				<!-- <div class="row case-item clearfix">
+					<div class="col-sm-6 case-cover">
+						<img src="images/picjpg/case_1.jpg" alt="">
+					</div>
+					<div class="col-sm-6 case-jianjie">
+						<h3 class="hd">Think Power Offer ODM Products for Elderly GPS Tracker for Canada</h3>
 						<div class="intro">
-							<strong>Think Power</strong>is VP2003 was connected with fuel sensor,which was uesd to detect the fuel volumes
-							,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes
+							In June, 2017, Think Power offered the ODM personal GPS tracker for Canada, including the hardware and software support.The ODM product will be applied for government special care project. It’s long battery backup, which will avoid frequent charging for elderly people. And humanization SOS design helps people to call for help immediately... 
 						</div>
-						<a href="###" class="link">Let me see</a>
+						<a href="###" class="link">learn more</a>
 					</div>
-				</div>
-				<div class="row case-item child-fl clearfix">
-					<div class="case-cover"><img src="images/picjpg/case_1.jpg" alt=""></div>
-					<div class="case-jianjie">
-						<div class="intro">
-							<strong>Think Power</strong>is VP2003 was connected with fuel sensor,which was uesd to detect the fuel volumes
-							,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes,which was uesd to detect the fuel volumes
-						</div>
-						<a href="###" class="link">Let me see</a>
-					</div>
-				</div>
+				</div> -->
+				 
 			</div>
-			<div class="pagenation">
-				
+			<div class="container pagepagination-wrap">
+				<ul class="pagination"><?php echo ($lists['page']); ?></ul>
 			</div>
 		</div>
 		  

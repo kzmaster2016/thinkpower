@@ -92,10 +92,11 @@
 					</div> -->
 					 
 				</div>	
-				<div class="row">
-					<div class="paganation"></div>
-				</div>		 
-			</div>		 
+				 		 
+			</div>	
+			<div class="container pagepagination-wrap">
+				<ul class="pagination"><?php echo ($lists['page']); ?></ul>
+			</div>	 
 		</div>	
 	</div>
 	<div class="index-con3">

@@ -30,7 +30,8 @@ class AdminTermController extends AdminbaseController {
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		foreach ($result as $r) {
 			$r['str_manage'] = '<a href="' . U("AdminTerm/add", array("parent" => $r['term_id'])) . '">'.L('ADD_SUB_CATEGORY').'</a> | <a href="' . U("AdminTerm/edit", array("id" => $r['term_id'])) . '">'.L('EDIT').'</a> | <a class="js-ajax-delete" href="' . U("AdminTerm/delete", array("id" => $r['term_id'])) . '">'.L('DELETE').'</a> ';
-			$url=U('portal/list/index',array('id'=>$r['term_id']));
+			// $url=U('portal/list/index',array('id'=>$r['term_id']));
+			$url="javascript:;";
 			$r['url'] = $url;
 			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
 			$r['id']=$r['term_id'];

@@ -7,46 +7,22 @@
 // +----------------------------------------------------------------------
 namespace Portal\Controller;
 use Common\Controller\HomebaseController;
+use Portal\Service\ArticleService;
 
 class SolutionController extends HomebaseController {
-	public function index(){
+	/*public function index(){
 		$this->display('solutionList');
-	}
+	}*/
 	public function solutionList(){
-		// $term_id=I('get.id',0,'intval');
-	    $term_id=3;
-	    $term_ids=sp_get_all_child_terms($term_id);
-		$term=sp_get_term($term_id);
-		if(empty($term)){
-		    header('HTTP/1.1 404 Not Found');
-		    header('Status:404 Not Found');
-		    if(sp_template_file_exists(MODULE_NAME."/404")){
-		        $this->display(":404");
-		    }
-		    return;
-		}
 
-		$terms=sp_get_all_child_terms($term_id); //关联数组
-	
-		$arrTerms=Array(); // 索引数组
-		foreach ($terms as $value) {
-			$arrTerms[]=$value['term_id'];
-		}
-		// var_dump($arrTerms);
+        $listResult=new ArticleService();
+        $result=$listResult->articlelist(3);
 
-		$arrTerms[]=$term_id;
-		$strTerms=implode(",",$arrTerms);
-		// echo $strTerms;
+    	$this->assign($result['term']);
+    	$this->assign('cat_id', $result['strTerms']);
+    	$this->assign('lists', $result['lists']);
 
-		$lists = sp_sql_posts_paged("cid:$strTerms;order:post_date DESC;",10);
-		// dump($lists);
-
-    	$this->assign($term);
-    	$this->assign('cat_id', $strTerms);
-    	$this->assign('lists', $lists);
-
-
-	    $tplname=$term["list_tpl"];
+	    $tplname=$result['term']["list_tpl"];
 	    $tplname=sp_get_apphome_tpl($tplname,"list");
 	    $this->display(":$tplname");
 	}

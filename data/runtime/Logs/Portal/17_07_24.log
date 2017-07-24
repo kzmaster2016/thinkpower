@@ -1,0 +1,416 @@
+[ 2017-07-24T17:22:45+08:00 ] ::1 /index.php/AdminPost/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000605s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000965s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000337s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002303s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001323s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001369s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0034s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0043s ]
+SQL: DELETE FROM `cmf_term_relationships` WHERE `object_id` = 2 AND `term_id` NOT IN ('3') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_term_relationships` WHERE `object_id` = 2 AND `term_id` = '3' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_term_relationships` SET `status`='1' WHERE `object_id` = 2 AND `term_id` = '3' [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_posts` SET `post_title`='share-device management',`post_keywords`='share-device',`post_source`='',`post_excerpt`='share-device management',`post_date`='2017-07-05 14:08:42',`post_status`='1',`istop`='1',`recommended`='1',`post_content`='<p>解决方案详情，</p><p>With the emergency of sharing device,&nbsp;<br style=\"box-sizing: border-box;\"/>such as sharing bike,sharing car,the GPS<br style=\"box-sizing: border-box;\"/>is helping the sharing company to manage the devices remotely.</p><p><img src=\"http://localhost:88/themes/simplebootx/Public/assets/images/picjpg/scene_1.jpg\" alt=\"\" style=\"box-sizing: border-box; border: 0px; vertical-align: middle; width: 400px; display: block; margin: 0px auto 20px;\"/><img src=\"http://localhost:88/themes/simplebootx/Public/assets/images/picjpg/scene_2.jpg\" alt=\"\" style=\"box-sizing: border-box; border: 0px; vertical-align: middle; width: 400px; display: block; margin: 0px auto 20px;\"/><img src=\"http://localhost:88/themes/simplebootx/Public/assets/images/picjpg/scene_3.jpg\" alt=\"\" style=\"box-sizing: border-box; border: 0px; vertical-align: middle; width: 400px; display: block; margin: 0px auto 20px;\"/></p><h3 style=\"box-sizing: border-box; font-family: &quot;Times New Roman&quot;; line-height: 30px; color: rgb(6, 6, 6); margin-top: 20px; margin-bottom: 50px; font-size: 16px; letter-spacing: 1px;\">How could LOT to support you?</h3><ul class=\"alignm list-paddingleft-2\" style=\"list-style-type: none;\"><li><h4 style=\"box-sizing: border-box; font-family: &quot;Times New Roman&quot;; line-height: 40px; color: inherit; margin: 0px; font-size: 15px;\">Find the Device Fast:</h4><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; line-height: 30px;\">It helps the user to find device fast,and the company to know the exiting of the current whole devices.</p></li><li><p>&nbsp;</p></li><li><h4 style=\"box-sizing: border-box; font-family: &quot;Times New Roman&quot;; line-height: 40px; color: inherit; margin: 0px; font-size: 15px;\">Open the Lock Instantly:</h4><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; line-height: 30px;\">The user could use the Bluetooth or the SIM network to open the around device by themselves.</p></li><li><h4 style=\"box-sizing: border-box; font-family: &quot;Times New Roman&quot;; line-height: 40px; color: inherit; margin: 0px; font-size: 15px;\">Device Location Optimal Management:</h4><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; line-height: 30px;\">The GPS history report will offer data to the device company on how to locate the device in the neaded area.</p></li><li><p>&nbsp;</p></li><li><h4 style=\"box-sizing: border-box; font-family: &quot;Times New Roman&quot;; line-height: 40px; color: inherit; margin: 0px; font-size: 15px;\">User Behavior Management:</h4><p style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0px; line-height: 30px;\">The payment of user will be decided by the using time,while the open and closure of the lock will help to decide the using time.</p></li></ul><p><br/></p>',`post_modified`='2017-07-24 17:22:45',`smeta`='{\"thumb\":\"portal\\/20170724\\/5975bc24496b2.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"http:\\/\\/localhost:88\\/data\\/upload\\/portal\\/20170705\\/595c829c78fb2.jpg\",\"alt\":\"ico.jpg\"}]}' WHERE `id` = '2' [ RunTime:0.0003s ]
+
+[ 2017-07-24T17:22:51+08:00 ] ::1 /index.php/portal/list/index/id/6
+ERR: 无法加载控制器:List
+
+[ 2017-07-24T17:24:54+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000604s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001164s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000430s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002640s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001212s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001256s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0170s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0044s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0039s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('stolen vehicle recovery','stolen vehicle','','stolen vehicle recovery','2017-07-24 17:23:59','1','0','0','<p>stolen vehicle recovery</p>','2017-07-24 17:24:54','1','{\"thumb\":\"portal\\/20170724\\/5975bcdf15628.jpg\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','14') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:25:28+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000463s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001047s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000363s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002353s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001320s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001392s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0159s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0050s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0045s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('cold chain','','','cold chain','2017-07-24 17:24:57','1','0','0','<p>cold chain</p>','2017-07-24 17:25:28','1','{\"thumb\":\"portal\\/20170724\\/5975bd05f0594.jpg\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','15') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:26:39+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000443s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001010s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000359s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002276s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001425s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001512s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0179s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0038s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0041s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('buses and coaches','buses coaches','','buses and coaches','2017-07-24 17:25:30','1','0','0','<p>buses and coaches</p>','2017-07-24 17:26:39','1','{\"thumb\":\"portal\\/20170724\\/5975bd4c32972.jpg\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','16') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:27:16+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000398s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000804s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000250s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001839s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001209s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001275s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0172s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0080s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('construction','construction','','construction','2017-07-24 17:26:40','1','0','0','<p>construction</p>','2017-07-24 17:27:16','1','{\"thumb\":\"portal\\/20170724\\/5975bd7121a01.jpg\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','17') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:28:02+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000516s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001065s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000424s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002732s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001416s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001512s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0179s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0047s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0034s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0034s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('vehicle finance','finance','','vehicle finance','2017-07-24 17:27:17','1','0','0','<p>vehicle finance</p>','2017-07-24 17:28:02','1','{\"thumb\":\"portal\\/20170724\\/5975bda0ad27a.jpg\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','18') [ RunTime:0.0001s ]
+
+[ 2017-07-24T17:28:58+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000559s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001250s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000349s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002850s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001472s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001522s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0163s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0035s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0047s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0042s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('insurance telematics','insurance telematics','','insurance telematics','2017-07-24 17:28:03','1','0','0','<p>insurance telematics</p>','2017-07-24 17:28:58','1','{\"thumb\":\"portal\\/20170724\\/5975bdd85ef39.jpg\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','19') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:29:37+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000451s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001383s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000492s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002793s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001248s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001309s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0155s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0039s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0041s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0031s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('local governmant','local governmant','','local governmant','2017-07-24 17:28:59','1','0','0','<p>local governmant</p>','2017-07-24 17:29:37','1','{\"thumb\":\"portal\\/20170724\\/5975bdfcdd0a5.jpg\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','20') [ RunTime:0.0006s ]
+
+[ 2017-07-24T17:30:24+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000472s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001190s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000347s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002444s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001410s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001494s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0153s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0054s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0034s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('transportation','transportation','','transportation','2017-07-24 17:29:39','1','0','0','<p>transportation</p>','2017-07-24 17:30:24','1','{\"thumb\":\"portal\\/20170724\\/5975be2db9dcb.jpg\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','21') [ RunTime:0.0001s ]
+
+[ 2017-07-24T17:30:48+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000426s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001292s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002410s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001269s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001369s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0181s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0083s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0058s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0066s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('rail','rail','','rail','2017-07-24 17:30:25','1','0','0','<p>rail</p>','2017-07-24 17:30:48','1','{\"thumb\":\"portal\\/20170724\\/5975be45d11e5.jpg\",\"template\":\"\"}') [ RunTime:0.0004s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','22') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:31:30+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000377s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000999s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000539s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002282s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001196s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001250s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0185s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0034s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0039s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0059s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('aircraft','aircraft','','aircraft','2017-07-24 17:30:51','1','0','0','<p>aircraft</p>','2017-07-24 17:31:30','1','{\"thumb\":\"portal\\/20170724\\/5975be701fb57.jpg\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','23') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:31:58+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000456s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001453s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000491s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002877s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001020s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001082s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0175s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0038s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0031s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0047s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('event management','event management','','event management','2017-07-24 17:31:32','1','0','0','<p>event management</p>','2017-07-24 17:31:58','1','{\"thumb\":\"portal\\/20170724\\/5975be8c1a2c1.jpg\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','24') [ RunTime:0.0001s ]
+
+[ 2017-07-24T17:40:59+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000340s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000862s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000304s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001808s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001408s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001480s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0183s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0040s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('law enforcement','law enforcement','','law enforcement','2017-07-24 17:40:21','1','0','0','<p>law enforcement</p>','2017-07-24 17:40:59','1','{\"thumb\":\"portal\\/20170724\\/5975c0a8964f3.jpg\",\"template\":\"\"}') [ RunTime:0.0005s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','25') [ RunTime:0.0004s ]
+
+[ 2017-07-24T17:41:28+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000713s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001815s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000385s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003748s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001108s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001164s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0172s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0036s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0049s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('boat tracking','boat tracking','','boat tracking','2017-07-24 17:41:02','1','0','0','<p>boat tracking</p>','2017-07-24 17:41:28','1','{\"thumb\":\"portal\\/20170724\\/5975c0c54f032.jpg\",\"template\":\"\"}') [ RunTime:0.0005s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','26') [ RunTime:0.0002s ]
+
+[ 2017-07-24T17:42:00+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000512s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000951s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000287s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002358s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001054s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001117s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0182s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0044s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0047s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0040s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('pet tracking','pet tracking','','pet tracking','2017-07-24 17:41:29','1','0','0','<p>pet tracking</p>','2017-07-24 17:42:00','1','{\"thumb\":\"portal\\/20170724\\/5975c0e62a458.jpg\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','27') [ RunTime:0.0001s ]
+
+[ 2017-07-24T17:42:16+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000338s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000852s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000405s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001960s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000913s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.000954s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0161s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0046s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0041s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0031s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('person tracking','person tracking','','person tracking','2017-07-24 17:42:00','1','0','0','<p>person tracking</p>','2017-07-24 17:42:16','1','{\"thumb\":\"portal\\/20170724\\/5975c0f5e1c1f.jpg\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('3','28') [ RunTime:0.0001s ]
+
+[ 2017-07-24T18:10:03+08:00 ] ::1 /index.php/AdminPost/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000428s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000871s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000247s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001911s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000929s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.000971s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0160s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0034s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0035s ]
+SQL: DELETE FROM `cmf_term_relationships` WHERE `object_id` = 3 AND `term_id` NOT IN ('2') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_term_relationships` WHERE `object_id` = 3 AND `term_id` = '2' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_term_relationships` SET `status`='1' WHERE `object_id` = 3 AND `term_id` = '2' [ RunTime:0.0001s ]
+SQL: UPDATE `cmf_posts` SET `post_title`='Think Power’s VP203 Supports Fuel Detection in South African Fleet',`post_keywords`='',`post_source`='',`post_excerpt`='Think Power’s 3G product VP203 was adopted to monitor fleet in South Africa in 2014.Think Power’s VP203 was connected with fuel sensor, which was used to detect the fuel volume. As fuel steal was v-ery high percentage in South Africa, fuel sensor could send alarm when fuel volume is abnormal. In ca-se of robbery, the dr-iver could press SOS button to ask for help to ... ',`post_date`='2017-07-05 14:36:01',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>Think Power’s 3G product VP203 was adopted to monitor fleet in South Africa in 2014.Think Power’s VP203 was connected with fuel sensor, which was used to detect the fuel volume. As fuel steal was v-ery high percentage in South Africa, fuel sensor could send alarm when fuel volume is abnormal. In ca-se of robbery, the dr-iver could press SOS button to ask for help to ...&nbsp;</p>',`post_modified`='2017-07-24 18:10:03',`smeta`='{\"thumb\":\"portal\\/20170724\\/5975c7625d885.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"portal\\/20170724\\/5975c7710d06f.jpg\",\"alt\":\"case_2.jpg\"},{\"url\":\"portal\\/20170724\\/5975c77115ab8.jpg\",\"alt\":\"case_3.jpg\"}]}' WHERE `id` = '3' [ RunTime:0.0002s ]
+
+[ 2017-07-24T18:10:18+08:00 ] ::1 /index.php/AdminPost/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000397s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000823s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000252s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001870s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000901s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.000944s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0153s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0041s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0041s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0034s ]
+SQL: DELETE FROM `cmf_term_relationships` WHERE `object_id` = 3 AND `term_id` NOT IN ('2') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_term_relationships` WHERE `object_id` = 3 AND `term_id` = '2' LIMIT 1   [ RunTime:0.0001s ]
+SQL: UPDATE `cmf_term_relationships` SET `status`='1' WHERE `object_id` = 3 AND `term_id` = '2' [ RunTime:0.0001s ]
+SQL: UPDATE `cmf_posts` SET `post_title`='Think Power’s VP203 Supports Fuel Detection in South African Fleet',`post_keywords`='',`post_source`='',`post_excerpt`='Think Power’s 3G product VP203 was adopted to monitor fleet in South Africa in 2014.Think Power’s VP203 was connected with fuel sensor, which was used to detect the fuel volume. As fuel steal was v-ery high percentage in South Africa, fuel sensor could send alarm when fuel volume is abnormal. In ca-se of robbery, the dr-iver could press SOS button to ask for help to ... ',`post_date`='2017-07-05 14:36:01',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>Think Power’s 3G product VP203 was adopted to monitor fleet in South Africa in 2014.Think Power’s VP203 was connected with fuel sensor, which was used to detect the fuel volume. As fuel steal was v-ery high percentage in South Africa, fuel sensor could send alarm when fuel volume is abnormal. In ca-se of robbery, the dr-iver could press SOS button to ask for help to ...&nbsp;</p>',`post_modified`='2017-07-24 18:10:18',`smeta`='{\"thumb\":\"portal\\/20170724\\/5975c7625d885.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"portal\\/20170724\\/5975c7710d06f.jpg\",\"alt\":\"case_2.jpg\"},{\"url\":\"portal\\/20170724\\/5975c77115ab8.jpg\",\"alt\":\"case_3.jpg\"}]}' WHERE `id` = '3' [ RunTime:0.0002s ]
+
+[ 2017-07-24T18:11:26+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000382s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000926s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000335s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001978s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001135s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001189s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0157s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0038s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0036s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0039s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('Think Power Offer ODM Products for Elderly GPS Tracker for Canada','','','In June, 2017, Think Power offered the ODM personal GPS tracker for Canada, including the hardware and software support.The ODM product will be applied for government special care project. It’s long battery backup, which will avoid frequent charging for elderly people. And humanization SOS design helps people to call for help immediately... ','2017-07-24 18:10:43','1','0','0','<p>In June, 2017, Think Power offered the ODM personal GPS tracker for Canada, including the hardware and software support.The ODM product will be applied for government special care project. It’s long battery backup, which will avoid frequent charging for elderly people. And humanization SOS design helps people to call for help immediately...&nbsp;</p>','2017-07-24 18:11:26','1','{\"thumb\":\"portal\\/20170724\\/5975c7c620cc2.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"portal\\/20170724\\/5975c7ccb865f.jpg\",\"alt\":\"case_4.jpg\"},{\"url\":\"portal\\/20170724\\/5975c7ccc1223.jpg\",\"alt\":\"case_5.jpg\"}]}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('2','29') [ RunTime:0.0001s ]
+
+[ 2017-07-24T18:12:58+08:00 ] ::1 /index.php/AdminTerm/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000527s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001010s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002313s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000893s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.000926s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0160s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0032s ]
+NOTIC: [8] Undefined index: validate D:\AppServ\www\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\AppServ\www\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `cmf_terms` SET `parent`='0',`name`='Successful Case',`description`='成功案例',`taxonomy`='article',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='successfulCase',`one_tpl`='newsDetail' WHERE `term_id` = '2' [ RunTime:0.0003s ]
+SQL: UPDATE `cmf_terms` SET `path`='0-2' WHERE ( term_id=2 ) [ RunTime:0.0001s ]
+
+[ 2017-07-24T18:18:05+08:00 ] ::1 /index.php/AdminPost/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000413s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000956s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000342s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002123s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001223s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001281s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0168s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0051s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0036s ]
+SQL: INSERT INTO `cmf_posts` (`post_title`,`post_keywords`,`post_source`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('Think Power appointed exclusive  distributor in Philippines','','','Think Power was glad to begin exclusive distribution co-
+operation with our Philippines friend. ','2017-07-24 18:17:24','1','0','0','<p>Think Power was glad to begin exclusive distribution co-</p><p>operation with our Philippines friend.&nbsp;</p><p><br/></p>','2017-07-24 18:18:05','1','{\"thumb\":\"portal\\/20170724\\/5975c95438f3d.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"portal\\/20170724\\/5975c95bbdcd5.jpg\",\"alt\":\"case_6.jpg\"},{\"url\":\"portal\\/20170724\\/5975c95bc7299.jpg\",\"alt\":\"case_7.jpg\"}]}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_term_relationships` (`term_id`,`object_id`) VALUES ('2','30') [ RunTime:0.0002s ]
+
+[ 2017-07-24T18:18:29+08:00 ] ::1 /index.php/AdminPost/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000383s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000864s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000340s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002037s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000964s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001010s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0165s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0047s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0043s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0034s ]
+SQL: DELETE FROM `cmf_term_relationships` WHERE `object_id` = 30 AND `term_id` NOT IN ('2') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_term_relationships` WHERE `object_id` = 30 AND `term_id` = '2' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_term_relationships` SET `status`='1' WHERE `object_id` = 30 AND `term_id` = '2' [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_posts` SET `post_title`='Think Power appointed exclusive  distributor in Philippines',`post_keywords`='',`post_source`='',`post_excerpt`='Think Power was glad to begin exclusive distribution co-
+operation with our Philippines friend. ',`post_date`='2017-07-24 18:17:24',`post_status`='0',`istop`='0',`recommended`='0',`post_content`='<p>Think Power was glad to begin exclusive distribution co-</p><p>operation with our Philippines friend.&nbsp;</p><p><br/></p>',`post_modified`='2017-07-24 18:18:29',`smeta`='{\"thumb\":\"portal\\/20170724\\/5975c95438f3d.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"http:\\/\\/localhost:88\\/data\\/upload\\/portal\\/20170724\\/5975c95bbdcd5.jpg\",\"alt\":\"case_6.jpg\"},{\"url\":\"http:\\/\\/localhost:88\\/data\\/upload\\/portal\\/20170724\\/5975c95bc7299.jpg\",\"alt\":\"case_7.jpg\"}]}' WHERE `id` = '30' [ RunTime:0.0003s ]
+
+[ 2017-07-24T18:18:45+08:00 ] ::1 /index.php/AdminPost/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000379s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000855s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000320s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001903s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001116s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001157s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0160s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_posts` [ RunTime:0.0042s ]
+SQL: SHOW COLUMNS FROM `cmf_terms` [ RunTime:0.0035s ]
+SQL: SHOW COLUMNS FROM `cmf_term_relationships` [ RunTime:0.0036s ]
+SQL: DELETE FROM `cmf_term_relationships` WHERE `object_id` = 30 AND `term_id` NOT IN ('2') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_term_relationships` WHERE `object_id` = 30 AND `term_id` = '2' LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `cmf_term_relationships` SET `status`='1' WHERE `object_id` = 30 AND `term_id` = '2' [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_posts` SET `post_title`='Think Power appointed exclusive  distributor in Philippines',`post_keywords`='',`post_source`='',`post_excerpt`='Think Power was glad to begin exclusive distribution co-
+operation with our Philippines friend. ',`post_date`='2017-07-24 18:17:24',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>Think Power was glad to begin exclusive distribution co-</p><p>operation with our Philippines friend.&nbsp;</p><p><br/></p>',`post_modified`='2017-07-24 18:18:45',`smeta`='{\"thumb\":\"portal\\/20170724\\/5975c95438f3d.jpg\",\"template\":\"\",\"photo\":[{\"url\":\"http:\\/\\/localhost:88\\/data\\/upload\\/portal\\/20170724\\/5975c95bbdcd5.jpg\",\"alt\":\"case_6.jpg\"},{\"url\":\"http:\\/\\/localhost:88\\/data\\/upload\\/portal\\/20170724\\/5975c95bc7299.jpg\",\"alt\":\"case_7.jpg\"}]}' WHERE `id` = '30' [ RunTime:0.0002s ]
+
+[ 2017-07-24T18:22:35+08:00 ] ::1 /data/upload/Arrayurl
+ERR: 无法加载控制器:Data
+
+[ 2017-07-24T18:22:42+08:00 ] ::1 /data/upload/Arrayurl
+ERR: 无法加载控制器:Data
+
+[ 2017-07-24T18:23:13+08:00 ] ::1 /data/upload/Arrayurl
+ERR: 无法加载控制器:Data
+

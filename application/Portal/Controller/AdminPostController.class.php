@@ -27,6 +27,7 @@ class AdminPostController extends AdminbaseController {
 	public function index(){
 		$this->_lists(array("post_status"=>array('neq',3)));
 		$this->_getTree();
+
 		$this->display();
 	}
 
@@ -198,13 +199,20 @@ class AdminPostController extends AdminbaseController {
 		->limit($page->firstRow , $page->listRows)
 		->order("a.post_date DESC");
 		if(empty($term_id)){
-		    $this->posts_model->field('a.*,c.user_login,c.user_nicename');
+		    $this->posts_model->field('a.*,c.user_login,c.user_nicename,d.name as term_name');
+		    $this->posts_model->join("__TERM_RELATIONSHIPS__ b ON a.id = b.object_id")->join("__TERMS__ d on d.term_id = b.term_id");
 		}else{
-		    $this->posts_model->field('a.*,c.user_login,c.user_nicename,b.listorder,b.tid');
-		    $this->posts_model->join("__TERM_RELATIONSHIPS__ b ON a.id = b.object_id");
+		    $this->posts_model->field('a.*,c.user_login,c.user_nicename,b.listorder,b.tid,d.name as term_name');
+		    $this->posts_model->join("__TERM_RELATIONSHIPS__ b ON a.id = b.object_id")->join("__TERMS__ d on d.term_id = b.term_id");
 		}
 		$posts=$this->posts_model->select();
 		
+		/*foreach ($posts as $key => $value) {
+			$value['id']
+		}*/
+
+		// dump($posts);
+
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("formget",array_merge($_GET,$_POST));
 		$this->assign("posts",$posts);

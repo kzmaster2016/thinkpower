@@ -44,7 +44,7 @@
 				<ul class="company-nav">
 					<li><a href="{:U('Company/about')}">About</a></li>
 					<li><a href="{:U('Company/leader')}">Leadship</a></li>
-					<li class="active"><a href="{:U('Company/news')}">News</a></li>
+					<li class="active"><a href="{:U('News/index')}">News</a></li>
 					<li><a href="{:U('Company/successfulCase')}">Successful Case</a></li>
 					<li><a href="###">Support</a></li>
 				</ul>
@@ -73,8 +73,8 @@
 				</div>	
 				</volist>			
 			</div>
-			<div class="pagination">
-				<ul>{$lists['page']}</ul>
+			<div class="container pagepagination-wrap">
+				<ul class="pagination">{$lists['page']}</ul>
 			</div>
 		</div>
 		  
