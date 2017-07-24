@@ -207,15 +207,37 @@ class AdminPostController extends AdminbaseController {
 		}
 		$posts=$this->posts_model->select();
 		
-		/*foreach ($posts as $key => $value) {
-			$value['id']
-		}*/
+		$rs_posts = array();
 
-		// dump($posts);
+		foreach ($posts as $key => $value) {
+			$flag = 0;
+			$key2 = "";
+			foreach ($rs_posts as $key1 => $value1) {
+				/*if($value['id'] == $value1['id'] && $value['term_name'] == $value1['term_name']){
+					$flag = 1;
+				}else if($value['id'] == $value1['id']){
+					$flag = 2;
+					$key2 = $key1;
+				}*/
+				
+				if ($value1['id']==$value['id']) {
+					$flag = 1;
+					$key2 = $key1;
+				}
 
+			}
+
+			if($flag == 0){
+				$rs_posts[] = $value;
+			}else{
+				$rs_posts[$key2]['term_name'] .= ",".$value['term_name'];
+			}
+
+		}
+		
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("formget",array_merge($_GET,$_POST));
-		$this->assign("posts",$posts);
+		$this->assign("posts",$rs_posts);
 	}
 
 	 
