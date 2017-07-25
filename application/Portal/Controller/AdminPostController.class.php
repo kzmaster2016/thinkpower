@@ -213,13 +213,7 @@ class AdminPostController extends AdminbaseController {
 			$flag = 0;
 			$key2 = "";
 			foreach ($rs_posts as $key1 => $value1) {
-				/*if($value['id'] == $value1['id'] && $value['term_name'] == $value1['term_name']){
-					$flag = 1;
-				}else if($value['id'] == $value1['id']){
-					$flag = 2;
-					$key2 = $key1;
-				}*/
-				
+
 				if ($value1['id']==$value['id']) {
 					$flag = 1;
 					$key2 = $key1;
@@ -238,6 +232,7 @@ class AdminPostController extends AdminbaseController {
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("formget",array_merge($_GET,$_POST));
 		$this->assign("posts",$rs_posts);
+
 	}
 
 	 

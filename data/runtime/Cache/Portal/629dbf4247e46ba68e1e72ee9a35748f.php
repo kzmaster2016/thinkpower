@@ -126,11 +126,11 @@
 					<div class="col-xs-6 col-sm-3">
 						<dl> 
 							<dt>General</dt>
-							<dd><a href="###">About Us</a></dd>
-							<dd><a href="###">Leadership</a></dd>
-							<dd><a href="###">News</a></dd>
-							<dd><a href="###">Successful Cases</a></dd>
-							<dd><a href="###">Contact</a></dd>
+							<dd><a href="<?php echo U('Company/about');?>">About Us</a></dd>
+							<dd><a href="<?php echo U('Company/leader');?>">Leadership</a></dd>
+							<dd><a href="<?php echo U('News/index');?>">News</a></dd>
+							<dd><a href="<?php echo U('Company/successfulCase');?>">Successful Cases</a></dd>
+							<dd><a href="<?php echo U('Company/contact');?>">Contact</a></dd>
 						</dl>
 					</div>
 					<div class="col-xs-6 col-sm-3">
@@ -147,7 +147,7 @@
 						<dl>
 							<dt>Service</dt>
 							<dd><a href="###">Technical Support</a></dd>
-							<dd><a href="###">Contact Us</a></dd>						 
+							<dd><a href="<?php echo U('Company/contact');?>">Contact Us</a></dd>						 
 						</dl>
 					</div>
 					 

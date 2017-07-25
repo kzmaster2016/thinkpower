@@ -10,13 +10,18 @@
 			<table class="table table-hover table-bordered">
 				<thead>
 					<tr>
-						<th width="50">ID</th>
-						<th width="100">{:L('NAME')}</th>
-						<th width="150">{:L('EMAIL')}</th>
-						<th style="min-width: 60px;">{:L('TITLE')}</th>
+						<th width="30">ID</th>
+						<th width="70">{:L('NAME')}</th>
+						<th width="80">Subject</th>
+						<th width="50">Gender</th>
+						<th width="50">Company</th>
+						<th width="50">Country</th>
+						<th width="50">City</th>
+						<th width="50">{:L('EMAIL')}</th>
+						<th width="50">Phone</th>
 						<th>{:L('CONTENT')}</th>
-						<th width="120">{:L('TIME')}</th>
-						<th width="120">{:L('ACTIONS')}</th>
+						<th width="70">{:L('TIME')}</th>
+						<th width="50">{:L('ACTIONS')}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,8 +29,13 @@
 					<tr>
 						<td>{$vo.id}</td>
 						<td>{$vo.mainname}</td>
-						<td>{$vo.email}</td>
 						<td>{$vo.title}</td>
+						<td>{$vo.gender}</td>
+						<td>{$vo.company}</td>
+						<td>{$vo.country}</td>
+						<td>{$vo.city}</td>
+						<td>{$vo.email}</td>
+						<td>{$vo.phone}</td>
 						<td>{$vo.msg}</td>
 						<td>{$vo.createtime}</td>
 						<td>

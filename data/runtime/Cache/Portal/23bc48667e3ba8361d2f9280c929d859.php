@@ -70,16 +70,16 @@
 		</div>
 	</div>					
 </div>
-	<div class="banner-con">
+	<!-- <div class="banner-con">
 		<img src="images/banner/solution.jpg" alt="">
-	</div>
+	</div> -->
 
 	<div class="company-con">	
-		<div class="solution-con">
-			<div class="container">
-				<div class="row detailhd alignm">
+		<div class="solution-con detail-con">
+			<div class="container-fluid">
+				<!-- <div class="row detailhd alignm">
 					<h3><?php echo ($post_title); ?></h3>			 
-				</div>	
+				</div>	 -->
 				<div class="row detailbd">
 					<?php echo ($post_content); ?>
 					<!-- <div class="introduce">
@@ -145,11 +145,11 @@
 					<div class="col-xs-6 col-sm-3">
 						<dl> 
 							<dt>General</dt>
-							<dd><a href="###">About Us</a></dd>
-							<dd><a href="###">Leadership</a></dd>
-							<dd><a href="###">News</a></dd>
-							<dd><a href="###">Successful Cases</a></dd>
-							<dd><a href="###">Contact</a></dd>
+							<dd><a href="<?php echo U('Company/about');?>">About Us</a></dd>
+							<dd><a href="<?php echo U('Company/leader');?>">Leadership</a></dd>
+							<dd><a href="<?php echo U('News/index');?>">News</a></dd>
+							<dd><a href="<?php echo U('Company/successfulCase');?>">Successful Cases</a></dd>
+							<dd><a href="<?php echo U('Company/contact');?>">Contact</a></dd>
 						</dl>
 					</div>
 					<div class="col-xs-6 col-sm-3">
@@ -166,7 +166,7 @@
 						<dl>
 							<dt>Service</dt>
 							<dd><a href="###">Technical Support</a></dd>
-							<dd><a href="###">Contact Us</a></dd>						 
+							<dd><a href="<?php echo U('Company/contact');?>">Contact Us</a></dd>						 
 						</dl>
 					</div>
 					 
