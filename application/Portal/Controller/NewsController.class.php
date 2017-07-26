@@ -38,7 +38,7 @@ class NewsController extends HomebaseController {
 		$strTerms=implode(",",$arrTerms);
 		// echo $strTerms;
 
-		$lists = sp_sql_posts_paged("cid:$strTerms;order:post_date DESC;",2);
+		$lists = sp_sql_posts_paged("cid:$strTerms;order:post_date DESC;",9);
                 
 		// dump($lists);
 

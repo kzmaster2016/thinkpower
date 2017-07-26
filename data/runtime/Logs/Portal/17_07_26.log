@@ -1,131 +1,130 @@
-[ 2017-07-26T09:47:53+08:00 ] ::1 /public/js/ueditor/ueditor.parse.js
-ERR: 无法加载控制器:Public
-
-[ 2017-07-26T09:48:06+08:00 ] ::1 /public/js/ueditor/ueditor.parse.js
-ERR: 无法加载控制器:Public
-
-[ 2017-07-26T11:28:35+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1146:La table 'thinkcmf.__product__' n'existe pas
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM cmf_product_cat product_cat INNER JOIN __product__ as product on product_cat.object_id = product.id INNER JOIN cmf_users as users on product.post_author = users.id  WHERE product_cat.status = 1 AND product.post_status = 1 AND product_cat.term_id IN (0) LIMIT 1  
-
-[ 2017-07-26T11:34:50+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1146:La table 'thinkcmf.__product__' n'existe pas
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM cmf_product_relationships product_relationships INNER JOIN __product__ as product on product_relationships.object_id = product.id INNER JOIN cmf_users as users on product.post_author = users.id  WHERE product_relationships.status = 1 AND product.post_status = 1 AND product_relationships.term_id IN (0) LIMIT 1  
-
-[ 2017-07-26T11:36:31+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1146:La table 'thinkcmf.__product__' n'existe pas
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM cmf_product_relationships product_relationships INNER JOIN __product__ as product on product_relationships.object_id = product.id INNER JOIN cmf_users as users on product.post_author = users.id  WHERE product_relationships.status = 1 AND product.post_status = 1 AND product_relationships.term_id IN (0) LIMIT 1  
-
-[ 2017-07-26T11:36:31+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1146:La table 'thinkcmf.__product__' n'existe pas
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM cmf_product_relationships product_relationships INNER JOIN __product__ as product on product_relationships.object_id = product.id INNER JOIN cmf_users as users on product.post_author = users.id  WHERE product_relationships.status = 1 AND product.post_status = 1 AND product_relationships.term_id IN (0) LIMIT 1  
-
-[ 2017-07-26T11:36:32+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1146:La table 'thinkcmf.__product__' n'existe pas
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM cmf_product_relationships product_relationships INNER JOIN __product__ as product on product_relationships.object_id = product.id INNER JOIN cmf_users as users on product.post_author = users.id  WHERE product_relationships.status = 1 AND product.post_status = 1 AND product_relationships.term_id IN (0) LIMIT 1  
-
-[ 2017-07-26T11:36:32+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1146:La table 'thinkcmf.__product__' n'existe pas
- [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM cmf_product_relationships product_relationships INNER JOIN __product__ as product on product_relationships.object_id = product.id INNER JOIN cmf_users as users on product.post_author = users.id  WHERE product_relationships.status = 1 AND product.post_status = 1 AND product_relationships.term_id IN (0) LIMIT 1  
-
-[ 2017-07-26T11:46:59+08:00 ] ::1 /index.php/AdminProduct/edit_post
+[ 2017-07-26T18:25:31+08:00 ] ::1 /index.php/AdminProduct/add_post
 INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000360s ]
-INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000825s ]
-INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000314s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.001847s ]
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000436s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000988s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000287s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002027s ]
 INFO: [ admin_begin ] --START--
-INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001062s ]
-INFO: [ admin_begin ] --END-- [ RunTime:0.001104s ]
-SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0182s ]
-SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
-SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0061s ]
-SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0059s ]
-SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0098s ]
-SQL: DELETE FROM `cmf_product_relationships` WHERE `object_id` = 1 AND `term_id` NOT IN ('3') [ RunTime:0.0212s ]
-SQL: SELECT COUNT(*) AS tp_count FROM `cmf_product_relationships` WHERE `object_id` = 1 AND `term_id` = '3' LIMIT 1   [ RunTime:0.0004s ]
-SQL: UPDATE `cmf_product_relationships` SET `status`='1' WHERE `object_id` = 1 AND `term_id` = '3' [ RunTime:0.0004s ]
-SQL: UPDATE `cmf_product` SET `post_title`='3g Tracker',`post_keywords`='',`post_excerpt`='wefadeg',`post_date`='2017-07-22 17:25:30',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>hgdfgdfhg</p>',`post_modified`='2017-07-26 11:46:59',`smeta`='{\"thumb\":\"portal\\/20170722\\/59731a324332d.jpg\",\"template\":\"\"}' WHERE `id` = '1' [ RunTime:0.0079s ]
-
-[ 2017-07-26T12:42:02+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1064:Erreur de syntaxe près de ') ORDER BY `listorder` asc' à la ligne 1
- [ SQL语句 ] : SELECT * FROM `cmf_product` WHERE `id` IN () ORDER BY `listorder` asc 
-
-[ 2017-07-26T12:42:20+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1064:Erreur de syntaxe près de ') ORDER BY `listorder` asc' à la ligne 1
- [ SQL语句 ] : SELECT * FROM `cmf_product` WHERE `id` IN () ORDER BY `listorder` asc 
-
-[ 2017-07-26T12:45:52+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: 1054:Champ 'listorder' inconnu dans order clause
- [ SQL语句 ] : SELECT * FROM `cmf_product` WHERE `id` IN ('1') ORDER BY `listorder` asc 
-
-[ 2017-07-26T12:49:29+08:00 ] ::1 /index.php/AdminProduct/add_post
-INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000432s ]
-INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000862s ]
-INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000291s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.001892s ]
-INFO: [ admin_begin ] --START--
-INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001314s ]
-INFO: [ admin_begin ] --END-- [ RunTime:0.001356s ]
-SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0184s ]
-SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
-SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0068s ]
-SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0071s ]
-SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0070s ]
-SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('VP203','','VP203F is external GPS and GSM mo-
-dules, with 2 RS232 interfaces for fle-
-et management.','2017-07-26 12:48:42','1','0','0','<p>VP203F is external GPS and GSM mo-</p><p>dules, with 2 RS232 interfaces for fle-</p><p>et management.</p><p><br/></p>','2017-07-26 12:49:29','1','{\"thumb\":\"portal\\/20170726\\/59781f574dffc.jpg\",\"template\":\"\"}') [ RunTime:0.0004s ]
-SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('3','2') [ RunTime:0.0002s ]
-
-[ 2017-07-26T13:55:23+08:00 ] ::1 /index.php/AdminProduct/edit_post
-INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000470s ]
-INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001189s ]
-INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000436s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.002606s ]
-INFO: [ admin_begin ] --START--
-INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001152s ]
-INFO: [ admin_begin ] --END-- [ RunTime:0.001201s ]
-SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0070s ]
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001444s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001508s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0181s ]
 SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
 SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0063s ]
-SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0076s ]
-SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0068s ]
-SQL: DELETE FROM `cmf_product_relationships` WHERE `object_id` = 2 AND `term_id` NOT IN ('1','3') [ RunTime:0.0002s ]
-SQL: SELECT COUNT(*) AS tp_count FROM `cmf_product_relationships` WHERE `object_id` = 2 AND `term_id` = '1' LIMIT 1   [ RunTime:0.0002s ]
-SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('1','2') [ RunTime:0.0002s ]
-SQL: SELECT COUNT(*) AS tp_count FROM `cmf_product_relationships` WHERE `object_id` = 2 AND `term_id` = '3' LIMIT 1   [ RunTime:0.0002s ]
-SQL: UPDATE `cmf_product_relationships` SET `status`='1' WHERE `object_id` = 2 AND `term_id` = '3' [ RunTime:0.0002s ]
-SQL: UPDATE `cmf_product` SET `post_title`='VP203',`post_keywords`='',`post_excerpt`='VP203F is external GPS and GSM mo-
-dules, with 2 RS232 interfaces for fle-
-et management.',`post_date`='2017-07-26 12:48:42',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>VP203F is external GPS and GSM mo-</p><p>dules, with 2 RS232 interfaces for fle-</p><p>et management.</p><p><br/></p>',`post_modified`='2017-07-26 13:55:23',`smeta`='{\"thumb\":\"portal\\/20170726\\/59781f574dffc.jpg\",\"template\":\"\"}' WHERE `id` = '2' [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0071s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0066s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDQ-GU-51','TDQ-GU-51','It’s the mainstream GPS module in 
+market, with common 9600 Baud R-
+ate.','2017-07-26 18:24:43','1','0','0','<p>It’s the mainstream GPS module in&nbsp;</p><p>market, with common 9600 Baud R-</p><p>ate.</p><p><br/></p>','2017-07-26 18:25:31','1','{\"thumb\":\"portal\\/20170726\\/59786e181d09a.png\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('14','22') [ RunTime:0.0002s ]
 
-[ 2017-07-26T14:13:36+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: XML标签语法错误 : name="$vo['product']"} id="item"
-
-[ 2017-07-26T14:13:38+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: XML标签语法错误 : name="$vo['product']"} id="item"
-
-[ 2017-07-26T14:25:20+08:00 ] ::1 /index.php/Product/productList/term_id/1
-ERR: XML标签语法错误 : name=$vo['product'] id="item"
-
-[ 2017-07-26T14:38:07+08:00 ] ::1 /index.php/AdminProduct/edit_post
+[ 2017-07-26T18:26:00+08:00 ] ::1 /index.php/AdminProduct/add_post
 INFO: [ app_begin ] --START--
-INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000471s ]
-INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001011s ]
-INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000392s ]
-INFO: [ app_begin ] --END-- [ RunTime:0.002281s ]
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000553s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001136s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000337s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002359s ]
 INFO: [ admin_begin ] --START--
-INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001253s ]
-INFO: [ admin_begin ] --END-- [ RunTime:0.001303s ]
-SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0216s ]
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001387s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001445s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0181s ]
 SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
-SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0077s ]
-SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0080s ]
-SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0073s ]
-SQL: DELETE FROM `cmf_product_relationships` WHERE `object_id` = 1 AND `term_id` NOT IN ('3') [ RunTime:0.0002s ]
-SQL: SELECT COUNT(*) AS tp_count FROM `cmf_product_relationships` WHERE `object_id` = 1 AND `term_id` = '3' LIMIT 1   [ RunTime:0.0002s ]
-SQL: UPDATE `cmf_product_relationships` SET `status`='1' WHERE `object_id` = 1 AND `term_id` = '3' [ RunTime:0.0002s ]
-SQL: UPDATE `cmf_product` SET `post_title`='3g Tracker',`post_keywords`='',`post_excerpt`='wefadeg',`post_date`='2017-07-22 17:25:30',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>hgdfgdfhg</p>',`post_modified`='2017-07-26 14:38:07',`smeta`='{\"thumb\":\"portal\\/20170726\\/597838cd304e7.png\",\"template\":\"\"}' WHERE `id` = '1' [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0082s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0077s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0087s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDQ-GU-61-BD','TDQ-GU-61-BD','Its dual modules: GPS+ BeiDou or 
+GPS+ Glonass.','2017-07-26 18:25:32','1','0','0','<p>Its dual modules: GPS+ BeiDou or&nbsp;</p><p>GPS+ Glonass.</p><p><br/></p>','2017-07-26 18:26:00','1','{\"thumb\":\"portal\\/20170726\\/59786e36bde0c.png\",\"template\":\"\"}') [ RunTime:0.0004s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('14','23') [ RunTime:0.0002s ]
+
+[ 2017-07-26T18:26:45+08:00 ] ::1 /index.php/AdminProduct/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000492s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001113s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000365s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002324s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001596s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001657s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0181s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0070s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0084s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0063s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDG-MX1-1097R','TDG-MX1-1097R','The GPS module is small size, low power, 
+short TTFF and high sensitivity. ','2017-07-26 18:26:01','1','0','0','<p>The GPS module is small size, low power,&nbsp;</p><p>short TTFF and high sensitivity.&nbsp;</p><p><br/></p>','2017-07-26 18:26:45','1','{\"thumb\":\"portal\\/20170726\\/59786e62d95ae.png\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('14','24') [ RunTime:0.0001s ]
+
+[ 2017-07-26T18:27:21+08:00 ] ::1 /index.php/AdminProduct/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000508s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001072s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000357s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002322s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001466s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001514s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0206s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0063s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0079s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0056s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDG-MX0-1097F','TDG-MX0-1097F','The GPS+ BeiDou dual modules is 
+small size, low power, short TTFF 
+and high sensitivity.','2017-07-26 18:26:46','1','0','0','<p>The GPS+ BeiDou dual modules is&nbsp;</p><p>small size, low power, short TTFF&nbsp;</p><p>and high sensitivity.</p><p><br/></p>','2017-07-26 18:27:21','1','{\"thumb\":\"portal\\/20170726\\/59786e870c847.png\",\"template\":\"\"}') [ RunTime:0.0002s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('14','25') [ RunTime:0.0001s ]
+
+[ 2017-07-26T18:27:57+08:00 ] ::1 /index.php/AdminProduct/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000542s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001224s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000360s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002484s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001340s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001382s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0188s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0068s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0082s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0074s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDQ-GV-02','TDQ-GV-02','It uses the SkyTraq Venus 810 chips, and 
+is small size, low power, short TTFF and 
+high sensitivity.','2017-07-26 18:27:22','1','0','0','<p>It uses the SkyTraq Venus 810 chips, and&nbsp;</p><p>is small size, low power, short TTFF and&nbsp;</p><p>high sensitivity.</p><p><br/></p>','2017-07-26 18:27:57','1','{\"thumb\":\"portal\\/20170726\\/59786eab20f9f.png\",\"template\":\"\"}') [ RunTime:0.0004s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('14','26') [ RunTime:0.0002s ]
+
+[ 2017-07-26T18:28:28+08:00 ] ::1 /index.php/AdminProduct/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000529s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001222s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000435s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002604s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001715s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001792s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0185s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0085s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0062s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0069s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDQ-GV-06-BD','TDQ-GV-06-BD','It uses the SkyTraq Venus 821 chips, and 
+combines dual modules: GPS+ BeiDou. ','2017-07-26 18:27:58','1','0','0','<p>It uses the SkyTraq Venus 821 chips, and&nbsp;</p><p>combines dual modules: GPS+ BeiDou.&nbsp;</p><p><br/></p>','2017-07-26 18:28:28','1','{\"thumb\":\"portal\\/20170726\\/59786ecae0d96.png\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('14','27') [ RunTime:0.0002s ]
+
+[ 2017-07-26T18:28:58+08:00 ] ::1 /index.php/AdminProduct/add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000459s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001254s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000565s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002616s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001570s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001622s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0212s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0072s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0065s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0066s ]
+SQL: INSERT INTO `cmf_product` (`post_title`,`post_keywords`,`post_excerpt`,`post_date`,`post_status`,`istop`,`recommended`,`post_content`,`post_modified`,`post_author`,`smeta`) VALUES ('TDQ-GU-1923','TDQ-GU-1923','With 18.4*18.4*4mm Ceramic Anten-
+na, it gets more receiving effect, whi-
+ch is for internal or external usage.','2017-07-26 18:28:29','1','0','0','<p>With 18.4*18.4*4mm Ceramic Anten-</p><p>na, it gets more receiving effect, whi-</p><p>ch is for internal or external usage.</p><p><br/></p>','2017-07-26 18:28:58','1','{\"thumb\":\"portal\\/20170726\\/59786ee808b99.png\",\"template\":\"\"}') [ RunTime:0.0003s ]
+SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('15','28') [ RunTime:0.0001s ]
 

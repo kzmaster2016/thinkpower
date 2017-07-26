@@ -46,43 +46,36 @@
 			z-index:9999;
 		}
 	</style><?php endif; ?>
+<style>
+li {
+	list-style: none;
+}
+</style>
 </head>
 <body>
 	<div class="wrap">
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="<?php echo U('guestbookadmin/index');?>">web留言</a></li>
-			<li><a href="<?php echo U('guestbookadmin/contactus');?>">联系留言</a></li>
-		</ul>
-		<form method="post" class="js-ajax-form">
-			<table class="table table-hover table-bordered">
-				<thead>
-					<tr>
-						<th width="50">ID</th>
-						<th width="100"><?php echo L('NAME');?></th>
-						<th width="150"><?php echo L('EMAIL');?></th>
-						<th style="min-width: 60px;"><?php echo L('TITLE');?></th>
-						<th><?php echo L('CONTENT');?></th>
-						<th width="120"><?php echo L('TIME');?></th>
-						<th width="120"><?php echo L('ACTIONS');?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php if(is_array($guestmsgs)): foreach($guestmsgs as $key=>$vo): ?><tr>
-						<td><?php echo ($vo["id"]); ?></td>
-						<td><?php echo ($vo["mainname"]); ?></td>
-						<td><?php echo ($vo["email"]); ?></td>
-						<td><?php echo ($vo["title"]); ?></td>
-						<td><?php echo ($vo["msg"]); ?></td>
-						<td><?php echo ($vo["createtime"]); ?></td>
-						<td>
-							<a href="<?php echo U('guestbookadmin/delete',array('id'=>$vo['id']));?>" class="js-ajax-delete"><?php echo L('DELETE');?></a>
-						</td>
-					</tr><?php endforeach; endif; ?>
-				</tbody>
-			</table>
-			<div class="pagination"><?php echo ($page); ?></div>
-		</form>
+		<div id="error_tips">
+			<h2><?php echo L('CACHE_CLEARED');?></h2>
+			<div class="error_cont">
+				<ul>
+					<li><?php echo L('CACHE_CLEARED');?></li>
+				</ul>
+				<div class="error_return">
+					<a href="javascript:close_app();" class="btn"><?php echo L('CLOSE');?></a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<script src="/public/js/common.js?"></script>
+	<script src="/public/js/common.js"></script>
+	<script>
+		var close_timeout = setTimeout(function() {
+			parent.close_current_app();
+		}, 3000);
+
+		function close_app() {
+			clearTimeout(close_timeout);
+			parent.close_current_app();
+		}
+	</script>
 </body>
 </html>
