@@ -34,7 +34,7 @@
 <body class="pcbody about-page">
 	<input type="hidden" value="1" class="active-maninav">
 	<div class="header">
-	<div class="top-search">
+	<div class="top-search hidden-xs">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 title">PROFESSIONAL IOT SOLUTION PROVIDER</div>
@@ -137,11 +137,11 @@
 					<div class="col-xs-6 col-sm-3">
 						<dl>
 							<dt>Product Portfolio</dt>
-							<dd><a href="###">Vehicle GPS Tracker</a></dd>
-							<dd><a href="###">Personal GPS Tracker</a></dd>
-							<dd><a href="###">Pets GPS Tracker</a></dd>						 
-							<dd><a href="###">Asset GPS Tracker</a></dd>						 
-							<dd><a href="###">Car Electronics</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>1));?>">Vehicle GPS Tracker</a></dd>
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>11));?>">Personal GPS Tracker</a></dd>
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>2));?>">Pets GPS Tracker</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>5));?>">Asset GPS Tracker</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>6));?>">Car Electronics</a></dd>						 
 						</dl>
 					</div>
 					<div class="col-xs-6 col-sm-3">

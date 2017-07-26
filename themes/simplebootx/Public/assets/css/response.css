@@ -61,4 +61,35 @@
 .header .main-nav{float: none;}
 .header .main-nav li{float: none;text-align: center;}
 .header .main-nav li a{line-height: 40px;}
+.header .top-logo{padding: 5px 0;position: relative;z-index: 100;}
+.header .top-logo img{width: auto;height: 40px;}
+.index-con1 .index-productcon>div:first-child .title{font-size: 14px;line-height: 26px;}
+.index-con1 .index-productcon>div:first-child .alink{padding: 0 6px;font-size: 12px;}
+.index-con1 .index-productcon>div .intro span{font-size: 12px;}
+.navbar-header.navbar-default{position: relative;}
+.navbar-header.navbar-default .navbar-toggle{position: absolute;right: 0;top: 0;}
+.index-con1 .index-product .title img{width: 40px;}
+.index-con1 .index-product .title h1{font-size: 20px;}
+.company-nav{white-space: nowrap;overflow: auto;}
+.company-nav li a{line-height: 40px;padding: 0 10px;}
+.company-about-ban h2{font-size: 20px;}
+.leader-list li{max-width: 100%;margin: 0;}
+.leader-con{padding: 40px 15px;}
+.article-con .post-article .post-date{width: 50px;}
+.article-con .post-article .post-date .day{font-size: 16px;padding: 0;}
+.article-con .post-article .post-detail{padding-left: 60px;}
+.productlist-con{padding: 10px 0;}
+.product-nav .nav-list{padding: 5px 0px;}
+.product-nav .nav-list li{white-space: nowrap;overflow: hidden;}
+.product-nav .nav-list li a{font-size: 12px;}
+.productdeatil-con .pd-con1 .prod-cover img{max-width: 100%;}
+.contact-con .contact-aside{margin-right: 0;}
+.tracker-con .tracker-item .tracker-cover,.tracker-con .tracker-item .tracker-jianjie{width: 100%;}
+.tracker-con .tracker-item .tracker-jianjie{padding: 0 15px;}
+.tracker-con .tracker-item .tracker-cover img{width: 100%;}
+.tracker-con .tracker-item{padding: 10px 0;}
+.tracker-con .tracker-item .tracker-jianjie h3{font-size: 18px;}
+.company-con .tracker-con{padding: 10px 0;}
+.solution-con{padding: 10px 0;}
 }
+
