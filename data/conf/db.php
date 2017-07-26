@@ -15,3 +15,4 @@ return array(
     //cookies
     "COOKIE_PREFIX" => '7eLh1N_',
 );
+
