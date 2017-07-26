@@ -367,6 +367,24 @@ class ApiService {
     		return $terms["t$term_id"];
     	}
     }
+    public static function productCat($term_id){
+        $productCat=F('all_productCat');
+        if(empty($productCat)){
+            $productCat_model= M("productCat");
+            $productCat=$productCat_model->where("status=1")->select();
+            $mproductCat=array();
+            
+            foreach ($productCat as $t){
+                $tid=$t['term_id'];
+                $mproductCat["t$tid"]=$t;
+            }
+            
+            F('all_productCat',$mproductCat);
+            return $mproductCat["t$term_id"];
+        }else{
+            return $productCat["t$term_id"];
+        }
+    }
     
     /**
      * 返回指定分类下的子分类
@@ -395,6 +413,15 @@ class ApiService {
         return $terms;
     }
     
+    public static function all_child_productCat($term_id){
+        $term_id=intval($term_id); 
+        $terms_model = M("productCat");
+    
+        $terms=$terms_model->where("status=1 and path like '%-$term_id-%'")->order("listorder asc")->select();
+    
+        return $terms;
+    }
+
     /**
      * 返回符合条件的所有分类
      * @param string $tag 查询标签,以字符串方式传入,例："ids:1,2;field:term_id,name,description,seo_title;limit:0,8;order:path asc,listorder desc;where:term_id>0;"<br>

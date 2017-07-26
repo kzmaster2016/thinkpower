@@ -29,7 +29,7 @@ class NewsController extends HomebaseController {
 		$terms=sp_get_all_child_terms($term_id); //关联数组
 	
 		$arrTerms=Array(); // 索引数组
-		foreach ($terms as $value) {
+		foreach ($terms as $value) {    
 			$arrTerms[]=$value['term_id'];
 		}
 		// var_dump($arrTerms);
@@ -39,6 +39,7 @@ class NewsController extends HomebaseController {
 		// echo $strTerms;
 
 		$lists = sp_sql_posts_paged("cid:$strTerms;order:post_date DESC;",2);
+                
 		// dump($lists);
 
     	$this->assign($term);

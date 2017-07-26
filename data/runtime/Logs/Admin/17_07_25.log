@@ -360,3 +360,18 @@ NOTIC: [2] mkdir(): File exists D:\AppServ\www\application\Admin\Controller\Menu
 [ 2017-07-25T13:58:27+08:00 ] ::1 /index.php/Admin/Menu/edit/id/2
 NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
 
+[ 2017-07-25T19:08:04+08:00 ] ::1 /index.php/Admin/public/dologin
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000372s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000831s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000304s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001869s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001004s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001039s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0159s ]
+SQL: SELECT * FROM `cmf_users` WHERE `user_login` = 'admin' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_role_user` [ RunTime:0.0034s ]
+SQL: SELECT `role_id` FROM cmf_role_user a INNER JOIN cmf_role as b on a.role_id =b.id  WHERE `user_id` = '1' AND `status` = 1  [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_users` SET `user_login`='admin',`user_pass`='###1909f311d53a8fdb27fbe393fb2b424c',`user_nicename`='admin',`user_email`='1274599189@qq.com',`user_url`='',`avatar`=NULL,`sex`='0',`birthday`='2000-01-01',`signature`=NULL,`last_login_ip`='0.0.0.0',`last_login_time`='2017-07-25 19:08:04',`create_time`='2017-07-04 11:23:06',`user_activation_key`='',`user_status`='1',`score`='0',`user_type`='1',`coin`='0',`mobile`='' WHERE `id` = '1' [ RunTime:0.0002s ]
+

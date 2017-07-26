@@ -61,7 +61,7 @@
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
 					<ul class="main-nav clearfix">					
 						<li><a href="<?php echo U('Company/about');?>">COMPANY</a></li>
-						<li><a href="<?php echo U('Product/productList');?>">PRODUCTS</a></li>
+						<li><a href="<?php echo U('Product/productList',array('term_id'=>1));?>">PRODUCTS</a></li>
 						<li><a href="<?php echo U('Company/tracker');?>">TRACKING SYSTEM</a></li>
 						<li><a href="<?php echo U('Solution/solutionList');?>">SOLUTION</a></li>
 						<li><a href="<?php echo U('Company/contact');?>">CONTACT US</a></li>

@@ -40,13 +40,9 @@
 			<div class="container">
 				<div class="row">
 					<ul class="nav-list">
-						<li class="on"><a href="{:U('Product/productList')}">Vehicle GPS tracker</a></li>
-						<li><a href="###">Pet GPS tracker</a></li>
-						<li><a href="###">Personal GPS tracker</a></li>
-						<li><a href="###">Asserts GPS tracker</a></li>
-						<li><a href="###">Accessories for GPS tracker</a></li>
-						<li><a href="###">Car digital TV Receiver</a></li>
-						<li><a href="###">DVR</a></li>
+						<volist name="productCatNav" id="vo">
+						<li <if condition="I('get.term_id')==$vo['term_id']"> class="on"</if>><a href="{:U('Product/productList',array('term_id'=>$vo['term_id']))}">{$vo['name']}</a></li>
+						</volist>					 
 					</ul>				
 				</div>			 
 			</div>
@@ -56,78 +52,42 @@
 	<div class="company-con">	
 		<div class="productlist-con">
 			<div class="container">
-				<div class="row">
-					<h3 class="col-xs-12 list-title">Vehicle GPS tracker</h3>
+				<div class="row"> 
+					<h3 class="col-xs-12 list-title">{$productCatItem['name']}</h3>
 					<div class="col-xs-12 list-introduce">
-						vehicle tracker can help you locate and track your vehicles including cars,trucks etc. vehicle tracker can help you locate and track your vehicles including cars,trucks etc. vehicle tracker can help you locate and track your vehicles including cars,trucks etc. vehicle tracker can help you locate and track your vehicles including cars,trucks etc. 
+						{$productCatItem['description']}
 					</div> 
 				</div>	
 				<div class="row">
-					<div class="col-xs-12">
-						<h3 class="seccat-hd">
-							3G GPS TRACKER
-						</h3>
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="{:U('Product/detail')}" class="alink">See more <i class="fa fa-angle-right"></i></a>
+					<volist name="arrproductCat" id="vo">
+						<if condition="($vo['cat'][0]['parent']!=0) and (sizeof($vo['product'])!=0)">
+						<div class="col-xs-12">
+							<h3 class="seccat-hd">
+								{$vo['cat'][0]['name']}
+							</h3>
 						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
+						</if>
+						<volist	name="vo['product']" id="vo2">
+						<php>
+							$smeta=json_decode($vo2['smeta'],true); 						
+						</php>
+						<div class="col-sm-4 prod-item">
+							<div class="prod-cover resimg-con">
+								<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" alt="">
+								<a href="{:U('Product/detail',array('id'=>$vo2['id']))}" class="alink">See more <i class="fa fa-angle-right"></i></a>
+							</div>
+							<div class="prod-info">
+								<h4 class="prod-name surp-elli">
+								{$vo2['post_title']}
+								</h4>
+								<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
+								<p class="prod-intro">{$vo2['post_excerpt']}</p>
+							</div>					
 						</div>
-						
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="{:U('Product/detail')}" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>			 
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="{:U('Product/detail')}" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="{:U('Product/detail')}" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="{:U('Product/detail')}" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
+						 
+						</volist>
+					</volist>
+	
 				</div>		 
 			</div>		 
 		</div>	
