@@ -185,9 +185,9 @@
 				</div>
 			</div> 
 		</div>
-		<div class="prod-bottombg">
-			<img src="images/product/banner_bg1.jpg" alt="">
-		</div>	 
+		<!-- <div class="prod-bottombg">
+			 	<img src="images/product/banner_bg1.jpg" alt="">
+			 </div> -->	 
 	</div>	
 	 
 	<div class="footer">

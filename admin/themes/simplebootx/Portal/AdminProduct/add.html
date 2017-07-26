@@ -25,7 +25,7 @@
 				<div class="span9">
 					<table class="table table-bordered">
 						<tr>
-							<th width="80">分类</th>
+							<th width="140">分类</th>
 							<td>
 								<select multiple="multiple" style="max-height: 100px;" name="term[]">{$taxonomys}</select>
 								<div>windows：按住 Ctrl 按钮来选择多个选项,Mac：按住 command 按钮来选择多个选项</div>
@@ -59,10 +59,32 @@
 							</td>
 						</tr>
 						<tr>
-							<th>相册图集</th>
+							<input style="display:hidden;" name="post[feature]" id="feature">
+							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
+							<td id='feature-td'>
+								<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="{$feature[$i].key}"><input type="text" placeholder="请输入描述" name="value" value="{$feature[$i].value}"></li>
+							</td>
+						</tr>
+						<tr>
+							<input style="display:hidden;" name="post[specifications]" id="specifications">
+							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
+							<td id='specifications-td'>
+								<li><input type="text" placeholder="请输入描述" name="value" value="{$specifications[$i]}"></li>
+							</td>
+						</tr>
+						<tr>
+							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" >
+							<th>PDF</th>
 							<td>
-								<ul id="photos" class="pic-list unstyled"></ul>
-								<a href="javascript:upload_multi_image('图片上传','#photos','photos-item-wrapper');" class="btn btn-small">选择图片</a>
+								<a href='{$post['pdf']}' id='pdf'>pdf</a>
+								<input type="file" id="uploadPDF" name="file">
+							</td>
+						</tr>
+						<tr>
+							<th>accessories</th>
+							<td>
+								<ul id="accessories" class="pic-list unstyled"></ul>
+								<a href="javascript:upload_multi_image('图片上传','#accessories','photos-item-wrapper');" class="btn btn-small">选择图片</a>
 							</td>
 						</tr>
 					</table>
@@ -164,10 +186,51 @@
 					});
 				});
 			});
+
+			$("#add-feature").on('click', function(e){
+				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+			})
+
+			$("#delete-feature").on('click', function(){
+				$("#feature-td li:last-child").remove();
+			})
+
+			$("#add-specifications").on('click', function(e){
+				$("#specifications-td").append('<li><input type="text" placeholder="请输入描述" name="value"></li>');
+			})
+
+			$("#delete-specifications").on('click', function(){
+				$("#specifications-td li:last-child").remove();
+			})
+
+			$("#uploadPDF").on('change', function(){
+				var formData = new FormData();
+				formData.append('file', $('#uploadPDF')[0].files[0]);
+				var url = "{:U('AdminProduct/upload')}";
+			     $.ajax({  
+			          url: url,  
+			          type: 'POST',  
+			          data: formData,  
+			          cache: false,  
+			          contentType: false,  
+			          processData: false,  
+			          success: function (data) {  
+			              if(data.status){
+			              	$("#pdf").attr('href', '/' + data.url);
+			              	$("#pdfUrl").val('/' + data.url);
+			              }else{
+			              	artdialog_alert(data.info);
+			              }  
+			          },  
+			          error: function (error) {  
+			              artdialog_alert(error);
+			          }  
+			     });  
+			})
 			/////---------------------
 			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
 				//javascript
-
+				
 				//编辑器
 				editorcontent = new baidu.editor.ui.Editor();
 				editorcontent.render('content');
@@ -249,13 +312,33 @@
 					onfocusout : false,
 					//验证通过，提交表单
 					submitHandler : function(forms) {
+						var featureArr = [];	
+						$("#feature-td li").each(function(){
+							var current = $(this);
+							var key = current.find('input[name="key"]').val();
+							var value = current.find('input[name="value"]').val();
+							if(key && value){
+								featureArr.push({key: key, value: value});
+							}	
+						})
+						$("#feature").val(JSON.stringify(featureArr))
+
+						var specificationsArr = [];	
+						$("#specifications-td li").each(function(){
+							var current = $(this);
+							var value = current.find('input[name="value"]').val();
+							if(value){
+								specificationsArr.push(value);
+							}	
+						})
+						$("#specifications").val(JSON.stringify(specificationsArr))
 						if (formloading)
 							return;
 						$(forms).ajaxSubmit({
 							url : form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
 							dataType : 'json',
 							beforeSubmit : function(arr, $form, options) {
-								formloading = true;
+								formloading = false;
 							},
 							success : function(data, statusText, xhr, $form) {
 								formloading = false;

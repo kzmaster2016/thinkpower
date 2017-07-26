@@ -69,11 +69,13 @@
 			<li class="active"><a href="#">编辑产品</a></li>
 		</ul>
 		<form action="<?php echo U('AdminProduct/edit_post');?>" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
+			<input style="display:hidden;" name="post[feature]" id="feature">
+			<input style="display:hidden;" name="post[specifications]" id="specifications">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
 						<tr>
-							<th width="80">分类</th>
+							<th width="140">分类</th>
 							<td>
 								<select multiple="multiple" style="max-height: 100px;"name="term[]"><?php echo ($taxonomys); ?></select>
 								<div>windows：按住 Ctrl 按钮来选择多个选项,Mac：按住 command 按钮来选择多个选项</div>
@@ -114,17 +116,44 @@
 							</td>
 						</tr>
 						<tr>
-							<th>相册图集</th>
+							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
+							<td id='feature-td'>
+								<?php  $feature = $post['feature']; if(!empty($feature)){ $feature = json_decode($feature, true); }else{ $feature = array(); } for($i=0;$i< count($feature);$i++){ ?> 
+									<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
+								<?php  } ?>
+							</td>
+						</tr>
+						<tr>
+							
+							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
+							<td id='specifications-td'>
+								<?php  $specifications = $post['specifications']; if(!empty($specifications)){ $specifications = json_decode($specifications, true); }else{ $specifications = array(); } for($i=0;$i<count($specifications);$i++){ ?> 
+									<li><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]); ?>"></li>
+								<?php  } ?>
+							</td>
+						</tr>
+						<tr>
+							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
+							<th>PDF</th>
+							<td>
+								<a href='<?php echo ($post['pdf']); ?>' id='pdf'>pdf</a>
+								<input type="file" id="uploadPDF" name="file">
+							</td>
+						</tr>
+						<tr>
+							<th>accessories</th>
 							<td>
 								<ul id="photos" class="pic-list unstyled">
-									<?php if(!empty($smeta['photo'])): if(is_array($smeta['photo'])): foreach($smeta['photo'] as $key=>$vo): $img_url=sp_get_image_preview_url($vo['url']); ?>
+									<?php if(!empty($post['accessories'])): $accessories = $post['accessories']; if(!empty($accessories)){ $accessories = json_decode($accessories, true); }else{ $accessories = array(); } for($i=0;$i<count($accessories);$i++){ $vo = $accessories[$i]; $img_url=$vo['photo']; ?>
 										<li id="savedimage<?php echo ($key); ?>">
 											<input id="photo-<?php echo ($key); ?>" type="hidden" name="photos_url[]" value="<?php echo ($img_url); ?>"> 
-											<input id="photo-<?php echo ($key); ?>-name" type="text" name="photos_alt[]" value="<?php echo ($vo["alt"]); ?>" style="width: 200px;" title="图片名称">
-											<img id="photo-<?php echo ($key); ?>-preview" src="<?php echo sp_get_image_preview_url($vo['url']);?>" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
+											<input id="photo-<?php echo ($key); ?>-name" type="text" name="photos_alt[]" value="<?php echo ($vo["name"]); ?>" style="width: 200px;" title="图片名称">
+											<img id="photo-<?php echo ($key); ?>-preview" src="<?php echo sp_get_image_preview_url($vo['photo']);?>" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
 											<a href="javascript:upload_one_image('图片上传','#photo-<?php echo ($key); ?>');">替换</a>
 											<a href="javascript:(function(){ $('#savedimage<?php echo ($key); ?>').remove();})();">移除</a>
-										</li><?php endforeach; endif; endif; ?>
+										</li>
+										<?php
+ } endif; ?>
 								</ul>
 								<a href="javascript:upload_multi_image('图片上传','#photos','photos-item-wrapper');" class="btn btn-small">选择图片</a>
 							</td>
@@ -236,6 +265,48 @@
 					});
 				});
 			});
+
+			$("#add-feature").on('click', function(e){
+				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+			})
+
+			$("#delete-feature").on('click', function(){
+				$("#feature-td li:last-child").remove();
+			})
+
+			$("#add-specifications").on('click', function(e){
+				$("#specifications-td").append('<li><input type="text" placeholder="请输入描述" name="value"></li>');
+			})
+
+			$("#delete-specifications").on('click', function(){
+				$("#specifications-td li:last-child").remove();
+			})
+
+			$("#uploadPDF").on('change', function(){
+				var formData = new FormData();
+				formData.append('file', $('#uploadPDF')[0].files[0]);
+				var url = "<?php echo U('AdminProduct/upload');?>";
+			     $.ajax({  
+			          url: url,  
+			          type: 'POST',  
+			          data: formData,  
+			          cache: false,  
+			          contentType: false,  
+			          processData: false,  
+			          success: function (data) {  
+			              if(data.status){
+			              	$("#pdf").attr('href', '/' + data.url);
+			              	$("#pdfUrl").val('/' + data.url);
+			              }else{
+			              	artdialog_alert(data.info);
+			              }  
+			          },  
+			          error: function (error) {  
+			              artdialog_alert(error);
+			          }  
+			     });  
+			})
+
 			/////---------------------
 			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
 				//javascript
@@ -320,6 +391,27 @@
 					onfocusout : false,
 					//验证通过，提交表单
 					submitHandler : function(forms) {
+						var featureArr = [];	
+						$("#feature-td li").each(function(){
+							var current = $(this);
+							var key = current.find('input[name="key"]').val();
+							var value = current.find('input[name="value"]').val();
+							if(key && value){
+								featureArr.push({key: key, value: value});
+							}	
+						})
+						$("#feature").val(JSON.stringify(featureArr))
+
+						var specificationsArr = [];	
+						$("#specifications-td li").each(function(){
+							var current = $(this);
+							var value = current.find('input[name="value"]').val();
+							if(value){
+								specificationsArr.push(value);
+							}	
+						})
+						$("#specifications").val(JSON.stringify(specificationsArr));
+
 						$(forms).ajaxSubmit({
 							url : form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
 							dataType : 'json',
