@@ -136,7 +136,7 @@
 							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
 							<th>PDF</th>
 							<td>
-								<a href='<?php echo ($post['pdf']); ?>' id='pdf'>pdf</a>
+								<a href='<?php echo ($post['pdf']); ?>' id='pdf'><?php echo ($post['pdf']); ?></a>
 								<input type="file" id="uploadPDF" name="file">
 							</td>
 						</tr>
@@ -296,6 +296,7 @@
 			          success: function (data) {  
 			              if(data.status){
 			              	$("#pdf").attr('href', '/' + data.url);
+			              	$("#pdf").text(data.url);
 			              	$("#pdfUrl").val('/' + data.url);
 			              }else{
 			              	artdialog_alert(data.info);
@@ -397,10 +398,10 @@
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(key && value){
-								featureArr.push({key: key, value: value});
+								featureArr.push({"key": key, "value": value});
 							}	
 						})
-						$("#feature").val(JSON.stringify(featureArr))
+						$("#feature").val(JSON.stringify(featureArr));
 
 						var specificationsArr = [];	
 						$("#specifications-td li").each(function(){
