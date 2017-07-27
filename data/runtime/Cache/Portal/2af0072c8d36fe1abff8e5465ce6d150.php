@@ -17,6 +17,7 @@
     <link href="/public/js/artDialog/skins/default.css" rel="stylesheet" />
     <link href="/public/simpleboot/font-awesome/4.4.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">
     <style>
+    ul,li,ol{list-style: none;}
 		form .input-order{margin-bottom: 0px;padding:3px;width:40px;}
 		.table-actions{margin-top: 5px; margin-bottom: 5px;padding:0px;}
 		.table-list{margin-bottom: 0px;}
@@ -53,7 +54,7 @@
 </style>
 <script type="text/html" id="photos-item-wrapper">
 	<li id="savedimage{id}">
-		<input id="photo-{id}" type="hidden" name="photos_url[]" value="{filepath}"> 
+		<input id="photo-{id}" type="hidden" name="photos_url[]" value="{filepath}">
 		<input id="photo-{id}-name" type="text" name="photos_alt[]" value="{name}" style="width: 160px;" title="图片名称">
 		<img id="photo-{id}-preview" src="{url}" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
 		<a href="javascript:upload_one_image('图片上传','#photo-{id}');">替换</a>
@@ -106,21 +107,21 @@
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[feature]" id="feature">
+							<input type="hidden" name="post[feature]" id="feature">
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
-								<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
+								<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[specifications]" id="specifications">
+							<input type="hidden" name="post[specifications]" id="specifications">
 							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
 							<td id='specifications-td'>
-								<li><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]); ?>"></li>
+								<li><input type="text" placeholder="请输入关键字(比如type)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" >
+							<input type="hidden" name="post[pdf]" id="pdfUrl" >
 							<th>PDF</th>
 							<td>
 								<a href='<?php echo ($post['pdf']); ?>' id='pdf'>pdf</a>
@@ -132,6 +133,13 @@
 							<td>
 								<ul id="accessories" class="pic-list unstyled"></ul>
 								<a href="javascript:upload_multi_image('图片上传','#accessories','photos-item-wrapper');" class="btn btn-small">选择图片</a>
+							</td>
+						</tr>
+						<tr>
+							<th>相册图集</th>
+							<td>
+								<ul id="photos-list" class="pic-list unstyled"></ul>
+								<a href="javascript:upload_multi_image('图片上传','#photos-list','photos-item-wrapper');" class="btn btn-small">选择图片</a>
 							</td>
 						</tr>
 					</table>
@@ -230,7 +238,7 @@
 			});
 
 			$("#add-feature").on('click', function(e){
-				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#feature-td").append('<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-feature").on('click', function(){
@@ -238,7 +246,7 @@
 			})
 
 			$("#add-specifications").on('click', function(e){
-				$("#specifications-td").append('<li><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#specifications-td").append('<li><input type="text" placeholder="请输入关键字(比如type)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-specifications").on('click', function(){
@@ -249,30 +257,59 @@
 				var formData = new FormData();
 				formData.append('file', $('#uploadPDF')[0].files[0]);
 				var url = "<?php echo U('AdminProduct/upload');?>";
-			     $.ajax({  
-			          url: url,  
-			          type: 'POST',  
-			          data: formData,  
-			          cache: false,  
-			          contentType: false,  
-			          processData: false,  
-			          success: function (data) {  
+			     $.ajax({
+			          url: url,
+			          type: 'POST',
+			          data: formData,
+			          cache: false,
+			          contentType: false,
+			          processData: false,
+			          success: function (data) {
 			              if(data.status){
 			              	$("#pdf").attr('href', '/' + data.url);
 			              	$("#pdfUrl").val('/' + data.url);
 			              }else{
 			              	artdialog_alert(data.info);
-			              }  
-			          },  
-			          error: function (error) {  
+			              }
+			          },
+			          error: function (error) {
 			              artdialog_alert(error);
-			          }  
-			     });  
+			          }
+			     });
+			})
+
+			$(document).on('change', '.uploadIcon', function(){
+				console.log("asfsafasf");
+				var me = $(this);
+				var aIconJQ = me.parent().find('.icon');
+				var formData = new FormData();
+				formData.append('file', me[0].files[0]);
+				var url = "<?php echo U('AdminProduct/upload');?>";
+			     $.ajax({
+			          url: url,
+			          type: 'POST',
+			          data: formData,
+			          cache: false,
+			          contentType: false,
+			          processData: false,
+			          success: function (data) {
+			              if(data.status){
+			              	aIconJQ.text('图标 ' + data.url);
+			              	aIconJQ.attr('href', '/' + data.url);
+			              }else{
+			              	artdialog_alert(data.info);
+			              }
+			          },
+			          error: function (error) {
+			              artdialog_alert(error);
+			          }
+			     });
+
 			})
 			/////---------------------
 			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
 				//javascript
-				
+
 				//编辑器
 				editorcontent = new baidu.editor.ui.Editor();
 				editorcontent.render('content');
@@ -354,24 +391,35 @@
 					onfocusout : false,
 					//验证通过，提交表单
 					submitHandler : function(forms) {
-						var featureArr = [];	
+						$("#photos-list li input[name='photos_url[]']").each(function(){
+							var current = $(this);
+							current.attr('name', 'photos_url1[]');
+						});
+						$("#photos-list li input[name='photos_alt[]']").each(function(){
+							var current = $(this);
+							current.attr('name', 'photos_alt1[]');
+						});
+						var featureArr = [];
 						$("#feature-td li").each(function(){
 							var current = $(this);
+							var icon = current.find('a[name="icon"]').attr('href');
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(key && value){
-								featureArr.push({key: key, value: value});
-							}	
+								featureArr.push({icon: icon, key: key, value: value});
+							}
 						})
-						$("#feature").val(JSON.stringify(featureArr))
+						$("#feature").val(JSON.stringify(featureArr));
 
-						var specificationsArr = [];	
+
+						var specificationsArr = [];
 						$("#specifications-td li").each(function(){
 							var current = $(this);
+							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(value){
-								specificationsArr.push(value);
-							}	
+								specificationsArr.push({key: key, value: value});
+							}
 						})
 						$("#specifications").val(JSON.stringify(specificationsArr))
 						if (formloading)
