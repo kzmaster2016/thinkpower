@@ -43,6 +43,21 @@ class AdminProductController extends AdminbaseController {
 		$this->display();
 	}
 
+	//上传文件(pdf)
+	public function upload(){
+	    $upload = new \Think\Upload();// 实例化上传类
+	    $upload->maxSize   =     1024*1024*10 ;// 设置附件上传大小, 10MB
+	    //$upload->exts      =     array('pdf');// 设置附件上传类型
+	    $upload->rootPath  =  'data/upload/pdf/'; // 设置附件上传根目录
+	    // 上传单个文件 
+	    $info   =   $upload->uploadOne($_FILES['file']);
+	    if(!$info) {// 上传错误提示错误信息
+	        $this->error($upload->getError());
+	    }else{// 上传成功 获取上传文件信息
+	         $this->success('ok', 'data/upload/pdf/'.$info['savepath'].$info['savename']);
+	    }
+	}
+
  
 	
 	// 文章或产品添加提交
@@ -51,20 +66,25 @@ class AdminProductController extends AdminbaseController {
 			if(empty($_POST['term'])){
 				$this->error("请至少选择一个分类！");
 			}
-			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
-				foreach ($_POST['photos_url'] as $key=>$url){
-					$photourl=sp_asset_relative_url($url);
-					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
-				}
-			}
+
 			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
 			 
 			$_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
 			$_POST['post']['post_author']=get_current_admin_id();
-			$article=I("post.post");
-			$article['smeta']=json_encode($_POST['smeta']);
-			$article['post_content']=htmlspecialchars_decode($article['post_content']);
-			$result=$this->posts_model->add($article);
+			$product = $_POST['post'];
+			$product['accessories'] = '';
+			$photos_alts = $_POST['photos_alt'];
+			$photos_urls = $_POST['photos_url'];
+			$tempArr = array();
+			if(is_array($photos_alts) && is_array($photos_urls)){
+				for($i=0; $i<count($photos_alts); $i++){
+					$tempArr[] = array("name"=>$photos_alts[$i], "photo"=>$photos_urls[$i]);
+				}
+			}
+			$product['accessories'] = json_encode($tempArr);
+			$product['smeta']=json_encode($_POST['smeta']);
+			$product['post_content']=htmlspecialchars_decode($product['post_content']);
+			$result = $this->posts_model->add($product);
 			if ($result) {
 				foreach ($_POST['term'] as $mterm_id){
 					$this->term_relationships_model->add(array("term_id"=>intval($mterm_id),"object_id"=>$result));
@@ -119,20 +139,23 @@ class AdminProductController extends AdminbaseController {
 					$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>$mterm_id))->save(array("status"=>1));
 				}
 			}
-			
-			if(!empty($_POST['photos_alt']) && !empty($_POST['photos_url'])){
-				foreach ($_POST['photos_url'] as $key=>$url){
-					$photourl=sp_asset_relative_url($url);
-					$_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt'][$key]);
+			$product=I("post.post");
+			$product['accessories'] = '';
+			$photos_alts = $_POST['photos_alt'];
+			$photos_urls = $_POST['photos_url'];
+			$tempArr = array();
+			if(is_array($photos_alts) && is_array($photos_urls)){
+				for($i=0; $i<count($photos_alts); $i++){
+					$tempArr[] = array("name"=>$photos_alts[$i], "photo"=>$photos_urls[$i]);
 				}
 			}
+			$product['accessories'] = json_encode($tempArr);
 			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
 			unset($_POST['post']['post_author']);
 			$_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
-			$article=I("post.post");
-			$article['smeta']=json_encode($_POST['smeta']);
-			$article['post_content']=htmlspecialchars_decode($article['post_content']);
-			$result=$this->posts_model->save($article);
+			$product['smeta']=json_encode($_POST['smeta']);
+			$product['post_content']=htmlspecialchars_decode($product['post_content']);
+			$result=$this->posts_model->save($product);
 			if ($result!==false) {
 				$this->success("保存成功！");
 			} else {

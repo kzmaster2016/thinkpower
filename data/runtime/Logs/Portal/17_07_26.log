@@ -128,3 +128,84 @@ na, it gets more receiving effect, whi-
 ch is for internal or external usage.','2017-07-26 18:28:29','1','0','0','<p>With 18.4*18.4*4mm Ceramic Anten-</p><p>na, it gets more receiving effect, whi-</p><p>ch is for internal or external usage.</p><p><br/></p>','2017-07-26 18:28:58','1','{\"thumb\":\"portal\\/20170726\\/59786ee808b99.png\",\"template\":\"\"}') [ RunTime:0.0003s ]
 SQL: INSERT INTO `cmf_product_relationships` (`term_id`,`object_id`) VALUES ('15','28') [ RunTime:0.0001s ]
 
+[ 2017-07-26T18:48:55+08:00 ] ::1 /index.php/Portal/AdminPage/recyclebin
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+
+[ 2017-07-26T18:48:58+08:00 ] ::1 /index.php/Portal/AdminPage/index
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+
+[ 2017-07-26T18:48:59+08:00 ] ::1 /index.php/Portal/AdminPage/index
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+
+[ 2017-07-26T18:48:59+08:00 ] ::1 /index.php/Portal/AdminPage/index
+NOTIC: D方法实例化没找到模型类Common\Model\PostsModel
+
+[ 2017-07-26T19:10:24+08:00 ] ::1 /index.php/Company/about
+ERR: SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+
+[ 2017-07-26T19:10:25+08:00 ] ::1 /index.php/Company/about
+ERR: SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+
+[ 2017-07-26T19:10:27+08:00 ] ::1 /index.php/Product/productList/term_id/1
+ERR: SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+
+[ 2017-07-26T19:10:49+08:00 ] ::1 /index.php
+ERR: SQLSTATE[HY000] [1045] Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+
+[ 2017-07-26T19:19:22+08:00 ] ::1 /index.php/AdminProduct/upload
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000565s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001462s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000372s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002829s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001252s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001308s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0067s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0060s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0059s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0054s ]
+
+[ 2017-07-26T19:19:46+08:00 ] ::1 /index.php/AdminProduct/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000639s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001218s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000337s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002591s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001503s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001549s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0203s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0065s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0065s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0065s ]
+SQL: DELETE FROM `cmf_product_relationships` WHERE `object_id` = 28 AND `term_id` NOT IN ('15') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_product_relationships` WHERE `object_id` = 28 AND `term_id` = '15' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_product_relationships` SET `status`='1' WHERE `object_id` = 28 AND `term_id` = '15' [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_product` SET `feature`='[]',`specifications`='[]',`pdf`='',`post_title`='TDQ-GU-1923',`post_keywords`='TDQ-GU-1923',`post_excerpt`='With 18.4*18.4*4mm Ceramic Anten-
+na, it gets more receiving effect, whi-
+ch is for internal or external usage.',`post_date`='2017-07-26 18:28:29',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>With 18.4*18.4*4mm Ceramic Anten-</p><p>na, it gets more receiving effect, whi-</p><p>ch is for internal or external usage.</p><p><br/></p>',`accessories`='[{\"name\":\"prodcover_stb-05h-01.jpg\",\"photo\":\"portal\\/20170726\\/59787ac66b528.jpg\"}]',`smeta`='{\"thumb\":\"portal\\/20170726\\/59786ee808b99.png\",\"template\":\"\"}' WHERE `id` = '28' [ RunTime:0.0002s ]
+
+[ 2017-07-26T19:20:56+08:00 ] ::1 /index.php/AdminProduct/edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000384s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001004s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000348s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002121s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001035s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001069s ]
+SQL: SHOW COLUMNS FROM `cmf_users` [ RunTime:0.0187s ]
+SQL: SELECT * FROM `cmf_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `cmf_product` [ RunTime:0.0069s ]
+SQL: SHOW COLUMNS FROM `cmf_product_cat` [ RunTime:0.0075s ]
+SQL: SHOW COLUMNS FROM `cmf_product_relationships` [ RunTime:0.0063s ]
+SQL: DELETE FROM `cmf_product_relationships` WHERE `object_id` = 28 AND `term_id` NOT IN ('15') [ RunTime:0.0002s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `cmf_product_relationships` WHERE `object_id` = 28 AND `term_id` = '15' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `cmf_product_relationships` SET `status`='1' WHERE `object_id` = 28 AND `term_id` = '15' [ RunTime:0.0001s ]
+SQL: UPDATE `cmf_product` SET `feature`='[]',`specifications`='[]',`pdf`='',`post_title`='TDQ-GU-1923',`post_keywords`='TDQ-GU-1923',`post_excerpt`='With 18.4*18.4*4mm Ceramic Anten-
+na, it gets more receiving effect, whi-
+ch is for internal or external usage.',`post_date`='2017-07-26 18:28:29',`post_status`='1',`istop`='0',`recommended`='0',`post_content`='<p>With 18.4*18.4*4mm Ceramic Anten-</p><p>na, it gets more receiving effect, whi-</p><p>ch is for internal or external usage.</p><p><br/></p>',`accessories`='[{\"name\":\"access-name\",\"photo\":\"portal\\/20170726\\/59787ac66b528.jpg\"}]',`smeta`='{\"thumb\":\"portal\\/20170726\\/59786ee808b99.png\",\"template\":\"\"}' WHERE `id` = '28' [ RunTime:0.0002s ]
+
