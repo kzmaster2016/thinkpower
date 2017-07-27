@@ -80,7 +80,7 @@
 								    } 
 									for($i=0;$i< count($feature);$i++){ 
 								?> 
-									<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="{$feature[$i].key}"><input type="text" placeholder="请输入描述" name="value" value="{$feature[$i].value}"></li>
+									<li><a href="{$feature[$i]['icon']}" name="icon" class="icon">{$feature[$i]['icon']}</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="{$feature[$i].key}"><input type="text" placeholder="请输入描述" name="value" value="{$feature[$i].value}"></li>
 								<?php 
 									} 
 								?>
@@ -267,7 +267,7 @@
 			});
 
 			$("#add-feature").on('click', function(e){
-				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#feature-td").append('<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-feature").on('click', function(){
@@ -306,6 +306,35 @@
 			              artdialog_alert(error);
 			          }  
 			     });  
+			})
+
+			$(document).on('change', '.uploadIcon', function(){
+				console.log("asfsafasf");
+				var me = $(this);
+				var aIconJQ = me.parent().find('.icon');
+				var formData = new FormData();
+				formData.append('file', me[0].files[0]);
+				var url = "{:U('AdminProduct/upload')}";
+			     $.ajax({  
+			          url: url,  
+			          type: 'POST',  
+			          data: formData,  
+			          cache: false,  
+			          contentType: false,  
+			          processData: false,  
+			          success: function (data) {  
+			              if(data.status){
+			              	aIconJQ.text('图标 ' + data.url);
+			              	aIconJQ.attr('href', '/' + data.url);
+			              }else{
+			              	artdialog_alert(data.info);
+			              }  
+			          },  
+			          error: function (error) {  
+			              artdialog_alert(error);
+			          }  
+			     });  
+
 			})
 
 			/////---------------------
@@ -395,11 +424,12 @@
 						var featureArr = [];	
 						$("#feature-td li").each(function(){
 							var current = $(this);
+							var icon = current.find('a[name="icon"]').attr('href');
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(key && value){
-								featureArr.push({"key": key, "value": value});
-							}	
+								featureArr.push({icon: icon, key: key, value: value});
+							}
 						})
 						$("#feature").val(JSON.stringify(featureArr));
 
