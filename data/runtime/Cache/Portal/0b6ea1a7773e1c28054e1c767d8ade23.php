@@ -54,7 +54,7 @@
 </style>
 <script type="text/html" id="photos-item-wrapper">
 	<li id="savedimage{id}">
-		<input id="photo-{id}" type="hidden" name="photos_url[]" value="{filepath}"> 
+		<input id="photo-{id}" type="hidden" name="photos_url[]" value="{filepath}">
 		<input id="photo-{id}-name" type="text" name="photos_alt[]" value="{name}" style="width: 160px;" title="图片名称">
 		<img id="photo-{id}-preview" src="{url}" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
 		<a href="javascript:upload_one_image('图片上传','#photo-{id}');">替换</a>
@@ -70,8 +70,8 @@
 			<li class="active"><a href="#">编辑产品</a></li>
 		</ul>
 		<form action="<?php echo U('AdminProduct/edit_post');?>" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
-			<input style="display:hidden;" name="post[feature]" id="feature">
-			<input style="display:hidden;" name="post[specifications]" id="specifications">
+			<input type="hidden" name="post[feature]" id="feature">
+			<input type="hidden" name="post[specifications]" id="specifications">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
@@ -97,7 +97,7 @@
 								多关键词之间用空格或者英文逗号隔开
 							</td>
 						</tr>
-	
+
 						<tr>
 							<th>文章来源</th>
 							<td>
@@ -119,22 +119,26 @@
 						<tr>
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
-								<?php  $feature = $post['feature']; if(!empty($feature)){ $feature = json_decode($feature, true); }else{ $feature = array(); } for($i=0;$i< count($feature);$i++){ ?> 
+								<?php
+ $feature = $post['feature']; if(!empty($feature)){ $feature = json_decode($feature, true); }else{ $feature = array(); } for($i=0;$i< count($feature);$i++){ ?>
 									<li><a href="<?php echo ($feature[$i]['icon']); ?>" name="icon" class="icon"><?php echo ($feature[$i]['icon']); ?></a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
-								<?php  } ?>
+								<?php
+ } ?>
 							</td>
 						</tr>
 						<tr>
-							
+
 							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
 							<td id='specifications-td'>
-								<?php  $specifications = $post['specifications']; if(!empty($specifications)){ $specifications = json_decode($specifications, true); }else{ $specifications = array(); } for($i=0;$i<count($specifications);$i++){ ?> 
-									<li><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]); ?>"></li>
-								<?php  } ?>
+								<?php
+ $specifications = $post['specifications']; if(!empty($specifications)){ $specifications = json_decode($specifications, true); }else{ $specifications = array(); } for($i=0;$i<count($specifications);$i++){ ?>
+									<li><input type="text" placeholder="请输入关键字(比如type)" name="key" value="<?php echo ($specifications[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]["value"]); ?>"></li>
+								<?php
+ } ?>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
+							<input type="hidden" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
 							<th>PDF</th>
 							<td>
 								<a href='<?php echo ($post['pdf']); ?>' id='pdf'><?php echo ($post['pdf']); ?></a>
@@ -147,7 +151,7 @@
 								<ul id="photos" class="pic-list unstyled">
 									<?php if(!empty($post['accessories'])): $accessories = $post['accessories']; if(!empty($accessories)){ $accessories = json_decode($accessories, true); }else{ $accessories = array(); } for($i=0;$i<count($accessories);$i++){ $vo = $accessories[$i]; $img_url=$vo['photo']; ?>
 										<li id="savedimage<?php echo ($key); ?>">
-											<input id="photo-<?php echo ($key); ?>" type="hidden" name="photos_url[]" value="<?php echo ($img_url); ?>"> 
+											<input id="photo-<?php echo ($key); ?>" type="hidden" name="photos_url[]" value="<?php echo ($img_url); ?>">
 											<input id="photo-<?php echo ($key); ?>-name" type="text" name="photos_alt[]" value="<?php echo ($vo["name"]); ?>" style="width: 200px;" title="图片名称">
 											<img id="photo-<?php echo ($key); ?>-preview" src="<?php echo sp_get_image_preview_url($vo['photo']);?>" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
 											<a href="javascript:upload_one_image('图片上传','#photo-<?php echo ($key); ?>');">替换</a>
@@ -157,6 +161,22 @@
  } endif; ?>
 								</ul>
 								<a href="javascript:upload_multi_image('图片上传','#photos','photos-item-wrapper');" class="btn btn-small">选择图片</a>
+							</td>
+						</tr>
+						<tr>
+							<th>相册图集</th>
+							<td>
+								<ul id="photos-list" class="pic-list unstyled">
+									<?php if(!empty($smeta['photo'])): if(is_array($smeta['photo'])): foreach($smeta['photo'] as $key=>$vo): $img_url=sp_get_image_preview_url($vo['url']); ?>
+											<li id="savedimage<?php echo ($key); ?>">
+												<input id="photo-<?php echo ($key); ?>" type="hidden" name="photos_url1[]" value="<?php echo ($img_url); ?>">
+												<input id="photo-<?php echo ($key); ?>-name" type="text" name="photos_alt1[]" value="<?php echo ($vo["alt"]); ?>" style="width: 200px;" title="图片名称">
+												<img id="photo-<?php echo ($key); ?>-preview" src="<?php echo sp_get_image_preview_url($vo['url']);?>" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
+												<a href="javascript:upload_one_image('图片上传','#photo-<?php echo ($key); ?>');">替换</a>
+												<a href="javascript:(function(){ $('#savedimage<?php echo ($key); ?>').remove();})();">移除</a>
+											</li><?php endforeach; endif; endif; ?>
+								</ul>
+								<a href="javascript:upload_multi_image('图片上传','#photos-list','photos-item-wrapper');" class="btn btn-small">选择图片</a>
 							</td>
 						</tr>
 					</table>
@@ -245,7 +265,7 @@
 	<script type="text/javascript" src="/public/js/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			
+
 			//setInterval(function(){public_lock_renewal();}, 10000);
 			$(".js-ajax-close-btn").on('click', function(e) {
 				e.preventDefault();
@@ -276,7 +296,7 @@
 			})
 
 			$("#add-specifications").on('click', function(e){
-				$("#specifications-td").append('<li><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#specifications-td").append('<li><input type="text" placeholder="请输入关键字(比如type)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-specifications").on('click', function(){
@@ -287,26 +307,26 @@
 				var formData = new FormData();
 				formData.append('file', $('#uploadPDF')[0].files[0]);
 				var url = "<?php echo U('AdminProduct/upload');?>";
-			     $.ajax({  
-			          url: url,  
-			          type: 'POST',  
-			          data: formData,  
-			          cache: false,  
-			          contentType: false,  
-			          processData: false,  
-			          success: function (data) {  
+			     $.ajax({
+			          url: url,
+			          type: 'POST',
+			          data: formData,
+			          cache: false,
+			          contentType: false,
+			          processData: false,
+			          success: function (data) {
 			              if(data.status){
 			              	$("#pdf").attr('href', '/' + data.url);
 			              	$("#pdf").text(data.url);
 			              	$("#pdfUrl").val('/' + data.url);
 			              }else{
 			              	artdialog_alert(data.info);
-			              }  
-			          },  
-			          error: function (error) {  
+			              }
+			          },
+			          error: function (error) {
 			              artdialog_alert(error);
-			          }  
-			     });  
+			          }
+			     });
 			})
 
 			$(document).on('change', '.uploadIcon', function(){
@@ -316,25 +336,25 @@
 				var formData = new FormData();
 				formData.append('file', me[0].files[0]);
 				var url = "<?php echo U('AdminProduct/upload');?>";
-			     $.ajax({  
-			          url: url,  
-			          type: 'POST',  
-			          data: formData,  
-			          cache: false,  
-			          contentType: false,  
-			          processData: false,  
-			          success: function (data) {  
+			     $.ajax({
+			          url: url,
+			          type: 'POST',
+			          data: formData,
+			          cache: false,
+			          contentType: false,
+			          processData: false,
+			          success: function (data) {
 			              if(data.status){
 			              	aIconJQ.text('图标 ' + data.url);
 			              	aIconJQ.attr('href', '/' + data.url);
 			              }else{
 			              	artdialog_alert(data.info);
-			              }  
-			          },  
-			          error: function (error) {  
+			              }
+			          },
+			          error: function (error) {
 			              artdialog_alert(error);
-			          }  
-			     });  
+			          }
+			     });
 
 			})
 
@@ -422,7 +442,15 @@
 					onfocusout : false,
 					//验证通过，提交表单
 					submitHandler : function(forms) {
-						var featureArr = [];	
+						$("#photos-list li input[name='photos_url[]']").each(function(){
+							var current = $(this);
+							current.attr('name', 'photos_url1[]');
+						});
+						$("#photos-list li input[name='photos_alt[]']").each(function(){
+							var current = $(this);
+							current.attr('name', 'photos_alt1[]');
+						});
+						var featureArr = [];
 						$("#feature-td li").each(function(){
 							var current = $(this);
 							var icon = current.find('a[name="icon"]').attr('href');
@@ -434,13 +462,14 @@
 						})
 						$("#feature").val(JSON.stringify(featureArr));
 
-						var specificationsArr = [];	
+						var specificationsArr = [];
 						$("#specifications-td li").each(function(){
 							var current = $(this);
+							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(value){
-								specificationsArr.push(value);
-							}	
+								specificationsArr.push({key: key, value: value});
+							}
 						})
 						$("#specifications").val(JSON.stringify(specificationsArr));
 
