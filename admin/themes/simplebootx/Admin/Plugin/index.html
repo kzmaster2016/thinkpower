@@ -4,9 +4,9 @@
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="{:U('plugin/index')}">{:L('ADMIN_PLUGIN_INDEX')}</a></li>
-			<li><a href="http://www.thinkcmf.com/appstore/plugin.html" target="_blank">插件市场</a></li>
-			<li><a href="http://www.thinkcmf.com/topic/index/index/cat/9.html" target="_blank">{:L('PLUGIN_DISCUSSION')}</a></li>
-			<li><a href="http://www.thinkcmf.com/docs/cmfx/plugin.html" target="_blank">{:L('PLUGIN_DOCUMENT')}</a></li>
+		<!-- 	<li><a href="http://www.thinkcmf.com/appstore/plugin.html" target="_blank">插件市场</a></li>
+		<li><a href="http://www.thinkcmf.com/topic/index/index/cat/9.html" target="_blank">{:L('PLUGIN_DISCUSSION')}</a></li>
+		<li><a href="http://www.thinkcmf.com/docs/cmfx/plugin.html" target="_blank">{:L('PLUGIN_DOCUMENT')}</a></li> -->
 		</ul>
 		<form method="post" class="js-ajax-form">
 			<php>
@@ -19,7 +19,7 @@
 						<th>{:L('TEXT_DOMAIN')}</th>
 						<th>{:L('HOOKS')}</th>
 						<th>{:L('DESCRIPTION')}</th>
-						<th>{:L('AUTHOR')}</th>
+
 						<th width="45">{:L('STATUS')}</th>
 						<th width="150">{:L('ACTIONS')}</th>
 					</tr>
@@ -31,7 +31,6 @@
 						<td>{$vo.name}</td>
 						<td>{$vo.hooks}</td>
 						<td>{$vo.description}</td>
-						<td>{$vo.author}</td>
 						<td>{$status[$vo['status']]}</td>
 						<td>
 							<if condition="$vo['status']==3">

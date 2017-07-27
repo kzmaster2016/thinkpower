@@ -450,7 +450,15 @@ input:-ms-input-placeholder{color: #f1f1f1;}
 .productdeatil-con .pd-con4 .accessory-list .item{border: 2px solid #b1b1b1;margin-bottom: 10px;}
 .productdeatil-con .pd-con4 .accessory-list .item div{padding-top: 75%;}
 .productdeatil-con .pd-con4 .accessory-list .item p{line-height: 30px;background: #b1b1b1;text-align: center;font-size: 16px;font-family: "Times";color: #000;}
-
+.productdeatil-con .prod-cover .imglist{background: #e2e1e1;}
+.productdeatil-con .imglist .slick-prev{position: absolute;z-index: 10;top: 50%;left: 0;transition: all 0.3s; width: 30px;height: 30px;margin-top: -15px;font-size: 0;border: none; background: url(../images/tippng/tip_7.png) center center no-repeat;}
+.productdeatil-con .imglist .slick-next{position: absolute;z-index: 10;top: 50%;right: 0;transition: all 0.3s; width: 30px;height: 30px;margin-top: -15px;font-size: 0;border: none; background: url(../images/tippng/tip_8.png) center center no-repeat;}
+.productdeatil-con .imglist .slick-prev:hover,.productdeatil-con .imglist .slick-next:hover{
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
 /* article */
 .article-con{padding: 50px 0 80px;}
 .article-con .post-article{position: relative;border-bottom: 1px dotted #ddd;padding: 0 0 40px;}

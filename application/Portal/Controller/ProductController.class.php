@@ -48,6 +48,35 @@ class ProductController extends HomebaseController {
 		$this->display();
 	}
 	public function detail(){
+
+		$article_id=I('get.id',0,'intval');	
+    	$posts_model=M("Product");
+
+    	$article=$posts_model->where(array('id'=>$article_id))->find();	
+
+    	// dump($article);
+
+    	if(empty($article)){
+    	    header('HTTP/1.1 404 Not Found');
+    	    header('Status:404 Not Found');
+    	    if(sp_template_file_exists(MODULE_NAME."/404")){
+    	        $this->display(":404");
+    	    } 	    
+    	    return;
+    	}   	
+    	$posts_model->where(array('id'=>$article_id))->setInc('post_hits'); 	//统计点击次数
+    	
+    	$smeta=json_decode($article['smeta'],true);
+    	$content_data=sp_content_page($article['post_content']);
+        $article['post_content']=$content_data['content'];
+    	// $article['test']='kuangzheng32134';   //测试获取数据
+    	
+    	// $this->assign("page",$content_data['page']);
+    	$this->assign($article);   //这样输出没有别名，那么模板获取变量就可以不用带article
+    	$this->assign("smeta",$smeta);
+     
+    	$this->assign("article_id",$article_id);
+
 		$this->display();
 	}
 
@@ -66,7 +95,6 @@ class ProductController extends HomebaseController {
 
 		$content['product']=$productList;
 		return $content;
-
 
 	}
 }

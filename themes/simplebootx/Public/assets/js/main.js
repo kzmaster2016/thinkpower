@@ -86,4 +86,9 @@ $(function(){
 	if(!$('.footer .go-top').length==0){
 	    $('.footer .go-top').gotop();
 	}
+	if(!$('.productdeatil-con').length==0){
+		$('.productdeatil-con .prod-cover .imglist').slick({
+			
+		});
+	}
 });

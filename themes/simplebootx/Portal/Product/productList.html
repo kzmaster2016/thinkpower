@@ -69,7 +69,7 @@
 						</if>
 						<volist	name="vo['product']" id="vo2">
 						<php>
-							$smeta=json_decode($vo2['smeta'],true); 						
+							$smeta=json_decode($vo2['smeta'],true); 		
 						</php>
 						<div class="col-sm-4 prod-item">
 							<div class="prod-cover resimg-con">
@@ -80,7 +80,9 @@
 								<h4 class="prod-name surp-elli">
 								{$vo2['post_title']}
 								</h4>
-								<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
+								<h5 class="prod-vicename surp-elli">
+								    {$vo2['post_vicetitle']?$vo2['post_vicetitle']:$vo['cat'][0]['name']}
+								</h5>
 								<p class="prod-intro">{$vo2['post_excerpt']}</p>
 							</div>					
 						</div>
