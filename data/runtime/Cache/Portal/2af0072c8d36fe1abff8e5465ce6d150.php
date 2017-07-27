@@ -17,7 +17,6 @@
     <link href="/public/js/artDialog/skins/default.css" rel="stylesheet" />
     <link href="/public/simpleboot/font-awesome/4.4.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">
     <style>
-    ul,li,ol{list-style: none;}
 		form .input-order{margin-bottom: 0px;padding:3px;width:40px;}
 		.table-actions{margin-top: 5px; margin-bottom: 5px;padding:0px;}
 		.table-list{margin-bottom: 0px;}
@@ -66,97 +65,73 @@
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
 			<li><a href="<?php echo U('AdminProduct/index');?>">产品管理</a></li>
-			<li><a href="<?php echo U('AdminProduct/add',array('term'=>empty($term['term_id'])?'':$term['term_id']));?>" target="_self">添加产品</a></li>
-			<li class="active"><a href="#">编辑产品</a></li>
+			<li class="active"><a href="<?php echo U('AdminProduct/add',array('term'=>empty($term['term_id'])?'':$term['term_id']));?>" target="_self">添加产品</a></li>
 		</ul>
-		<form action="<?php echo U('AdminProduct/edit_post');?>" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
-			<input style="display:hidden;" name="post[feature]" id="feature">
-			<input style="display:hidden;" name="post[specifications]" id="specifications">
+		<form action="<?php echo U('AdminProduct/add_post');?>" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
 						<tr>
 							<th width="140">分类</th>
 							<td>
-								<select multiple="multiple" style="max-height: 100px;"name="term[]"><?php echo ($taxonomys); ?></select>
+								<select multiple="multiple" style="max-height: 100px;" name="term[]"><?php echo ($taxonomys); ?></select>
 								<div>windows：按住 Ctrl 按钮来选择多个选项,Mac：按住 command 按钮来选择多个选项</div>
 							</td>
 						</tr>
 						<tr>
 							<th>标题</th>
 							<td>
-								<input type="hidden" name="post[id]" value="<?php echo ($post["id"]); ?>">
-								<input type="text" style="width: 400px;" name="post[post_title]" required value="<?php echo ($post["post_title"]); ?>" placeholder="请输入标题"/>
+								<input type="text" style="width:400px;" name="post[post_title]" id="title" required value="" placeholder="请输入标题"/>
 								<span class="form-required">*</span>
 							</td>
 						</tr>
 						<tr>
 							<th>关键词</th>
-							<td>
-								<input type="text" name="post[post_keywords]" style="width: 400px" value="<?php echo ($post['post_keywords']); ?>" placeholder="请输入关键字">
-								多关键词之间用空格或者英文逗号隔开
-							</td>
+							<td><input type="text" name="post[post_keywords]" id="keywords" value="" style="width: 400px" placeholder="请输入关键字"> 多关键词之间用空格或者英文逗号隔开</td>
 						</tr>
-	
 						<tr>
 							<th>文章来源</th>
-							<td>
-								<input type="text" name="post[post_source]" value="<?php echo ($post['post_source']); ?>" style="width: 400px" placeholder="请输入文章来源">
-							</td>
+							<td><input type="text" name="post[post_source]" id="source" value="" style="width: 400px" placeholder="请输入文章来源"></td>
 						</tr>
 						<tr>
 							<th>摘要</th>
 							<td>
-								<textarea name="post[post_excerpt]" style="width: 98%; height: 50px;" placeholder="请填写摘要"><?php echo ($post["post_excerpt"]); ?></textarea>
+								<textarea name="post[post_excerpt]" id="description" style="width: 98%; height: 50px;" placeholder="请填写摘要"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<th>内容</th>
 							<td>
-								<script type="text/plain" id="content" name="post[post_content]"><?php echo ($post["post_content"]); ?></script>
+								<script type="text/plain" id="content" name="post[post_content]"></script>
 							</td>
 						</tr>
 						<tr>
+							<input style="display:hidden;" name="post[feature]" id="feature">
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
-								<?php  $feature = $post['feature']; if(!empty($feature)){ $feature = json_decode($feature, true); }else{ $feature = array(); } for($i=0;$i< count($feature);$i++){ ?> 
-									<li><a href="<?php echo ($feature[$i]['icon']); ?>" name="icon" class="icon"><?php echo ($feature[$i]['icon']); ?></a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
-								<?php  } ?>
+								<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
 							</td>
 						</tr>
 						<tr>
-							
+							<input style="display:hidden;" name="post[specifications]" id="specifications">
 							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
 							<td id='specifications-td'>
-								<?php  $specifications = $post['specifications']; if(!empty($specifications)){ $specifications = json_decode($specifications, true); }else{ $specifications = array(); } for($i=0;$i<count($specifications);$i++){ ?> 
-									<li><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]); ?>"></li>
-								<?php  } ?>
+								<li><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]); ?>"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
+							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" >
 							<th>PDF</th>
 							<td>
-								<a href='<?php echo ($post['pdf']); ?>' id='pdf'><?php echo ($post['pdf']); ?></a>
+								<a href='<?php echo ($post['pdf']); ?>' id='pdf'>pdf</a>
 								<input type="file" id="uploadPDF" name="file">
 							</td>
 						</tr>
 						<tr>
 							<th>accessories</th>
 							<td>
-								<ul id="photos" class="pic-list unstyled">
-									<?php if(!empty($post['accessories'])): $accessories = $post['accessories']; if(!empty($accessories)){ $accessories = json_decode($accessories, true); }else{ $accessories = array(); } for($i=0;$i<count($accessories);$i++){ $vo = $accessories[$i]; $img_url=$vo['photo']; ?>
-										<li id="savedimage<?php echo ($key); ?>">
-											<input id="photo-<?php echo ($key); ?>" type="hidden" name="photos_url[]" value="<?php echo ($img_url); ?>"> 
-											<input id="photo-<?php echo ($key); ?>-name" type="text" name="photos_alt[]" value="<?php echo ($vo["name"]); ?>" style="width: 200px;" title="图片名称">
-											<img id="photo-<?php echo ($key); ?>-preview" src="<?php echo sp_get_image_preview_url($vo['photo']);?>" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
-											<a href="javascript:upload_one_image('图片上传','#photo-<?php echo ($key); ?>');">替换</a>
-											<a href="javascript:(function(){ $('#savedimage<?php echo ($key); ?>').remove();})();">移除</a>
-										</li>
-										<?php
- } endif; ?>
-								</ul>
-								<a href="javascript:upload_multi_image('图片上传','#photos','photos-item-wrapper');" class="btn btn-small">选择图片</a>
+								<ul id="accessories" class="pic-list unstyled"></ul>
+								<a href="javascript:upload_multi_image('图片上传','#accessories','photos-item-wrapper');" class="btn btn-small">选择图片</a>
 							</td>
 						</tr>
 					</table>
@@ -164,54 +139,44 @@
 				<div class="span3">
 					<table class="table table-bordered">
 						<tr>
-							<td><b>缩略图</b></td>
+							<th><b>缩略图</b></th>
 						</tr>
 						<tr>
 							<td>
 								<div style="text-align: center;">
-									<input type="hidden" name="smeta[thumb]" id="thumb" value="<?php echo ((isset($smeta["thumb"]) && ($smeta["thumb"] !== ""))?($smeta["thumb"]):''); ?>">
+									<input type="hidden" name="smeta[thumb]" id="thumb" value="">
 									<a href="javascript:upload_one_image('图片上传','#thumb');">
-										<?php if(empty($smeta['thumb'])): ?><img src="/admin/themes/simplebootx/Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand"/>
-										<?php else: ?>
-											<img src="<?php echo sp_get_image_preview_url($smeta['thumb']);?>" id="thumb-preview" width="135" style="cursor: hand"/><?php endif; ?>
+										<img src="/admin/themes/simplebootx/Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand" />
 									</a>
 									<input type="button" class="btn btn-small" onclick="$('#thumb-preview').attr('src','/admin/themes/simplebootx/Public/assets/images/default-thumbnail.png');$('#thumb').val('');return false;" value="取消图片">
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th>发布时间</th>
+							<th><b>发布时间</b></th>
 						</tr>
 						<tr>
-							<td><input type="text" name="post[post_date]" value="<?php echo ($post["post_date"]); ?>" class="js-datetime" style="width: 160px;"></td>
+							<td><input type="text" name="post[post_date]" value="<?php echo date('Y-m-d H:i:s',time());?>" class="js-datetime" style="width: 160px;"></td>
 						</tr>
 						<tr>
-							<th>评论</th>
-						</tr>
-						<tr>
-							<td><label style="width: 88px"><a href="javascript:open_iframe_dialog('<?php echo U('comment/commentadmin/index',array('post_id'=>$post['id']));?>','评论列表')">查看评论</a></label>
-							</td>
-						</tr>
-						<tr>
-							<th>状态</th>
+							<th><b>状态</b></th>
 						</tr>
 						<tr>
 							<td>
-								<?php $status_yes=$post['post_status']==1?"checked":""; $status_no=$post['post_status']==0?"checked":""; $istop_yes=$post['istop']==1?"checked":""; $istop_no=$post['istop']==0?"checked":""; $recommended_yes=$post['recommended']==1?"checked":""; $recommended_no=$post['recommended']==0?"checked":""; ?>
-								<label class="radio"><input type="radio" name="post[post_status]" value="1" <?php echo ($status_yes); ?>>审核通过</label>
-								<label class="radio"><input type="radio" name="post[post_status]" value="0" <?php echo ($status_no); ?>>未审核</label>
+								<label class="radio"><input type="radio" name="post[post_status]" value="1" checked>审核通过</label>
+								<label class="radio"><input type="radio" name="post[post_status]" value="0">待审核</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<label class="radio"><input type="radio" name="post[istop]" value="1" <?php echo ($istop_yes); ?>>置顶</label>
-								<label class="radio"><input type="radio" name="post[istop]" value="0" <?php echo ($istop_no); ?>>未置顶</label>
+								<label class="radio"><input type="radio" name="post[istop]" value="1">置顶</label>
+								<label class="radio"><input type="radio" name="post[istop]" value="0" checked>未置顶</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<label class="radio"><input type="radio" name="post[recommended]" value="1" <?php echo ($recommended_yes); ?>>推荐</label>
-								<label class="radio"><input type="radio" name="post[recommended]" value="0" <?php echo ($recommended_no); ?>>未推荐</label>
+								<label class="radio"><input type="radio" name="post[recommended]" value="1">推荐</label>
+								<label class="radio"><input type="radio" name="post[recommended]" value="0" checked>未推荐</label>
 							</td>
 						</tr>
 						<tr>
@@ -222,8 +187,7 @@
 								<?php $tpl_list=sp_admin_get_tpl_file_list(); unset($tpl_list['page']); ?>
 								<select style="min-width: 190px;" name="smeta[template]">
 									<option value="">请选择模板</option>
-									<?php if(is_array($tpl_list)): foreach($tpl_list as $key=>$vo): $template_selected=$smeta['template']==$vo?"selected":""; ?>
-										<option value="<?php echo ($vo); ?>"<?php echo ($template_selected); ?>><?php echo ($vo); echo C("TMPL_TEMPLATE_SUFFIX");?></option><?php endforeach; endif; ?>
+									<?php if(is_array($tpl_list)): foreach($tpl_list as $key=>$vo): ?><option value="<?php echo ($vo); ?>"><?php echo ($vo); echo C("TMPL_TEMPLATE_SUFFIX");?></option><?php endforeach; endif; ?>
 								</select>
 							</td>
 						</tr>
@@ -245,8 +209,6 @@
 	<script type="text/javascript" src="/public/js/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			
-			//setInterval(function(){public_lock_renewal();}, 10000);
 			$(".js-ajax-close-btn").on('click', function(e) {
 				e.preventDefault();
 				Wind.use("artDialog", function() {
@@ -268,7 +230,7 @@
 			});
 
 			$("#add-feature").on('click', function(e){
-				$("#feature-td").append('<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-feature").on('click', function(){
@@ -297,7 +259,6 @@
 			          success: function (data) {  
 			              if(data.status){
 			              	$("#pdf").attr('href', '/' + data.url);
-			              	$("#pdf").text(data.url);
 			              	$("#pdfUrl").val('/' + data.url);
 			              }else{
 			              	artdialog_alert(data.info);
@@ -308,40 +269,10 @@
 			          }  
 			     });  
 			})
-
-			$(document).on('change', '.uploadIcon', function(){
-				console.log("asfsafasf");
-				var me = $(this);
-				var aIconJQ = me.parent().find('.icon');
-				var formData = new FormData();
-				formData.append('file', me[0].files[0]);
-				var url = "<?php echo U('AdminProduct/upload');?>";
-			     $.ajax({  
-			          url: url,  
-			          type: 'POST',  
-			          data: formData,  
-			          cache: false,  
-			          contentType: false,  
-			          processData: false,  
-			          success: function (data) {  
-			              if(data.status){
-			              	aIconJQ.text('图标 ' + data.url);
-			              	aIconJQ.attr('href', '/' + data.url);
-			              }else{
-			              	artdialog_alert(data.info);
-			              }  
-			          },  
-			          error: function (error) {  
-			              artdialog_alert(error);
-			          }  
-			     });  
-
-			})
-
 			/////---------------------
 			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
 				//javascript
-
+				
 				//编辑器
 				editorcontent = new baidu.editor.ui.Editor();
 				editorcontent.render('content');
@@ -355,7 +286,6 @@
 						editorcontent.sync();
 					} catch (err) {
 					}
-					;
 					return editorcontent.hasContents();
 				});
 				var form = $('form.js-ajax-forms');
@@ -368,6 +298,8 @@
 						}
 					});
 				}
+
+				var formloading = false;
 				//表单验证开始
 				form.validate({
 					//是否在获取焦点时验证
@@ -425,14 +357,13 @@
 						var featureArr = [];	
 						$("#feature-td li").each(function(){
 							var current = $(this);
-							var icon = current.find('a[name="icon"]').attr('href');
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(key && value){
-								featureArr.push({icon: icon, key: key, value: value});
-							}
+								featureArr.push({key: key, value: value});
+							}	
 						})
-						$("#feature").val(JSON.stringify(featureArr));
+						$("#feature").val(JSON.stringify(featureArr))
 
 						var specificationsArr = [];	
 						$("#specifications-td li").each(function(){
@@ -442,15 +373,17 @@
 								specificationsArr.push(value);
 							}	
 						})
-						$("#specifications").val(JSON.stringify(specificationsArr));
-
+						$("#specifications").val(JSON.stringify(specificationsArr))
+						if (formloading)
+							return;
 						$(forms).ajaxSubmit({
 							url : form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
 							dataType : 'json',
 							beforeSubmit : function(arr, $form, options) {
-
+								formloading = false;
 							},
 							success : function(data, statusText, xhr, $form) {
+								formloading = false;
 								if (data.status) {
 									setCookie("refersh_time", 1);
 									//添加成功
@@ -464,9 +397,9 @@
 											opacity : 0,
 											content : data.info,
 											button : [ {
-												name : '继续编辑？',
+												name : '继续添加？',
 												callback : function() {
-													//reloadPage(window);
+													reloadPage(window);
 													return true;
 												},
 												focus : true

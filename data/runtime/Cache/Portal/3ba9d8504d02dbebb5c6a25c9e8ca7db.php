@@ -34,7 +34,7 @@
 <body class="pcbody about-page">
 	<input type="hidden" value="1" class="active-maninav">
 	<div class="header">
-	<div class="top-search">
+	<div class="top-search hidden-xs">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 title">PROFESSIONAL IOT SOLUTION PROVIDER</div>
@@ -62,7 +62,7 @@
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
 					<ul class="main-nav clearfix">					
 						<li><a href="<?php echo U('Company/about');?>">COMPANY</a></li>
-						<li><a href="<?php echo U('Product/productList');?>">PRODUCTS</a></li>
+						<li><a href="<?php echo U('Product/productList',array('term_id'=>1));?>">PRODUCTS</a></li>
 						<li><a href="<?php echo U('Company/tracker');?>">TRACKING SYSTEM</a></li>
 						<li><a href="<?php echo U('Solution/solutionList');?>">SOLUTION</a></li>
 						<li><a href="<?php echo U('Company/contact');?>">CONTACT US</a></li>
@@ -78,13 +78,7 @@
 			<div class="container">
 				<div class="row">
 					<ul class="nav-list">
-						<li class="on"><a href="<?php echo U('Product/productList');?>">Vehicle GPS tracker</a></li>
-						<li><a href="###">Pet GPS tracker</a></li>
-						<li><a href="###">Personal GPS tracker</a></li>
-						<li><a href="###">Asserts GPS tracker</a></li>
-						<li><a href="###">Accessories for GPS tracker</a></li>
-						<li><a href="###">Car digital TV Receiver</a></li>
-						<li><a href="###">DVR</a></li>
+						<?php if(is_array($productCatNav)): $i = 0; $__LIST__ = $productCatNav;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li <?php if(I('get.term_id')==$vo['term_id']): ?>class="on"<?php endif; ?>><a href="<?php echo U('Product/productList',array('term_id'=>$vo['term_id']));?>"><?php echo ($vo['name']); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>					 
 					</ul>				
 				</div>			 
 			</div>
@@ -94,78 +88,33 @@
 	<div class="company-con">	
 		<div class="productlist-con">
 			<div class="container">
-				<div class="row">
-					<h3 class="col-xs-12 list-title">Vehicle GPS tracker</h3>
+				<div class="row"> 
+					<h3 class="col-xs-12 list-title"><?php echo ($productCatItem['name']); ?></h3>
 					<div class="col-xs-12 list-introduce">
-						vehicle tracker can help you locate and track your vehicles including cars,trucks etc. vehicle tracker can help you locate and track your vehicles including cars,trucks etc. vehicle tracker can help you locate and track your vehicles including cars,trucks etc. vehicle tracker can help you locate and track your vehicles including cars,trucks etc. 
+						<?php echo ($productCatItem['description']); ?>
 					</div> 
 				</div>	
 				<div class="row">
-					<div class="col-xs-12">
-						<h3 class="seccat-hd">
-							3G GPS TRACKER
-						</h3>
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="<?php echo U('Product/detail');?>" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="<?php echo U('Product/detail');?>" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>			 
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="<?php echo U('Product/detail');?>" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="<?php echo U('Product/detail');?>" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
-					<div class="col-sm-4 prod-item">
-						<div class="prod-cover resimg-con">
-							<img src="images/product/prodcover_1.png" alt="">
-							<a href="<?php echo U('Product/detail');?>" class="alink">See more <i class="fa fa-angle-right"></i></a>
-						</div>
-						<div class="prod-info">
-							<h4 class="prod-name surp-elli">VP203</h4>
-							<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
-							<p class="prod-intro">VP203F is external GPS and GSM mo-dules, with 2 RS232 interfaces for fleet management.</p>
-						</div>
-						
-					</div>
+					<?php if(is_array($arrproductCat)): $i = 0; $__LIST__ = $arrproductCat;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if(($vo['cat'][0]['parent']!=0) and (sizeof($vo['product'])!=0)): ?><div class="col-xs-12">
+							<h3 class="seccat-hd">
+								<?php echo ($vo['cat'][0]['name']); ?>
+							</h3>
+						</div><?php endif; ?>
+						<?php if(is_array($vo['product'])): $i = 0; $__LIST__ = $vo['product'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i; $smeta=json_decode($vo2['smeta'],true); ?>
+						<div class="col-sm-4 prod-item">
+							<div class="prod-cover resimg-con">
+								<img src="<?php echo sp_get_asset_upload_path($smeta['thumb']);?>" alt="">
+								<a href="<?php echo U('Product/detail',array('id'=>$vo2['id']));?>" class="alink">See more <i class="fa fa-angle-right"></i></a>
+							</div>
+							<div class="prod-info">
+								<h4 class="prod-name surp-elli">
+								<?php echo ($vo2['post_title']); ?>
+								</h4>
+								<h5 class="prod-vicename surp-elli">3G/2G External GPS Tracker</h5>
+								<p class="prod-intro"><?php echo ($vo2['post_excerpt']); ?></p>
+							</div>					
+						</div><?php endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; ?>
+	
 				</div>		 
 			</div>		 
 		</div>	
@@ -188,11 +137,11 @@
 					<div class="col-xs-6 col-sm-3">
 						<dl>
 							<dt>Product Portfolio</dt>
-							<dd><a href="###">Vehicle GPS Tracker</a></dd>
-							<dd><a href="###">Personal GPS Tracker</a></dd>
-							<dd><a href="###">Pets GPS Tracker</a></dd>						 
-							<dd><a href="###">Asset GPS Tracker</a></dd>						 
-							<dd><a href="###">Car Electronics</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>1));?>">Vehicle GPS Tracker</a></dd>
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>11));?>">Personal GPS Tracker</a></dd>
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>2));?>">Pets GPS Tracker</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>5));?>">Asset GPS Tracker</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>6));?>">Car Electronics</a></dd>						 
 						</dl>
 					</div>
 					<div class="col-xs-6 col-sm-3">

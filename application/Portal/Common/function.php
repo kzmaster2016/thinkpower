@@ -190,6 +190,9 @@ function sp_get_term($term_id){
     return ApiService::term($term_id);
 }
 
+function sp_get_productCat($term_id){
+    return ApiService::productCat($term_id);
+}
 /**
  * 返回指定分类下的子分类
  * @param int $term_id 分类id
@@ -206,6 +209,10 @@ function sp_get_child_terms($term_id){
  */
 function sp_get_all_child_terms($term_id){
     return ApiService::all_child_terms($term_id);
+}
+
+function sp_get_all_child_productCat($term_id){
+    return ApiService::all_child_productCat($term_id);
 }
 
 /**

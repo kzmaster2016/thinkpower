@@ -229,6 +229,7 @@ input:-ms-input-placeholder{color: #f1f1f1;}
 .about-con .tp-vital ul{}
 .about-con .tp-vital ul li{line-height: 30px;margin-bottom: 20px;padding-left: 20px;background: url(../images/tippng/tip_2.png) 0 9px no-repeat;}
 .company-about-ban{position: relative;background: #e5e5e5;padding:20px 0;}
+.company-about-ban.about-bottom-banner{padding: 0;}
 .company-about-ban img{display: block;width: 100%;}
 .company-about-ban h2{margin:0;top: 40%;color: #000;font-family: "Times New Roman";text-transform: uppercase;letter-spacing: 1px;}
 .why-choose{background: #eaeaea;padding: 30px 0 70px;}
@@ -446,7 +447,7 @@ input:-ms-input-placeholder{color: #f1f1f1;}
 .productdeatil-con .pd-con3 .specif-list li .tip span{display: inline-block;max-width: 30%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .productdeatil-con .pd-con3 .specif-list li .tip em{display: inline-block;max-width: 70%;font-style: normal;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .productdeatil-con .pd-con4 .accessory-list{padding-bottom: 50px;}
-.productdeatil-con .pd-con4 .accessory-list .item{border: 2px solid #b1b1b1;}
+.productdeatil-con .pd-con4 .accessory-list .item{border: 2px solid #b1b1b1;margin-bottom: 10px;}
 .productdeatil-con .pd-con4 .accessory-list .item div{padding-top: 75%;}
 .productdeatil-con .pd-con4 .accessory-list .item p{line-height: 30px;background: #b1b1b1;text-align: center;font-size: 16px;font-family: "Times";color: #000;}
 

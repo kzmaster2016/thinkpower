@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-
+ul,li,ol{list-style: none;}
 .input-order{width:30px;}
 .wrap {
 padding: 20px 20px 70px;
