@@ -11,18 +11,18 @@ namespace Portal\Controller;
 use Common\Controller\AdminbaseController;
 
 class AdminProductController extends AdminbaseController {
-    
+
 	protected $posts_model;
 	protected $term_relationships_model;
 	protected $terms_model;
-	
+
 	function _initialize() {
 		parent::_initialize();
 		$this->posts_model = D("Portal/Product");
 		$this->terms_model = D("Portal/ProductCat");
 		$this->term_relationships_model = D("Portal/ProductRelationships");
 	}
-	
+
 	// 后台文章管理列表
 	public function index(){
 		$this->_lists(array("post_status"=>array('neq',3)));
@@ -30,8 +30,8 @@ class AdminProductController extends AdminbaseController {
 		$this->display();
 	}
 
-	 
-	
+
+
 	// 文章添加
 	public function add(){
 		$terms = $this->terms_model->order(array("listorder"=>"asc"))->select();
@@ -49,7 +49,7 @@ class AdminProductController extends AdminbaseController {
 	    $upload->maxSize   =     1024*1024*20 ;// 设置附件上传大小, 20MB
 	    //$upload->exts      =     array('pdf');// 设置附件上传类型
 	    $upload->rootPath  =  'data/upload/pdf/'; // 设置附件上传根目录
-	    // 上传单个文件 
+	    // 上传单个文件
 	    $info   =   $upload->uploadOne($_FILES['file']);
 	    if(!$info) {// 上传错误提示错误信息
 	        $this->error($upload->getError());
@@ -58,8 +58,8 @@ class AdminProductController extends AdminbaseController {
 	    }
 	}
 
- 
-	
+
+
 	// 文章或产品添加提交
 	public function add_post(){
 		if (IS_POST) {
@@ -68,7 +68,7 @@ class AdminProductController extends AdminbaseController {
 			}
 
 			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
-			 
+
 			$_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
 			$_POST['post']['post_author']=get_current_admin_id();
 			$product = $_POST['post'];
@@ -81,6 +81,12 @@ class AdminProductController extends AdminbaseController {
 					$tempArr[] = array("name"=>$photos_alts[$i], "photo"=>$photos_urls[$i]);
 				}
 			}
+      if(!empty($_POST['photos_alt1']) && !empty($_POST['photos_url1'])){
+        foreach ($_POST['photos_url1'] as $key=>$url){
+          $photourl=sp_asset_relative_url($url);
+          $_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt1'][$key]);
+        }
+      }
 			$product['accessories'] = json_encode($tempArr);
 			$product['smeta']=json_encode($_POST['smeta']);
 			$product['post_content']=htmlspecialchars_decode($product['post_content']);
@@ -89,15 +95,15 @@ class AdminProductController extends AdminbaseController {
 				foreach ($_POST['term'] as $mterm_id){
 					$this->term_relationships_model->add(array("term_id"=>intval($mterm_id),"object_id"=>$result));
 				}
-				
+
 				$this->success("添加成功！");
 			} else {
 				$this->error("添加失败！");
 			}
-			 
+
 		}
 	}
-	
+
 	// 文章编辑
 	public function edit(){
 		$id=  I("get.id",0,'intval');
@@ -120,8 +126,8 @@ class AdminProductController extends AdminbaseController {
 		$this->display();
 	}
 
- 
-	
+
+
 	// 文章或产品编辑提交
 	public function edit_post(){
 		if (IS_POST) {
@@ -129,7 +135,7 @@ class AdminProductController extends AdminbaseController {
 				$this->error("请至少选择一个分类！");
 			}
 			$post_id=intval($_POST['post']['id']);
-			
+
 			$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>array("not in",implode(",", $_POST['term']))))->delete();
 			foreach ($_POST['term'] as $mterm_id){
 				$find_term_relationship=$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>$mterm_id))->count();
@@ -149,6 +155,12 @@ class AdminProductController extends AdminbaseController {
 					$tempArr[] = array("name"=>$photos_alts[$i], "photo"=>$photos_urls[$i]);
 				}
 			}
+		      if(!empty($_POST['photos_alt1']) && !empty($_POST['photos_url1'])){
+		        foreach ($_POST['photos_url1'] as $key=>$url){
+		          $photourl=sp_asset_relative_url($url);
+		          $_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt1'][$key]);
+		        }
+		      }
 			$product['accessories'] = json_encode($tempArr);
 			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
 			unset($_POST['post']['post_author']);
@@ -163,7 +175,7 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 	// 文章排序
 	public function listorders() {
 		$status = parent::_listorders($this->term_relationships_model);
@@ -173,29 +185,29 @@ class AdminProductController extends AdminbaseController {
 			$this->error("排序更新失败！");
 		}
 	}
-	
+
 	/**
 	 * 文章列表处理方法,根据不同条件显示不同的列表
 	 * @param array $where 查询条件
 	 */
 	private function _lists($where=array()){
 		$term_id=I('request.term',0,'intval');
-		
+
 		$where['post_type']=array(array('eq',1),array('exp','IS NULL'),'OR');
-		
+
 		if(!empty($term_id)){
 		    $where['b.term_id']=$term_id;
 			$term=$this->terms_model->where(array('term_id'=>$term_id))->find();
 			$this->assign("term",$term);
 		}
-		
+
 		$start_time=I('request.start_time');
 		if(!empty($start_time)){
 		    $where['post_date']=array(
 		        array('EGT',$start_time)
 		    );
 		}
-		
+
 		$end_time=I('request.end_time');
 		if(!empty($end_time)){
 		    if(empty($where['post_date'])){
@@ -203,24 +215,24 @@ class AdminProductController extends AdminbaseController {
 		    }
 		    array_push($where['post_date'], array('ELT',$end_time));
 		}
-		
+
 		$keyword=I('request.keyword');
 		if(!empty($keyword)){
 		    $where['post_title']=array('like',"%$keyword%");
 		}
-			
+
 		$this->posts_model
 		->alias("a")
 		->where($where);
-		
+
 		if(!empty($term_id)){
 		    $this->posts_model->join("__TERM_RELATIONSHIPS__ b ON a.id = b.object_id");
 		}
-		
+
 		$count=$this->posts_model->count();
-			
+
 		$page = $this->page($count, 20);
-			
+
 		$this->posts_model
 		->alias("a")
 		->join("__USERS__ c ON a.post_author = c.id")
@@ -248,7 +260,7 @@ class AdminProductController extends AdminbaseController {
 					$flag = 2;
 					$key2 = $key1;
 				}*/
-				
+
 				if ($value1['id']==$value['id']) {
 					$flag = 1;
 					$key2 = $key1;
@@ -264,18 +276,18 @@ class AdminProductController extends AdminbaseController {
 
 		}
 
- 
+
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("formget",array_merge($_GET,$_POST));
 		$this->assign("posts",$rs_posts);
 	}
 
-	 
+
 	// 获取文章分类树结构 select 形式
 	private function _getTree(){
 		$term_id=empty($_REQUEST['term'])?0:intval($_REQUEST['term']);
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
-		
+
 		$tree = new \Tree();
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
@@ -288,19 +300,19 @@ class AdminProductController extends AdminbaseController {
 			$r['selected']=$term_id==$r['term_id']?"selected":"";
 			$array[] = $r;
 		}
-		
+
 		$tree->init($array);
 		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
 		$taxonomys = $tree->get_tree(0, $str);
 		$this->assign("taxonomys", $taxonomys);
 	}
 
- 
-	
-	// 获取文章分类树结构 
+
+
+	// 获取文章分类树结构
 	private function _getTermTree($term=array()){
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
-		
+
 		$tree = new \Tree();
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
@@ -314,13 +326,13 @@ class AdminProductController extends AdminbaseController {
 			$r['checked'] =in_array($r['term_id'], $term)?"checked":"";
 			$array[] = $r;
 		}
-		
+
 		$tree->init($array);
 		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
 		$taxonomys = $tree->get_tree(0, $str);
 		$this->assign("taxonomys", $taxonomys);
 	}
-	
+
 	// 文章删除
 	public function delete(){
 		if(isset($_GET['id'])){
@@ -331,10 +343,10 @@ class AdminProductController extends AdminbaseController {
 				$this->error("删除失败！");
 			}
 		}
-		
+
 		if(isset($_POST['ids'])){
 			$ids = I('post.ids/a');
-			
+
 			if ($this->posts_model->where(array('id'=>array('in',$ids)))->save(array('post_status'=>3))!==false) {
 				$this->success("删除成功！");
 			} else {
@@ -342,12 +354,12 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 	// 文章审核
 	public function check(){
 		if(isset($_POST['ids']) && $_GET["check"]){
 		    $ids = I('post.ids/a');
-			
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('post_status'=>1)) !== false ) {
 				$this->success("审核成功！");
 			} else {
@@ -356,7 +368,7 @@ class AdminProductController extends AdminbaseController {
 		}
 		if(isset($_POST['ids']) && $_GET["uncheck"]){
 		    $ids = I('post.ids/a');
-		    
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('post_status'=>0)) !== false) {
 				$this->success("取消审核成功！");
 			} else {
@@ -364,12 +376,12 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 	// 文章置顶
 	public function top(){
 		if(isset($_POST['ids']) && $_GET["top"]){
 			$ids = I('post.ids/a');
-			
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('istop'=>1))!==false) {
 				$this->success("置顶成功！");
 			} else {
@@ -378,7 +390,7 @@ class AdminProductController extends AdminbaseController {
 		}
 		if(isset($_POST['ids']) && $_GET["untop"]){
 		    $ids = I('post.ids/a');
-		    
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('istop'=>0))!==false) {
 				$this->success("取消置顶成功！");
 			} else {
@@ -386,12 +398,12 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 	// 文章推荐
 	public function recommend(){
 		if(isset($_POST['ids']) && $_GET["recommend"]){
 			$ids = I('post.ids/a');
-			
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('recommended'=>1))!==false) {
 				$this->success("推荐成功！");
 			} else {
@@ -400,7 +412,7 @@ class AdminProductController extends AdminbaseController {
 		}
 		if(isset($_POST['ids']) && $_GET["unrecommend"]){
 		    $ids = I('post.ids/a');
-		    
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('recommended'=>0))!==false) {
 				$this->success("取消推荐成功！");
 			} else {
@@ -408,7 +420,7 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 	// 文章批量移动
 	public function move(){
 		if(IS_POST){
@@ -418,7 +430,7 @@ class AdminProductController extends AdminbaseController {
 			    if($old_term_id!=$term_id){
 			        $ids=explode(',', I('get.ids/s'));
 			        $ids=array_map('intval', $ids);
-			         
+
 			        foreach ($ids as $id){
 			            $this->term_relationships_model->where(array('object_id'=>$id,'term_id'=>$old_term_id))->delete();
 			            $find_relation_count=$this->term_relationships_model->where(array('object_id'=>$id,'term_id'=>$term_id))->count();
@@ -426,9 +438,9 @@ class AdminProductController extends AdminbaseController {
 			                $this->term_relationships_model->add(array('object_id'=>$id,'term_id'=>$term_id));
 			            }
 			        }
-			        
+
 			    }
-			    
+
 			    $this->success("移动成功！");
 			}
 		}else{
@@ -445,12 +457,12 @@ class AdminProductController extends AdminbaseController {
 			$tree->init($new_terms);
 			$tree_tpl="<option value='\$id'>\$spacer\$name</option>";
 			$tree=$tree->get_tree(0,$tree_tpl);
-			 
+
 			$this->assign("terms_tree",$tree);
 			$this->display();
 		}
 	}
-	
+
 	// 文章批量复制
 	public function copy(){
 	    if(IS_POST){
@@ -463,9 +475,9 @@ class AdminProductController extends AdminbaseController {
 	            if($term_count==0){
 	                $this->error('分类不存在！');
 	            }
-	            
+
 	            $data=array();
-	            
+
 	            foreach ($ids as $id){
 	                $find_post=$this->posts_model->field('post_keywords,post_source,post_content,post_title,post_excerpt,smeta')->where(array('id'=>$id))->find();
 	                if($find_post){
@@ -478,7 +490,7 @@ class AdminProductController extends AdminbaseController {
 	                    }
 	                }
 	            }
-	            
+
 	            if ( $this->term_relationships_model->addAll($data) !== false) {
 	                $this->success("复制成功！");
 	            } else {
@@ -499,19 +511,19 @@ class AdminProductController extends AdminbaseController {
 	        $tree->init($new_terms);
 	        $tree_tpl="<option value='\$id'>\$spacer\$name</option>";
 	        $tree=$tree->get_tree(0,$tree_tpl);
-	
+
 	        $this->assign("terms_tree",$tree);
 	        $this->display();
 	    }
 	}
-	
+
 	// 文章回收站列表
 	public function recyclebin(){
 		$this->_lists(array('post_status'=>array('eq',3)));
 		$this->_getTree();
 		$this->display();
 	}
-	
+
 	// 清除已经删除的文章
 	public function clean(){
 		if(isset($_POST['ids'])){
@@ -519,7 +531,7 @@ class AdminProductController extends AdminbaseController {
 			$ids = array_map('intval', $ids);
 			$status=$this->posts_model->where(array("id"=>array('in',$ids),'post_status'=>3))->delete();
 			$this->term_relationships_model->where(array('object_id'=>array('in',$ids)))->delete();
-			
+
 			if ($status!==false) {
 				$this->success("删除成功！");
 			} else {
@@ -530,7 +542,7 @@ class AdminProductController extends AdminbaseController {
 				$id = I("get.id",0,'intval');
 				$status=$this->posts_model->where(array("id"=>$id,'post_status'=>3))->delete();
 				$this->term_relationships_model->where(array('object_id'=>$id))->delete();
-				
+
 				if ($status!==false) {
 					$this->success("删除成功！");
 				} else {
@@ -539,7 +551,7 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 	// 文章还原
 	public function restore(){
 		if(isset($_GET['id'])){
@@ -551,5 +563,5 @@ class AdminProductController extends AdminbaseController {
 			}
 		}
 	}
-	
+
 }
