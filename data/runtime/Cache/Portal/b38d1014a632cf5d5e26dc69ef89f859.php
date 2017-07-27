@@ -37,7 +37,7 @@
 <body class="pcbody index-page"> 
 	<input type="hidden" value="20" class="active-maninav">
 	<div class="header">
-	<div class="top-search">
+	<div class="top-search hidden-xs">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 title">PROFESSIONAL IOT SOLUTION PROVIDER</div>
@@ -65,7 +65,7 @@
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
 					<ul class="main-nav clearfix">					
 						<li><a href="<?php echo U('Company/about');?>">COMPANY</a></li>
-						<li><a href="<?php echo U('Product/productList');?>">PRODUCTS</a></li>
+						<li><a href="<?php echo U('Product/productList',array('term_id'=>1));?>">PRODUCTS</a></li>
 						<li><a href="<?php echo U('Company/tracker');?>">TRACKING SYSTEM</a></li>
 						<li><a href="<?php echo U('Solution/solutionList');?>">SOLUTION</a></li>
 						<li><a href="<?php echo U('Company/contact');?>">CONTACT US</a></li>
@@ -95,27 +95,27 @@
 					<div class="index-productcon clearfix">
 						<div class="hd inblockm">
 							<h2 class="title">WHAT ARE YOU WAITING FOR?</h2>
-							<p class="wenzi">Why not checking our  product information  for more ideas? </p>
-							<a href="###" class="alink surp-elli">See More</a>
+							<p class="wenzi hidden-xs">Why not checking our  product information  for more ideas? </p>
+							<a href="<?php echo U('Product/productList',array('term_id'=>1));?>" class="alink surp-elli">See More</a>
 						</div>
 						<div class="bd inblockm">
 							<div class="img-cover">
 								<img src="images/picjpg/case1.jpg" alt="">
-								<a href="###">See More</a>
+								<a href="<?php echo U('Product/productList',array('term_id'=>1));?>">See More</a>
 							</div>
 							<div class="intro">
-								<a href="###">
-								<span class="inblockm">Car Tracker</span>
+								<a href="<?php echo U('Product/productList',array('term_id'=>1));?>">
+								<span class="inblockm">Vehicle Tracker</span>
 								</a>
 							</div>
 						</div>
 						<div class="bd inblockm">
 							<div class="img-cover">
 								<img src="images/picjpg/case2.jpg" alt="">
-								<a href="###">See More</a>
+								<a href="<?php echo U('Product/productList',array('term_id'=>12));?>">See More</a>
 							</div>
 							<div class="intro">
-								<a href="###">
+								<a href="<?php echo U('Product/productList',array('term_id'=>12));?>">
 								<span class="inblockm">IOT Equipment</span>
 								</a>
 								 
@@ -124,10 +124,10 @@
 						<div class="bd inblockm">
 							<div class="img-cover">
 								<img src="images/picjpg/case3.jpg" alt="">
-								<a href="###">See More</a>
+								<a href="<?php echo U('Product/productList',array('term_id'=>6));?>">See More</a>
 							</div>
 							<div class="intro">
-								<a href="###">
+								<a href="<?php echo U('Product/productList',array('term_id'=>6));?>">
 								<span class="inblockm">Car Electronic</span>
 								</a>
 								 
@@ -136,10 +136,10 @@
 						<div class="bd">
 							<div class="img-cover">
 								<img src="images/picjpg/case4.jpg" alt="">
-								<a href="###">See More</a>
+								<a href="<?php echo U('Product/productList',array('term_id'=>11));?>">See More</a>
 							</div>
 							<div class="intro">
-								<a href="###">
+								<a href="<?php echo U('Product/productList',array('term_id'=>11));?>">
 								<span class="inblockm">Personal Tracker</span>
 								</a>
 							</div>
@@ -147,10 +147,10 @@
 						<div class="bd">
 							<div class="img-cover">
 								<img src="images/picjpg/case5.jpg" alt="">
-								<a href="###">See More</a>
+								<a href="<?php echo U('Product/productList',array('term_id'=>2));?>">See More</a>
 							</div>
 							<div class="intro">
-								<a href="###">
+								<a href="<?php echo U('Product/productList',array('term_id'=>2));?>">
 								<span class="inblockm">Pets Tracker</span>
 								</a>
 							</div>
@@ -158,10 +158,10 @@
 						<div class="bd">
 							<div class="img-cover">
 								<img src="images/picjpg/case6.jpg" alt="">
-								<a href="###">See More</a>
+								<a href="<?php echo U('Product/productList',array('term_id'=>5));?>">See More</a>
 							</div>
 							<div class="intro">
-								<a href="###">
+								<a href="<?php echo U('Product/productList',array('term_id'=>5));?>">
 								<span class="inblockm">Asset Tracker</span>
 								</a>
 							</div>
@@ -240,11 +240,11 @@
 					<div class="col-xs-6 col-sm-3">
 						<dl>
 							<dt>Product Portfolio</dt>
-							<dd><a href="###">Vehicle GPS Tracker</a></dd>
-							<dd><a href="###">Personal GPS Tracker</a></dd>
-							<dd><a href="###">Pets GPS Tracker</a></dd>						 
-							<dd><a href="###">Asset GPS Tracker</a></dd>						 
-							<dd><a href="###">Car Electronics</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>1));?>">Vehicle GPS Tracker</a></dd>
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>11));?>">Personal GPS Tracker</a></dd>
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>2));?>">Pets GPS Tracker</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>5));?>">Asset GPS Tracker</a></dd>						 
+							<dd><a href="<?php echo U('Product/productList',array('term_id'=>6));?>">Car Electronics</a></dd>						 
 						</dl>
 					</div>
 					<div class="col-xs-6 col-sm-3">

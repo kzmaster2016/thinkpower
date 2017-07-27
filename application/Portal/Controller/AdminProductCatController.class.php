@@ -13,7 +13,7 @@ use Common\Controller\AdminbaseController;
 class AdminProductCatController extends AdminbaseController {
 	
 	protected $terms_model;
-	protected $taxonomys=array("article"=>"文章","picture"=>"图片");
+	protected $taxonomys=array("article"=>"产品","picture"=>"图片");
 	
 	function _initialize() {
 		parent::_initialize();
