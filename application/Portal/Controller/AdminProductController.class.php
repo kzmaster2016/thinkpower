@@ -46,7 +46,7 @@ class AdminProductController extends AdminbaseController {
 	//上传文件(pdf)
 	public function upload(){
 	    $upload = new \Think\Upload();// 实例化上传类
-	    $upload->maxSize   =     1024*1024*10 ;// 设置附件上传大小, 10MB
+	    $upload->maxSize   =     1024*1024*20 ;// 设置附件上传大小, 20MB
 	    //$upload->exts      =     array('pdf');// 设置附件上传类型
 	    $upload->rootPath  =  'data/upload/pdf/'; // 设置附件上传根目录
 	    // 上传单个文件 
@@ -139,7 +139,7 @@ class AdminProductController extends AdminbaseController {
 					$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>$mterm_id))->save(array("status"=>1));
 				}
 			}
-			$product=I("post.post");
+			$product=$_POST['post'];
 			$product['accessories'] = '';
 			$photos_alts = $_POST['photos_alt'];
 			$photos_urls = $_POST['photos_url'];

@@ -120,7 +120,7 @@
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
 								<?php  $feature = $post['feature']; if(!empty($feature)){ $feature = json_decode($feature, true); }else{ $feature = array(); } for($i=0;$i< count($feature);$i++){ ?> 
-									<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
+									<li><a href="<?php echo ($feature[$i]['icon']); ?>" name="icon" class="icon"><?php echo ($feature[$i]['icon']); ?></a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
 								<?php  } ?>
 							</td>
 						</tr>
@@ -137,7 +137,7 @@
 							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
 							<th>PDF</th>
 							<td>
-								<a href='<?php echo ($post['pdf']); ?>' id='pdf'>pdf</a>
+								<a href='<?php echo ($post['pdf']); ?>' id='pdf'><?php echo ($post['pdf']); ?></a>
 								<input type="file" id="uploadPDF" name="file">
 							</td>
 						</tr>
@@ -268,7 +268,7 @@
 			});
 
 			$("#add-feature").on('click', function(e){
-				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#feature-td").append('<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-feature").on('click', function(){
@@ -297,6 +297,7 @@
 			          success: function (data) {  
 			              if(data.status){
 			              	$("#pdf").attr('href', '/' + data.url);
+			              	$("#pdf").text(data.url);
 			              	$("#pdfUrl").val('/' + data.url);
 			              }else{
 			              	artdialog_alert(data.info);
@@ -306,6 +307,35 @@
 			              artdialog_alert(error);
 			          }  
 			     });  
+			})
+
+			$(document).on('change', '.uploadIcon', function(){
+				console.log("asfsafasf");
+				var me = $(this);
+				var aIconJQ = me.parent().find('.icon');
+				var formData = new FormData();
+				formData.append('file', me[0].files[0]);
+				var url = "<?php echo U('AdminProduct/upload');?>";
+			     $.ajax({  
+			          url: url,  
+			          type: 'POST',  
+			          data: formData,  
+			          cache: false,  
+			          contentType: false,  
+			          processData: false,  
+			          success: function (data) {  
+			              if(data.status){
+			              	aIconJQ.text('图标 ' + data.url);
+			              	aIconJQ.attr('href', '/' + data.url);
+			              }else{
+			              	artdialog_alert(data.info);
+			              }  
+			          },  
+			          error: function (error) {  
+			              artdialog_alert(error);
+			          }  
+			     });  
+
 			})
 
 			/////---------------------
@@ -395,13 +425,14 @@
 						var featureArr = [];	
 						$("#feature-td li").each(function(){
 							var current = $(this);
+							var icon = current.find('a[name="icon"]').attr('href');
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
 							if(key && value){
-								featureArr.push({key: key, value: value});
-							}	
+								featureArr.push({icon: icon, key: key, value: value});
+							}
 						})
-						$("#feature").val(JSON.stringify(featureArr))
+						$("#feature").val(JSON.stringify(featureArr));
 
 						var specificationsArr = [];	
 						$("#specifications-td li").each(function(){
