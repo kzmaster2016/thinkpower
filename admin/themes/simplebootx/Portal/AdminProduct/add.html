@@ -59,21 +59,21 @@
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[feature]" id="feature">
+							<input type="hidden" name="post[feature]" id="feature">
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
 								<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[specifications]" id="specifications">
+							<input type="hidden" name="post[specifications]" id="specifications">
 							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
 							<td id='specifications-td'>
 								<li><input type="text" placeholder="请输入描述" name="value"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" >
+							<input type="hidden" name="post[pdf]" id="pdfUrl" >
 							<th>PDF</th>
 							<td>
 								<a href='{$post['pdf']}' id='pdf'>pdf</a>
@@ -347,13 +347,10 @@
 							var icon = current.find('a[name="icon"]').attr('href');
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
-							if(icon && key && value){
+							if(key && value){
 								featureArr.push({icon: icon, key: key, value: value});
-							}else{
-								artdialog_alert('每个feature必须上传图标，key以及描述');
-							}	
+							}
 						})
-						console.log(featureArr);
 						$("#feature").val(JSON.stringify(featureArr));
 
 

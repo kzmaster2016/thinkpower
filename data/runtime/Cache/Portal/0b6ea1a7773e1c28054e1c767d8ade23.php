@@ -69,8 +69,8 @@
 			<li class="active"><a href="#">编辑产品</a></li>
 		</ul>
 		<form action="<?php echo U('AdminProduct/edit_post');?>" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
-			<input style="display:hidden;" name="post[feature]" id="feature">
-			<input style="display:hidden;" name="post[specifications]" id="specifications">
+			<input type="hidden" name="post[feature]" id="feature">
+			<input type="hidden" name="post[specifications]" id="specifications">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
@@ -133,7 +133,7 @@
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
+							<input type="hidden" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
 							<th>PDF</th>
 							<td>
 								<a href='<?php echo ($post['pdf']); ?>' id='pdf'><?php echo ($post['pdf']); ?></a>
