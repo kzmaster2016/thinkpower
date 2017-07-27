@@ -70,8 +70,8 @@
 			<li class="active"><a href="#">编辑产品</a></li>
 		</ul>
 		<form action="<?php echo U('AdminProduct/edit_post');?>" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
-			<input style="display:hidden;" name="post[feature]" id="feature">
-			<input style="display:hidden;" name="post[specifications]" id="specifications">
+			<input type="hidden" name="post[feature]" id="feature">
+			<input type="hidden" name="post[specifications]" id="specifications">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
@@ -91,6 +91,13 @@
 							</td>
 						</tr>
 						<tr>
+							<th>副标题</th>
+							<td>
+								<input type="text" style="width:400px;" name="post[post_vicetitle]" id="title" required value="<?php echo ($post["post_vicetitle"]); ?>" placeholder="请输入标题"/>
+								<span class="form-required">*</span>
+							</td>
+						</tr>
+						<tr>
 							<th>关键词</th>
 							<td>
 								<input type="text" name="post[post_keywords]" style="width: 400px" value="<?php echo ($post['post_keywords']); ?>" placeholder="请输入关键字">
@@ -98,24 +105,19 @@
 							</td>
 						</tr>
 	
-						<tr>
+						<!-- <tr>
 							<th>文章来源</th>
 							<td>
 								<input type="text" name="post[post_source]" value="<?php echo ($post['post_source']); ?>" style="width: 400px" placeholder="请输入文章来源">
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th>摘要</th>
 							<td>
 								<textarea name="post[post_excerpt]" style="width: 98%; height: 50px;" placeholder="请填写摘要"><?php echo ($post["post_excerpt"]); ?></textarea>
 							</td>
 						</tr>
-						<tr>
-							<th>内容</th>
-							<td>
-								<script type="text/plain" id="content" name="post[post_content]"><?php echo ($post["post_content"]); ?></script>
-							</td>
-						</tr>
+						
 						<tr>
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
@@ -134,11 +136,17 @@
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
+							<input type="hidden" name="post[pdf]" id="pdfUrl" value="<?php echo ($post['pdf']); ?>">
 							<th>PDF</th>
 							<td>
 								<a href='<?php echo ($post['pdf']); ?>' id='pdf'><?php echo ($post['pdf']); ?></a>
 								<input type="file" id="uploadPDF" name="file">
+							</td>
+						</tr>
+						<tr>
+							<th>内容</th>
+							<td>
+								<script type="text/plain" id="content" name="post[post_content]"><?php echo ($post["post_content"]); ?></script>
 							</td>
 						</tr>
 						<tr>

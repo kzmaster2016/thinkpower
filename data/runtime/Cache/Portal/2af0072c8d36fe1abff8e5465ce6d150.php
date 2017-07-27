@@ -17,6 +17,7 @@
     <link href="/public/js/artDialog/skins/default.css" rel="stylesheet" />
     <link href="/public/simpleboot/font-awesome/4.4.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">
     <style>
+    ul,li,ol{list-style: none;}
 		form .input-order{margin-bottom: 0px;padding:3px;width:40px;}
 		.table-actions{margin-top: 5px; margin-bottom: 5px;padding:0px;}
 		.table-list{margin-bottom: 0px;}
@@ -86,45 +87,53 @@
 							</td>
 						</tr>
 						<tr>
+							<th>副标题</th>
+							<td>
+								<input type="text" style="width:400px;" name="post[post_vicetitle]" id="title" required value="" placeholder="请输入标题"/>
+								<span class="form-required">*</span>
+							</td>
+						</tr>
+						<tr>
 							<th>关键词</th>
 							<td><input type="text" name="post[post_keywords]" id="keywords" value="" style="width: 400px" placeholder="请输入关键字"> 多关键词之间用空格或者英文逗号隔开</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>文章来源</th>
 							<td><input type="text" name="post[post_source]" id="source" value="" style="width: 400px" placeholder="请输入文章来源"></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th>摘要</th>
 							<td>
 								<textarea name="post[post_excerpt]" id="description" style="width: 98%; height: 50px;" placeholder="请填写摘要"></textarea>
 							</td>
 						</tr>
+						
 						<tr>
-							<th>内容</th>
-							<td>
-								<script type="text/plain" id="content" name="post[post_content]"></script>
-							</td>
-						</tr>
-						<tr>
-							<input style="display:hidden;" name="post[feature]" id="feature">
+							<input type="hidden" name="post[feature]" id="feature">
 							<th>Feature &nbsp;<i class="fa fa-plus" id="add-feature"></i> <i id="delete-feature" class="fa fa-close"></i></th>
 							<td id='feature-td'>
-								<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key" value="<?php echo ($feature[$i]["key"]); ?>"><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($feature[$i]["value"]); ?>"></li>
+								<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[specifications]" id="specifications">
+							<input type="hidden" name="post[specifications]" id="specifications">
 							<th>Specifications&nbsp;<i class="fa fa-plus" id="add-specifications"></i> <i id="delete-specifications" class="fa fa-close"></i></th>
 							<td id='specifications-td'>
-								<li><input type="text" placeholder="请输入描述" name="value" value="<?php echo ($specifications[$i]); ?>"></li>
+								<li><input type="text" placeholder="请输入描述" name="value"></li>
 							</td>
 						</tr>
 						<tr>
-							<input style="display:hidden;" name="post[pdf]" id="pdfUrl" >
+							<input type="hidden" name="post[pdf]" id="pdfUrl" >
 							<th>PDF</th>
 							<td>
 								<a href='<?php echo ($post['pdf']); ?>' id='pdf'>pdf</a>
 								<input type="file" id="uploadPDF" name="file">
+							</td>
+						</tr>
+						<tr>
+							<th>内容</th>
+							<td>
+								<script type="text/plain" id="content" name="post[post_content]"></script>
 							</td>
 						</tr>
 						<tr>
@@ -230,7 +239,7 @@
 			});
 
 			$("#add-feature").on('click', function(e){
-				$("#feature-td").append('<li><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
+				$("#feature-td").append('<li><a href="" name="icon" class="icon">图标</a><input type="file" class="uploadIcon" name="file"><input type="text" placeholder="请输入关键字(比如Telechips)" name="key"><input type="text" placeholder="请输入描述" name="value"></li>');
 			})
 
 			$("#delete-feature").on('click', function(){
@@ -268,6 +277,35 @@
 			              artdialog_alert(error);
 			          }  
 			     });  
+			})
+
+			$(document).on('change', '.uploadIcon', function(){
+				console.log("asfsafasf");
+				var me = $(this);
+				var aIconJQ = me.parent().find('.icon');
+				var formData = new FormData();
+				formData.append('file', me[0].files[0]);
+				var url = "<?php echo U('AdminProduct/upload');?>";
+			     $.ajax({  
+			          url: url,  
+			          type: 'POST',  
+			          data: formData,  
+			          cache: false,  
+			          contentType: false,  
+			          processData: false,  
+			          success: function (data) {  
+			              if(data.status){
+			              	aIconJQ.text('图标 ' + data.url);
+			              	aIconJQ.attr('href', '/' + data.url);
+			              }else{
+			              	artdialog_alert(data.info);
+			              }  
+			          },  
+			          error: function (error) {  
+			              artdialog_alert(error);
+			          }  
+			     });  
+
 			})
 			/////---------------------
 			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
@@ -357,13 +395,18 @@
 						var featureArr = [];	
 						$("#feature-td li").each(function(){
 							var current = $(this);
+							var icon = current.find('a[name="icon"]').attr('href');
 							var key = current.find('input[name="key"]').val();
 							var value = current.find('input[name="value"]').val();
-							if(key && value){
-								featureArr.push({key: key, value: value});
+							if(icon && key && value){
+								featureArr.push({icon: icon, key: key, value: value});
+							}else{
+								artdialog_alert('每个feature必须上传图标，key以及描述');
 							}	
 						})
-						$("#feature").val(JSON.stringify(featureArr))
+						console.log(featureArr);
+						$("#feature").val(JSON.stringify(featureArr));
+
 
 						var specificationsArr = [];	
 						$("#specifications-td li").each(function(){
