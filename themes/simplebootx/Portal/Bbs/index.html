@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="player video vidmate movie mxplayer vlc Bollywood">
+    <meta name="description" content="All-around high definition media player">
+	<link rel="icon" href="images/ico_logo.png" type="image/x-icon" />
+	<base href="__TMPL__Public/assets/">
+	<title>BBS Home Think Power </title>	
+
+    <tc_include file="Public:head" />
+    <link rel="stylesheet" type="text/css" href="css/bbscommon.css">
+   
+	<style type="text/css">
+	.navbar-fixed-bottom, .navbar-fixed-top{position: static;}
+	.banner-con .brand img{width: 40px;}
+	.bbs-top{background: #333;}
+	.bbs-top .navbar{min-height: 40px;margin-bottom: 10px;}
+	</style>
+</head>
+<body class="pcbody about-page">
+	<input type="hidden" value="0" class="active-maninav">
+	<tc_include file="Public:nav" />
+
+	<div class="bbs-top">
+		<!-- <img src="images/banneR/product_cat.jpg" alt=""> -->
+		<div class="navbar navbar-fixed-top">
+		   <div class="navbar-inner">
+		     <div class="container">
+		       	<div class="row">
+
+			     	<h4 class="brand col-sm-6"><a class="" href="javascript:;"><strong>ThinkPower BBS</strong></a> </h4>
+			        <div class="nav-collapse col-sm-6" id="main-menu">			
+						<ul class="nav clearfix fr" id="main-menu-user">
+							<li class="dropdown user login fl" style="display: none;">
+					            <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
+					            <i class="fa fa-user"></i>
+					            <span class="user-nicename"></span><b class="caret"></b></a>
+					            <ul class="dropdown-menu pull-right">
+					               <li><a href="{:U('user/center/index')}"><i class="fa fa-user"></i> &nbsp;User Center</a></li>
+					               <li class="divider"></li>
+					               <li><a href="{:U('user/index/logout')}"><i class="fa fa-sign-out"></i> &nbsp;Sign Out</a></li>
+					            </ul>
+				          	</li>
+				          	<li class="dropdown user offline fl" style="display: none;">
+					            <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
+					           		Login<b class="caret"></b>
+					            </a>
+					            <ul class="dropdown-menu pull-right">
+
+					               <li><a href="{:leuu('user/login/index')}"><i class="fa fa-sign-in"></i> &nbsp;Login In</a></li>
+					               <li class="divider"></li>
+					               <li><a href="{:leuu('user/register/index')}"><i class="fa fa-user"></i> &nbsp;Register</a></li>
+					            </ul>
+				          	</li>
+						</ul>			 
+			        </div>
+		        </div>
+		     </div>
+		   </div>
+		</div>
+	</div>
+	 
+	<div class="company-con bbsindex-con">	
+		<div class="container">
+
+			<div class="row"> 
+				<div class="col-sm-9">
+					<div class="bbd-page-head">
+						<h3><i class="fa fa-home"></i>&nbsp;Board index</h3>
+						
+					</div>
+					<div class="bbs-page-body">
+						<div class="forum-cat">
+							<h3 class="hd">
+								General Questions
+								<a href="javascript:void(0)" class="fr togbtn" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="true"><i class="fa fa-minus"></i></a>
+							</h3>
+							<ul id="collapseExample1" class="bd collapse in">
+								<li>
+									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>Post Rules</a>
+									<p class="desc">Read me first before posting anywhere! And you will give the support more easier.	</p>
+								</li>
+								<li>
+									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>News and Notices</a>
+									<p class="desc">The event about the GPS industry, the announcement of Concox and new products.		</p>
+								</li>
+							</ul>
+						</div>
+						<div class="forum-cat">
+							<h3 class="hd">
+								Vehicle Tracker
+								<a href="javascript:void(0)" class="fr togbtn" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="true"><i class="fa fa-minus"></i></a>
+							</h3>
+							<ul id="collapseExample2" class="bd collapse in">
+								<li>
+									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>Post Rules</a>
+									<p class="desc">Read me first before posting anywhere! And you will give the support more easier.	</p>
+								</li>
+								<li>
+									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>News and Notices</a>
+									<p class="desc">The event about the GPS industry, the announcement of Concox and new products.		</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">			
+				</div>
+			</div>			 	 
+		</div>		 		
+	</div>
+	 
+	<tc_include file="Public:footer"/>
+	<script type="text/javascript" src="__PUBLIC__/js/cookie.js"></script>
+	<script type="text/javascript">
+	$(function(){
+
+		var uname='{$_SESSION['user']["user_login"]}';
+		console.log(uname);
+		if(uname){
+	    	$('.login').show();
+	    	$('.offline').remove();
+	    	$('.user-nicename').html(uname);
+	    }else{
+	    	$('.offline').show();
+	    	$('.login').remove();
+	    	
+	    }
+
+	})
+	</script>
+
+</body>
+</html>

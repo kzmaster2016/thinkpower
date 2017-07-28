@@ -209,14 +209,14 @@ hello;
     public function dologin(){
 
     	if(!sp_check_verify_code()){
-    		$this->error("验证码错误！");
+    		$this->error("Verify code is error!");
     	}
     	
     	$users_model=M("Users");
     	$rules = array(
     			//array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
-    			array('username', 'require', '手机号/邮箱/用户名不能为空！', 1 ),
-    			array('password','require','密码不能为空！',1),
+    			array('username', 'require', 'The email cannot be empty!', 1 ),
+    			array('password','require','Password is empty!',1),
     	
     	);
     	if($users_model->validate($rules)->create()===false){
@@ -276,6 +276,7 @@ hello;
         }
         $users_model=M('Users');
         $result = $users_model->where($where)->find();
+
         $ucenter_syn=C("UCENTER_ENABLED");
         
         $ucenter_old_user_login=false;
@@ -358,6 +359,8 @@ hello;
         if(!empty($result)){
             if(sp_compare_password($password, $result['user_pass'])|| $ucenter_login_ok){
                 session('user',$result);
+                
+                
                 //写入此次登录信息
                 $data = array(
                     'last_login_time' => date("Y-m-d H:i:s"),
@@ -368,18 +371,19 @@ hello;
                 $session_login_http_referer=session('login_http_referer');
                 $redirect=empty($session_login_http_referer)?__ROOT__."/":$session_login_http_referer;
                 session('login_http_referer','');
+
                 $ucenter_old_user_login_msg="";
         
                 if($ucenter_old_user_login){
                     //$ucenter_old_user_login_msg="老用户请在跳转后，再次登陆";
                 }
         
-                $this->success("登录验证成功！", $redirect);
+                $this->success("Login successfully!", $redirect);
             }else{
-                $this->error("密码错误！");
+                $this->error("password is wrong!");
             }
         }else{
-            $this->error("用户名不存在或已被拉黑！");
+            $this->error("the username is not exit!");
         }
         
         

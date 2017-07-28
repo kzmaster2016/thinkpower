@@ -4,8 +4,10 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 title">PROFESSIONAL IOT SOLUTION PROVIDER</div>
 			<div class="col-xs-12 col-sm-6">
-				<form action="###" method="get" class="topsearch-form">
-					<input type="text" placeholder="Search" class="key-txt inblockm" /><input type="button" class="search-btn inblockm" /><span class="glyphicon glyphicon-search btn-bg" aria-hidden="true"></span>
+				<form action="{:U('portal/search/index')}" method="get" class="topsearch-form">
+					<input type="text" placeholder="Search" name="keyword" value="{:I('get.keyword')}" class="key-txt inblockm" />
+					<input type="submit" class="search-btn inblockm" value="" />
+					<span class="glyphicon glyphicon-search btn-bg" aria-hidden="true"></span>
 				</form>
 			</div>
 		</div>
@@ -26,11 +28,11 @@
 			    </div>
                 <div class="collapse navbar-collapse" id="example-navbar-collapse">
 					<ul class="main-nav clearfix">					
-						<li><a href="{:U('Company/about')}">COMPANY</a></li>
-						<li><a href="{:U('Product/productList',array('term_id'=>1))}">PRODUCTS</a></li>
-						<li><a href="{:U('Company/tracker')}">TRACKING SYSTEM</a></li>
-						<li><a href="{:U('Solution/solutionList')}">SOLUTION</a></li>
-						<li><a href="{:U('Company/contact')}">CONTACT US</a></li>
+						<li><a href="{:U('Portal/Company/about')}">COMPANY</a></li>
+						<li><a href="{:U('Portal/Product/productList',array('term_id'=>1))}">PRODUCTS</a></li>
+						<li><a href="{:U('Portal/Company/tracker')}">TRACKING SYSTEM</a></li>
+						<li><a href="{:U('Portal/Solution/solutionList')}">SOLUTION</a></li>
+						<li><a href="{:U('Portal/Company/contact')}">CONTACT US</a></li>
 					</ul>
 				</div>
 			</div>				

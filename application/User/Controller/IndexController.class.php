@@ -15,7 +15,7 @@ class IndexController extends HomebaseController {
 		$user=$users_model->where(array("id"=>$id))->find();
 		
 		if(empty($user)){
-			$this->error("查无此人！");
+			$this->error("No this user");
 		}
 		
 		$this->assign($user);
@@ -28,7 +28,7 @@ class IndexController extends HomebaseController {
     	if(sp_is_user_login()){
     		$this->ajaxReturn(array("status"=>1,"user"=>sp_get_current_user()));
     	}else{
-    		$this->ajaxReturn(array("status"=>0,"info"=>"此用户未登录！"));
+    		$this->ajaxReturn(array("status"=>0,"info"=>"The user is not logged in！"));
     	}
     }
 
@@ -41,6 +41,9 @@ class IndexController extends HomebaseController {
     		echo uc_user_synlogout();
     	}
     	session("user",null);//只有前台用户退出
+
+        setcookie('uname','');
+
     	redirect(__ROOT__."/");
     }
 
