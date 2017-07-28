@@ -6,10 +6,16 @@
 	<meta name="description" content="">
 	<base href="__TMPL__Public/assets/">
 	<tc_include file="Public:head" />
+	<style type="text/css">
+	
+	.search-con{margin-bottom: 100px;}
+	.search-con .list-boxes{margin-bottom: 20px;border-bottom: 1px solid #e6e6e6;padding: 10px 0 20px;}
+	.search-con .list-boxes h3{}
+	</style>
 </head>
 <body class="">
 <tc_include file="Public:nav" />
-<div class="container">
+<div class="container search-con">
 	<div class="row">
 		<div class="col-sm-9">
 			<div class="main-title">
@@ -28,7 +34,7 @@
 			<div class="list-boxes">
 				<h3><a href="{:leuu('article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a></h3>
 				<p>{$vo.post_excerpt}</p>
-				<div>
+				<div class="vice-info clearfix">
 					<div class="pull-left">
 						<div class="list-actions">
 						<a href="javascript:;"><i class="fa fa-eye"></i><span>{$vo.post_hits}</span></a>
