@@ -92,5 +92,7 @@
 .company-con .tracker-con{padding: 10px 0;}
 .solution-con{padding: 10px 0;}
 .bbs-user-login,.bbs-user-register{max-width: 90%;}
+.index-page>.header{position: static!important;}
+.navbar-header.navbar-default .navbar-toggle{margin-right: 0;}
 }
 
