@@ -340,7 +340,7 @@ input:-ms-input-placeholder{color: #f1f1f1;}
 .contact-con .contact-bd form .form-btns input[type="reset"],
 .contact-con .contact-bd form .form-btns input[type="submit"]{line-height: 30px;border-radius: 15px;padding: 0 20px;margin: 0 20px;}
 .contact-con .contact-bd form .form-btns .reset{background: #30999f;color: #fff;}
-.contact-con .contact-bd form .form-btns .submit{background: #969696;color: #fff;}
+.contact-con .contact-bd form .form-btns .submit{background: #398439;color: #fff;}
 
 /* tracker */
 .tracker-con .tracker-item{padding: 50px 0;}

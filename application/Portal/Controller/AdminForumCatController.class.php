@@ -16,28 +16,63 @@ class AdminForumCatController extends AdminbaseController {
  
 	function _initialize() {
 		parent::_initialize();
-		$this->terms_model = D("Portal/ForumCat");
-		 
+		$this->terms_model = D("Portal/ForumCat");		 
 	}
 	
 	// 后台文章分类列表
     public function index(){
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
 		
-	
+		$tree = new \Tree();
+		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
+		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+		foreach ($result as $r) {
+			$r['str_manage'] = '<a href="' . U("AdminForumCat/add", array("parent" => $r['id'])) . '">'.L('ADD_SUB_CATEGORY').'</a> | <a href="' . U("AdminForumCat/edit", array("id" => $r['id'])) . '">'.L('EDIT').'</a> | <a class="js-ajax-delete" href="' . U("AdminForumCat/delete", array("id" => $r['id'])) . '">'.L('DELETE').'</a> ';
+			// $url=U('portal/list/index',array('id'=>$r['term_id']));
+			$url="javascript:;";
+			$r['url'] = $url;
+			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
+			$r['id']=$r['id'];
+			$r['parentid']=$r['parent'];
+			$array[] = $r;
+		}
+		
+		$tree->init($array);
+		$str = "<tr>
+					<td><input name='listorders[\$id]' type='text' size='3' value='\$listorder' class='input input-order'></td>
+					<td>\$id</td>
+					<td>\$spacer <a href='\$url' target='_blank'>\$name</a></td>
+	    			<td>\$taxonomys</td>
+					<td>\$str_manage</td>
+				</tr>";
+		$taxonomys = $tree->get_tree(0, $str);
+		$this->assign("taxonomys", $taxonomys);
 		$this->display();
 	}
 	
 	 
 	
 
-	// 文章分类添加
+	// 分类添加
 	public function add(){
 	 	$parentid = I("get.parent",0,'intval');
-	  
+	  	$tree = new \Tree();
+	 	$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
+	 	$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 	 	$terms = $this->terms_model->order(array("path"=>"asc"))->select();
 	 	
-	 	 
+	 	$new_terms=array();
+	 	foreach ($terms as $r) {
+	 		$r['id']=$r['term_id'];
+	 		$r['parentid']=$r['parent'];
+	 		$r['selected']= (!empty($parentid) && $r['term_id']==$parentid)? "selected":"";
+	 		$new_terms[] = $r;
+	 	}
+	 	$tree->init($new_terms);
+	 	$tree_tpl="<option value='\$id' \$selected>\$spacer\$name</option>";
+	 	$tree=$tree->get_tree(0,$tree_tpl);
+
+	 	$this->assign("terms_tree",$tree);	 
 	 	$this->assign("parent",$parentid);
 	 	$this->display();
 	}
@@ -61,7 +96,7 @@ class AdminForumCatController extends AdminbaseController {
 	// 文章分类编辑
 	public function edit(){
 		$id = I("get.id",0,'intval');
-		$data=$this->terms_model->where(array("term_id" => $id))->find();
+		$data=$this->terms_model->where(array("id" => $id))->find();
 	 
 		$this->assign("data",$data);
 		$this->display();

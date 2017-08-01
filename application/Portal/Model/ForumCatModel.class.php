@@ -3,24 +3,53 @@ namespace Portal\Model;
 
 use Common\Model\CommonModel;
 
-class ProductModel extends CommonModel {
+class ForumCatModel extends CommonModel {
     
     //自动验证
-    protected $_validate = array(
-        //array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
-        array('name', 'require', '标题不能为空！', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
-    );
-    
-	protected $_auto = array (
-		array('time', 'mGetDate', self::MODEL_INSERT, 'callback' )
+	protected $_validate = array(
+		//array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
+		array('name', 'require', '分类名称不能为空！', 1, 'regex', 3),
 	);
 	
-	// 获取当前时间
-	public function mGetDate() {
-		return date( 'Y-m-d H:i:s' );
+	protected function _after_insert($data,$options){
+		parent::_after_insert($data,$options);
+		$term_id=$data['id'];
+		$parent_id=$data['parent'];
+		if($parent_id==0){
+			$d['path']="0-$term_id";
+		}else{
+			$parent=$this->where("id=$parent_id")->find();
+			$d['path']=$parent['path'].'-'.$term_id;
+		}
+		$d['time']=date( 'Y-m-d H:i:s' );
+		$this->where("id=$term_id")->save($d);
+	}
+	
+	protected function _after_update($data,$options){
+		parent::_after_update($data,$options);
+		if(isset($data['parent'])){
+			$term_id=$data['id'];
+			$parent_id=$data['parent'];
+			if($parent_id==0){
+				$d['path']="0-$term_id";
+			}else{
+				$parent=$this->where("id=$parent_id")->find();
+				$d['path']=$parent['path'].'-'.$term_id;
+			}
+			$d['time']=date( 'Y-m-d H:i:s' );
+			$result=$this->where("id=$term_id")->save($d);
+			if($result){
+				$children=$this->where(array("parent"=>$term_id))->select();
+				foreach ($children as $child){
+					$this->where(array("id"=>$child['id']))->save(array("parent"=>$id,"id"=>$child['id']));
+				}
+			}
+		}
+		
 	}
 	
 	protected function _before_write(&$data) {
 		parent::_before_write($data);
 	}
+
 }

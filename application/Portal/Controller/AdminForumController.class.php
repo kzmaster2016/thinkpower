@@ -13,31 +13,29 @@ use Common\Controller\AdminbaseController;
 class AdminForumController extends AdminbaseController {
 
 	protected $posts_model;
-	protected $term_relationships_model;
 	protected $terms_model;
 
 	function _initialize() {
 		parent::_initialize();
-		$this->posts_model = D("Portal/Product");
-		$this->terms_model = D("Portal/ProductCat");
-		$this->term_relationships_model = D("Portal/ProductRelationships");
+		$this->posts_model = D("Portal/Forum");
+		$this->terms_model = D("Portal/ForumCat");
 	}
 
 	// 后台文章管理列表
 	public function index(){
-		$this->_lists(array("post_status"=>array('neq',3)));
+		$this->_lists(array("a.status"=>array('neq',3)));
 		$this->_getTree();
 		$this->display();
 	}
 
 
 
-	// 文章添加
+	// 添加
 	public function add(){
 		$terms = $this->terms_model->order(array("listorder"=>"asc"))->select();
 		$term_id = I("get.term",0,'intval');
 		$this->_getTermTree();
-		$term=$this->terms_model->where(array('term_id'=>$term_id))->find();
+		$term=$this->terms_model->where(array('id'=>$term_id))->find();
 		$this->assign("term",$term);
 		$this->assign("terms",$terms);
 		$this->display();
@@ -45,44 +43,20 @@ class AdminForumController extends AdminbaseController {
 
  
 
-
-
 	// 文章或产品添加提交
 	public function add_post(){
 		if (IS_POST) {
-			if(empty($_POST['term'])){
+			if(empty($_POST['cid'])){
 				$this->error("请至少选择一个分类！");
 			}
-
-			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
-
-			$_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
-			$_POST['post']['post_author']=get_current_admin_id();
+	 
+			$_POST['post']['uid']=get_current_admin_id();
+			$_POST['post']['cid']=$_POST['cid'];
 			$product = $_POST['post'];
-			$product['accessories'] = '';
-			$photos_alts = $_POST['photos_alt'];
-			$photos_urls = $_POST['photos_url'];
-			$tempArr = array();
-			if(is_array($photos_alts) && is_array($photos_urls)){
-				for($i=0; $i<count($photos_alts); $i++){
-					$tempArr[] = array("name"=>$photos_alts[$i], "photo"=>$photos_urls[$i]);
-				}
-			}
-      if(!empty($_POST['photos_alt1']) && !empty($_POST['photos_url1'])){
-        foreach ($_POST['photos_url1'] as $key=>$url){
-          $photourl=sp_asset_relative_url($url);
-          $_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt1'][$key]);
-        }
-      }
-			$product['accessories'] = json_encode($tempArr);
-			$product['smeta']=json_encode($_POST['smeta']);
-			$product['post_content']=htmlspecialchars_decode($product['post_content']);
+			 		 
 			$result = $this->posts_model->add($product);
 			if ($result) {
-				foreach ($_POST['term'] as $mterm_id){
-					$this->term_relationships_model->add(array("term_id"=>intval($mterm_id),"object_id"=>$result));
-				}
-
+				 
 				$this->success("添加成功！");
 			} else {
 				$this->error("添加失败！");
@@ -95,70 +69,35 @@ class AdminForumController extends AdminbaseController {
 	public function edit(){
 		$id=  I("get.id",0,'intval');
 
-		// $term_relationship = M('TermRelationships')->where(array("object_id"=>$id,"status"=>1))->select();
-		$term_relationship = $this->term_relationships_model->where(array("object_id"=>$id,"status"=>1))->select();
-		$term_id_arr = [];
-		foreach($term_relationship as $key=>$value){
-			$term_id_arr[] = $value["term_id"];
-		}
+		$post = $this->posts_model->where(array("id"=>$id))->select();
+		$term_id = I("get.term",0,'intval');
 
-		// dump($term_relationship);
-		$this->_getTermTree($term_id_arr);
-		$terms=$this->terms_model->select();
-		$post=$this->posts_model->where("id=$id")->find();
-		$this->assign("post",$post);
-		$this->assign("smeta",json_decode($post['smeta'],true));
-		$this->assign("terms",$terms);
-		$this->assign("term",$term_relationship);
+		// dump($post);
+		$this->_getTermTree();
+		$term=$this->terms_model->where(array('id'=>$term_id))->find();
+		$this->assign("term",$term);
+		$this->assign("post",$post[0]);
 		$this->display();
 	}
-
 
 
 	// 文章或产品编辑提交
 	public function edit_post(){
 		if (IS_POST) {
-			if(empty($_POST['term'])){
+			if(empty($_POST['cid'])){
 				$this->error("请至少选择一个分类！");
 			}
-			$post_id=intval($_POST['post']['id']);
-
-			$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>array("not in",implode(",", $_POST['term']))))->delete();
-			foreach ($_POST['term'] as $mterm_id){
-				$find_term_relationship=$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>$mterm_id))->count();
-				if(empty($find_term_relationship)){
-					$this->term_relationships_model->add(array("term_id"=>intval($mterm_id),"object_id"=>$post_id));
-				}else{
-					$this->term_relationships_model->where(array("object_id"=>$post_id,"term_id"=>$mterm_id))->save(array("status"=>1));
-				}
-			}
-			$product=$_POST['post'];
-			$product['accessories'] = '';
-			$photos_alts = $_POST['photos_alt'];
-			$photos_urls = $_POST['photos_url'];
-			$tempArr = array();
-			if(is_array($photos_alts) && is_array($photos_urls)){
-				for($i=0; $i<count($photos_alts); $i++){
-					$tempArr[] = array("name"=>$photos_alts[$i], "photo"=>$photos_urls[$i]);
-				}
-			}
-		      if(!empty($_POST['photos_alt1']) && !empty($_POST['photos_url1'])){
-		        foreach ($_POST['photos_url1'] as $key=>$url){
-		          $photourl=sp_asset_relative_url($url);
-		          $_POST['smeta']['photo'][]=array("url"=>$photourl,"alt"=>$_POST['photos_alt1'][$key]);
-		        }
-		      }
-			$product['accessories'] = json_encode($tempArr);
-			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
-			unset($_POST['post']['post_author']);
-			$_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
-			$product['smeta']=json_encode($_POST['smeta']);
-			$product['post_content']=htmlspecialchars_decode($product['post_content']);
-			$result=$this->posts_model->save($product);
-			if ($result!==false) {
-				$this->success("保存成功！");
+	 
+			$_POST['post']['uid']=get_current_admin_id();
+			$_POST['post']['cid']=$_POST['cid'];
+			$product = $_POST['post'];
+			 		 
+			$result = $this->posts_model->save($product);
+			if ($result) {
+				 
+				$this->success("添加成功！");
 			} else {
-				$this->error("保存失败！");
+				$this->error("添加失败！");
 			}
 		}
 	}
@@ -176,36 +115,22 @@ class AdminForumController extends AdminbaseController {
 	/**
 	 * 文章列表处理方法,根据不同条件显示不同的列表
 	 * @param array $where 查询条件
+	 *b: forumcat表
+	 *c: users
 	 */
 	private function _lists($where=array()){
 		$term_id=I('request.term',0,'intval');
-
-		$where['post_type']=array(array('eq',1),array('exp','IS NULL'),'OR');
-
+	      
 		if(!empty($term_id)){
-		    $where['b.term_id']=$term_id;
-			$term=$this->terms_model->where(array('term_id'=>$term_id))->find();
+		    $where['b.id']=$term_id;
+			$term=$this->terms_model->where(array('id'=>$term_id))->find();
 			$this->assign("term",$term);
 		}
 
-		$start_time=I('request.start_time');
-		if(!empty($start_time)){
-		    $where['post_date']=array(
-		        array('EGT',$start_time)
-		    );
-		}
-
-		$end_time=I('request.end_time');
-		if(!empty($end_time)){
-		    if(empty($where['post_date'])){
-		        $where['post_date']=array();
-		    }
-		    array_push($where['post_date'], array('ELT',$end_time));
-		}
-
+		
 		$keyword=I('request.keyword');
 		if(!empty($keyword)){
-		    $where['post_title']=array('like',"%$keyword%");
+		    $where['a.name']=array('like',"%$keyword%");
 		}
 
 		$this->posts_model
@@ -213,7 +138,7 @@ class AdminForumController extends AdminbaseController {
 		->where($where);
 
 		if(!empty($term_id)){
-		    $this->posts_model->join("__TERM_RELATIONSHIPS__ b ON a.id = b.object_id");
+		    $this->posts_model->join("__FORUM_CAT__ b ON a.cid = b.id");
 		}
 
 		$count=$this->posts_model->count();
@@ -222,51 +147,23 @@ class AdminForumController extends AdminbaseController {
 
 		$this->posts_model
 		->alias("a")
-		->join("__USERS__ c ON a.post_author = c.id")
+		->join("__USERS__ c ON a.uid = c.id")
+
 		->where($where)
 		->limit($page->firstRow , $page->listRows)
-		->order("a.post_date DESC");
-		if(empty($term_id)){
-		    $this->posts_model->field('a.*,c.user_login,c.user_nicename,d.name as term_name');
-		    $this->posts_model->join("__PRODUCT_RELATIONSHIPS__ b ON a.id = b.object_id")->join("__PRODUCT_CAT__ d on d.term_id = b.term_id");
-		}else{
-		    $this->posts_model->field('a.*,c.user_login,c.user_nicename,b.listorder,b.tid,d.name as term_name');
-		    $this->posts_model->join("__PRODUCT_RELATIONSHIPS__ b ON a.id = b.object_id")->join("__PRODUCT_CAT__ d on d.term_id = b.term_id");
-		}
-		$posts=$this->posts_model->select();
-		// dump($posts);
-		$rs_posts = array();
+		->order("a.time DESC")
+		->join("__FORUM_CAT__ b ON a.cid = b.id");
 
-		foreach ($posts as $key => $value) {
-			$flag = 0;
-			$key2 = "";
-			foreach ($rs_posts as $key1 => $value1) {
-				/*if($value['id'] == $value1['id'] && $value['term_name'] == $value1['term_name']){
-					$flag = 1;
-				}else if($value['id'] == $value1['id']){
-					$flag = 2;
-					$key2 = $key1;
-				}*/
-
-				if ($value1['id']==$value['id']) {
-					$flag = 1;
-					$key2 = $key1;
-				}
-
-			}
-
-			if($flag == 0){
-				$rs_posts[] = $value;
-			}else{
-				$rs_posts[$key2]['term_name'] .= ",".$value['term_name'];
-			}
-
-		}
-
+		
+		$forums=$this->posts_model
+		->field('a.*,c.user_login,c.user_nicename,b.name as term_name')
+		->select();
+		// dump($forums);
+		 
 
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("formget",array_merge($_GET,$_POST));
-		$this->assign("posts",$rs_posts);
+		$this->assign("posts",$forums);
 	}
 
 
@@ -279,12 +176,12 @@ class AdminForumController extends AdminbaseController {
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminProductCat/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminProductCat/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminProductCat/delete", array("id" => $r['term_id'])) . '">删除</a> ';
+			$r['str_manage'] = '<a href="' . U("AdminForumCat/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminForumCat/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminForumCat/delete", array("id" => $r['term_id'])) . '">删除</a> ';
 			$r['visit'] = "<a href='#'>访问</a>";
 			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
-			$r['id']=$r['term_id'];
+			$r['id']=$r['id'];
 			$r['parentid']=$r['parent'];
-			$r['selected']=$term_id==$r['term_id']?"selected":"";
+			$r['selected']=$term_id==$r['id']?"selected":"";
 			$array[] = $r;
 		}
 
@@ -304,10 +201,10 @@ class AdminForumController extends AdminbaseController {
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminProductCat/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminProductCat/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminProductCat/delete", array("id" => $r['term_id'])) . '">删除</a> ';
+			$r['str_manage'] = '<a href="' . U("AdminForumCat/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminForumCat/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminForumCat/delete", array("id" => $r['term_id'])) . '">删除</a> ';
 			$r['visit'] = "<a href='#'>访问</a>";
 			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
-			$r['id']=$r['term_id'];
+			$r['id']=$r['id'];
 			$r['parentid']=$r['parent'];
 			$r['selected']=in_array($r['term_id'], $term)?"selected":"";
 			$r['checked'] =in_array($r['term_id'], $term)?"checked":"";
@@ -386,11 +283,4 @@ class AdminForumController extends AdminbaseController {
 		}
 	}
 
-	 
-
- 
- 
- 
- 
- 
 }
