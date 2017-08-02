@@ -3,7 +3,7 @@ namespace Portal\Model;
 
 use Common\Model\CommonModel;
 
-class ProductModel extends CommonModel {
+class TopicModel extends CommonModel {
     
     //自动验证
     protected $_validate = array(

@@ -91,17 +91,17 @@ class RegisterController extends HomebaseController {
 	private function _do_email_register(){
 	   
         if(!sp_check_verify_code()){
-            $this->error("验证码错误！");
+            $this->error("Verify code is wrong!");
         }
         
         $rules = array(
             //array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)
-            array('email', 'require', '邮箱不能为空！', 1 ),
-            array('password','require','密码不能为空！',1),
-            array('password','5,20',"密码长度至少5位，最多20位！",1,'length',3),
-            array('repassword', 'require', '重复密码不能为空！', 1 ),
-            array('repassword','password','确认密码不正确',0,'confirm'),
-            array('email','email','邮箱格式不正确！',1), // 验证email字段格式是否正确
+            array('email', 'require', 'Email cannot be empty!', 1 ),
+            array('password','require','Password cannot be empty!',1),
+            array('password','5,20',"Password length is at least 5 bits, up to 20 bits!",1,'length',3),
+            array('repassword', 'require', 'Confirmed password cannot be empty!', 1 ),
+            array('repassword','password','Confirmed password is wrong',0,'confirm'),
+            array('email','email','The Email format is incorrect!',1), // 验证email字段格式是否正确
         );
 	     
 	    $users_model=M("Users");
@@ -119,11 +119,7 @@ class RegisterController extends HomebaseController {
 	        $this->error('用户名中包含'.$stripChar.'等非法字符！');
 	    }
 	     
-// 	    $banned_usernames=explode(",", sp_get_cmf_settings("banned_usernames"));
-	     
-// 	    if(in_array($username, $banned_usernames)){
-// 	        $this->error("此用户名禁止使用！");
-// 	    }
+ 
 	    
 	    $where['user_login']=$username;
 	    $where['user_email']=$email;
@@ -141,7 +137,7 @@ class RegisterController extends HomebaseController {
 	    $users_model=M("Users");
 	    $result = $users_model->where($where)->count();
 	    if($result || $uc_checkemail<0 || $uc_checkusername<0){
-	        $this->error("用户名或者该邮箱已经存在！");
+	        $this->error("User or the Email already exists!");
 	    }else{
 	        $uc_register=true;
 	        if($ucenter_syn){
@@ -175,17 +171,17 @@ class RegisterController extends HomebaseController {
 	                if($need_email_active){
 	                    $this->_send_to_active();
 	                    session('user',null);
-	                    $this->success("注册成功，激活后才能使用！",U("user/login/index"));
+	                    $this->success("Registration successful, activated to use!",U("user/login/index"));
 	                }else {
-	                    $this->success("注册成功！",__ROOT__."/");
+	                    $this->success("Registration is successful!",__ROOT__."/");
 	                }
 	                	
 	            }else{
-	                $this->error("注册失败！",U("user/register/index"));
+	                $this->error("Registing is failure!",U("user/register/index"));
 	            }
 	             
 	        }else{
-	            $this->error("注册失败！",U("user/register/index"));
+	            $this->error("Registing is failure!",U("user/register/index"));
 	        }
 	         
 	    }

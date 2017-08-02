@@ -21,7 +21,7 @@ class AdminForumController extends AdminbaseController {
 		$this->terms_model = D("Portal/ForumCat");
 	}
 
-	// 后台文章管理列表
+	// 后台管理列表
 	public function index(){
 		$this->_lists(array("a.status"=>array('neq',3)));
 		$this->_getTree();
@@ -43,7 +43,7 @@ class AdminForumController extends AdminbaseController {
 
  
 
-	// 文章或产品添加提交
+	// 或产品添加提交
 	public function add_post(){
 		if (IS_POST) {
 			if(empty($_POST['cid'])){
@@ -65,7 +65,7 @@ class AdminForumController extends AdminbaseController {
 		}
 	}
 
-	// 文章编辑
+	// 编辑
 	public function edit(){
 		$id=  I("get.id",0,'intval');
 
@@ -81,7 +81,7 @@ class AdminForumController extends AdminbaseController {
 	}
 
 
-	// 文章或产品编辑提交
+	// 或产品编辑提交
 	public function edit_post(){
 		if (IS_POST) {
 			if(empty($_POST['cid'])){
@@ -104,7 +104,7 @@ class AdminForumController extends AdminbaseController {
 
 	// 排序
 	public function listorders() {
-		$status = parent::_listorders($this->term_relationships_model);
+		$status = parent::_listorders($this->posts_model);
 		if ($status) {
 			$this->success("排序更新成功！");
 		} else {
@@ -113,7 +113,7 @@ class AdminForumController extends AdminbaseController {
 	}
 
 	/**
-	 * 文章列表处理方法,根据不同条件显示不同的列表
+	 * 列表处理方法,根据不同条件显示不同的列表
 	 * @param array $where 查询条件
 	 *b: forumcat表
 	 *c: users
@@ -167,7 +167,7 @@ class AdminForumController extends AdminbaseController {
 	}
 
 
-	// 获取文章分类树结构 select 形式
+	// 获取分类树结构 select 形式
 	private function _getTree(){
 		$term_id=empty($_REQUEST['term'])?0:intval($_REQUEST['term']);
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
@@ -193,7 +193,7 @@ class AdminForumController extends AdminbaseController {
 
 
 
-	// 获取文章分类树结构
+	// 获取分类树结构
 	private function _getTermTree($term=array()){
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
 
@@ -221,7 +221,7 @@ class AdminForumController extends AdminbaseController {
 	public function delete(){
 		if(isset($_GET['id'])){
 			$id = I("get.id",0,'intval');
-			if ($this->posts_model->where(array('id'=>$id))->save(array('post_status'=>3)) !==false) {
+			if ($this->posts_model->where(array('id'=>$id))->save(array('status'=>3)) !==false) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");
@@ -231,7 +231,7 @@ class AdminForumController extends AdminbaseController {
 		if(isset($_POST['ids'])){
 			$ids = I('post.ids/a');
 
-			if ($this->posts_model->where(array('id'=>array('in',$ids)))->save(array('post_status'=>3))!==false) {
+			if ($this->posts_model->where(array('id'=>array('in',$ids)))->save(array('status'=>3))!==false) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");
@@ -239,12 +239,12 @@ class AdminForumController extends AdminbaseController {
 		}
 	}
 
-	// 文章审核
+	// 审核
 	public function check(){
 		if(isset($_POST['ids']) && $_GET["check"]){
 		    $ids = I('post.ids/a');
 
-			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('post_status'=>1)) !== false ) {
+			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('status'=>1)) !== false ) {
 				$this->success("审核成功！");
 			} else {
 				$this->error("审核失败！");
@@ -253,7 +253,7 @@ class AdminForumController extends AdminbaseController {
 		if(isset($_POST['ids']) && $_GET["uncheck"]){
 		    $ids = I('post.ids/a');
 
-			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('post_status'=>0)) !== false) {
+			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('status'=>0)) !== false) {
 				$this->success("取消审核成功！");
 			} else {
 				$this->error("取消审核失败！");
@@ -261,7 +261,7 @@ class AdminForumController extends AdminbaseController {
 		}
 	}
 
-	// 文章置顶
+	// 置顶
 	public function top(){
 		if(isset($_POST['ids']) && $_GET["top"]){
 			$ids = I('post.ids/a');
