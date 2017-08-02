@@ -369,7 +369,7 @@ hello;
                 $users_model->where("id=".$result["id"])->save($data);
 
                 $session_login_http_referer=session('login_http_referer');
-                $redirect=empty($session_login_http_referer)?__ROOT__."/":$session_login_http_referer;
+                $redirect=empty($session_login_http_referer)?U("Bbs/index"):$session_login_http_referer;
                 session('login_http_referer','');
 
                 $ucenter_old_user_login_msg="";

@@ -173,7 +173,7 @@ class RegisterController extends HomebaseController {
 	                    session('user',null);
 	                    $this->success("Registration successful, activated to use!",U("user/login/index"));
 	                }else {
-	                    $this->success("Registration is successful!",__ROOT__."/");
+	                    $this->success("Registration is successful!",U("Bbs/index"));
 	                }
 	                	
 	            }else{
