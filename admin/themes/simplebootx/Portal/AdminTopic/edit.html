@@ -50,21 +50,21 @@
 							<th><b>发布时间</b></th>
 						</tr>
 						<tr>
-							<td><input type="text" name="post[time]" value="{:date('Y-m-d H:i:s',time())}" class="js-datetime" style="width: 160px;"></td>
+							<td><input type="text" name="post[time]" value="{$post[time]}" class="js-datetime" style="width: 160px;"></td>
 						</tr>
 						<tr>
 							<th><b>状态</b></th>
 						</tr>
 						<tr>
 							<td>
-								<label class="radio"><input type="radio" name="post[status]" value="1" checked>审核通过</label>
-								<label class="radio"><input type="radio" name="post[status]" value="0">待审核</label>
+								<label class="radio"><input type="radio" name="post[status]" value="1" <if condition="$post[status]==1"> checked </if>>审核通过</label>
+								<label class="radio"><input type="radio" name="post[status]" value="0" <if condition="$post[status]==0"> checked </if>>待审核</label>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<label class="radio"><input type="radio" name="post[istop]" value="1">置顶</label>
-								<label class="radio"><input type="radio" name="post[istop]" value="0" checked>未置顶</label>
+								<label class="radio"><input type="radio" name="post[istop]" value="1" <if condition="$post[istop]==1"> checked </if>>置顶</label>
+								<label class="radio"><input type="radio" name="post[istop]" value="0" <if condition="$post[istop]==0"> checked </if>>未置顶</label>
 							</td>
 						</tr>
 						 

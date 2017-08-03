@@ -21,7 +21,7 @@ class AdminProductCatController extends AdminbaseController {
 		$this->assign("taxonomys",$this->taxonomys);
 	}
 	
-	// 后台文章分类列表
+	// 后台分类列表
     public function index(){
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
 		
@@ -30,7 +30,8 @@ class AdminProductCatController extends AdminbaseController {
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		foreach ($result as $r) {
 			$r['str_manage'] = '<a href="' . U("AdminProductCat/add", array("parent" => $r['term_id'])) . '">'.L('ADD_SUB_CATEGORY').'</a> | <a href="' . U("AdminProductCat/edit", array("id" => $r['term_id'])) . '">'.L('EDIT').'</a> | <a class="js-ajax-delete" href="' . U("AdminProductCat/delete", array("id" => $r['term_id'])) . '">'.L('DELETE').'</a> ';
-			$url=U('portal/list/index',array('id'=>$r['term_id']));
+			
+			$url=U('Portal/Product/productList',array('term_id'=>$r['term_id']));
 			$r['url'] = $url;
 			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
 			$r['id']=$r['term_id'];
@@ -54,7 +55,7 @@ class AdminProductCatController extends AdminbaseController {
 	 
 	
 
-	// 文章分类添加
+	// 分类添加
 	public function add(){
 	 	$parentid = I("get.parent",0,'intval');
 	 	$tree = new \Tree();
