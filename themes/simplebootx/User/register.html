@@ -65,7 +65,12 @@
 
 					<div class="tab-pane active" id="email">
 						<form class="form-horizontal js-ajax-form bbs-user-register" action="{:U('user/register/doregister')}" method="post">
-		
+							<div class="form-group form-group-sm">
+								<label class="col-sm-3 control-label">nickname:</label>
+								<div class="col-sm-9">
+								<input type="text" name="nicename"  class="form-control">
+								</div>
+							</div>
 							<div class="form-group form-group-sm">
 								<label for=""  class="col-sm-3 control-label">email:</label>
 								<div class="col-sm-9">

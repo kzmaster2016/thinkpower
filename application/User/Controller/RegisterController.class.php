@@ -153,7 +153,7 @@ class RegisterController extends HomebaseController {
 	            $data=array(
 	                'user_login' => $username,
 	                'user_email' => $email,
-	                'user_nicename' =>$username,
+	                'user_nicename' =>I('post.nicename'),
 	                'user_pass' => sp_password($password),
 	                'last_login_ip' => get_client_ip(0,true),
 	                'create_time' => date("Y-m-d H:i:s"),
@@ -173,7 +173,7 @@ class RegisterController extends HomebaseController {
 	                    session('user',null);
 	                    $this->success("Registration successful, activated to use!",U("user/login/index"));
 	                }else {
-	                    $this->success("Registration is successful!",U("Bbs/index"));
+	                    $this->success("Registration is successful!",U("Portal/Bbs/index"));
 	                }
 	                	
 	            }else{

@@ -195,6 +195,9 @@ class AdminForumController extends AdminbaseController {
 
 	// 获取分类树结构
 	private function _getTermTree($term=array()){
+
+		$term_id=empty($_REQUEST['cid'])?0:intval($_REQUEST['cid']);
+		
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
 
 		$tree = new \Tree();
@@ -206,7 +209,7 @@ class AdminForumController extends AdminbaseController {
 			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
 			$r['id']=$r['id'];
 			$r['parentid']=$r['parent'];
-			$r['selected']=in_array($r['term_id'], $term)?"selected":"";
+			$r['selected']=$term_id==$r['id']?"selected":"";
 			$r['checked'] =in_array($r['term_id'], $term)?"checked":"";
 			$array[] = $r;
 		}

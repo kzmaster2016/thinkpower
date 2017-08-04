@@ -73,38 +73,30 @@
 						
 					</div>
 					<div class="bbs-page-body">
+						<volist name="forumList" id="vo" key='j'>
+							
+						<if condition="(sizeof($vo))!=0">
 						<div class="forum-cat">
 							<h3 class="hd">
-								General Questions
-								<a href="javascript:void(0)" class="fr togbtn" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="true"><i class="fa fa-minus"></i></a>
+								 
+								{$Think.lang.$key}
+								<a href="javascript:void(0)" class="fr togbtn" data-toggle="collapse" data-target="#collapseExample{$j}" aria-expanded="true"><i class="fa fa-minus"></i></a>
 							</h3>
-							<ul id="collapseExample1" class="bd collapse in">
+							<ul id="collapseExample{$j}" class="bd collapse in">
+
+								<volist	name="vo" id="forum">
 								<li>
-									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>Post Rules</a>
-									<p class="desc">Read me first before posting anywhere! And you will give the support more easier.	</p>
+									<a href="{:U('Bbs/topicList',array('forumid'=>$forum['id']))}" class="title"><i class="fa fa-file"></i>{$forum['name']}</a>
+									<p class="desc">{$forum['introduce']}</p>
+									<p class="desc">Moderator:{$forum['uname']} </p>
 								</li>
-								<li>
-									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>News and Notices</a>
-									<p class="desc">The event about the GPS industry, the announcement of Concox and new products.		</p>
-								</li>
+								</volist>
 							</ul>
 						</div>
-						<div class="forum-cat">
-							<h3 class="hd">
-								Vehicle Tracker
-								<a href="javascript:void(0)" class="fr togbtn" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="true"><i class="fa fa-minus"></i></a>
-							</h3>
-							<ul id="collapseExample2" class="bd collapse in">
-								<li>
-									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>Post Rules</a>
-									<p class="desc">Read me first before posting anywhere! And you will give the support more easier.	</p>
-								</li>
-								<li>
-									<a href="{:U('Bbs/topicList')}" class="title"><i class="fa fa-file"></i>News and Notices</a>
-									<p class="desc">The event about the GPS industry, the announcement of Concox and new products.		</p>
-								</li>
-							</ul>
-						</div>
+						</if>
+
+						</volist>
+						 
 					</div>
 				</div>
 				<div class="col-sm-3">			
@@ -130,6 +122,7 @@
 	    	
 	    }
 
+	    
 	})
 	</script>
 

@@ -43,7 +43,7 @@ class AdminTopicController extends AdminbaseController {
 
  
 
-	// 或产品添加提交
+	// 添加提交
 	public function add_post(){
 		if (IS_POST) {
 			if(empty($_POST['cid'])){
@@ -52,6 +52,7 @@ class AdminTopicController extends AdminbaseController {
 	 
 			$_POST['post']['uid']=get_current_admin_id();
 			$_POST['post']['cid']=$_POST['cid'];
+			$_POST['post']['type']=2;  //Announcements
 			$product = $_POST['post'];
 			 		 
 			$result = $this->posts_model->add($product);
@@ -61,7 +62,6 @@ class AdminTopicController extends AdminbaseController {
 			} else {
 				$this->error("添加失败！");
 			}
-
 		}
 	}
 
@@ -195,19 +195,22 @@ class AdminTopicController extends AdminbaseController {
 
 	// 获取分类树结构
 	private function _getTermTree($term=array()){
+
+		$term_id=empty($_REQUEST['cid'])?0:intval($_REQUEST['cid']);
+
 		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
 
 		$tree = new \Tree();
 		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
 		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminForum/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminForum/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminForum/delete", array("id" => $r['term_id'])) . '">删除</a> ';
+			/*$r['str_manage'] = '<a href="' . U("AdminForum/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminForum/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminForum/delete", array("id" => $r['term_id'])) . '">删除</a> ';
 			$r['visit'] = "<a href='#'>访问</a>";
-			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
+			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];*/
 			$r['id']=$r['id'];
 			$r['parentid']=$r['parent'];
-			$r['selected']=in_array($r['term_id'], $term)?"selected":"";
-			$r['checked'] =in_array($r['term_id'], $term)?"checked":"";
+			$r['selected']=$term_id==$r['id']?"selected":"";			 
+			$r['checked'] =in_array($r['id'], $term)?"checked":"";
 			$array[] = $r;
 		}
 
