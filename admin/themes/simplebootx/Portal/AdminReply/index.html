@@ -1,43 +1,143 @@
 <admintpl file="header" />
 </head>
 <body>
-	<div class="wrap">
+	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="{:U('AdminTerm/index')}">{:L('PORTAL_ADMINTERM_INDEX')}</a></li>
-			<li><a href="{:U('AdminTerm/add')}">{:L('PORTAL_ADMINTERM_ADD')}</a></li>
+			<li class="active"><a href="javascript:;">话题回复管理</a></li>
+			<li><a href="{:U('AdminReply/add',array('term'=>empty($term['term_id'])?'':$term['term_id']))}" target="_self">添加回复</a></li>
 		</ul>
-		<form method="post" class="js-ajax-form" action="{:U('AdminTerm/listorders')}">
+		<form class="well form-search" method="post" action="{:U('AdminReply/index')}">
+			话题： 
+			<select name="term" style="width: 120px;">
+				<option value='0'>全部</option>
+				<?php
+					for($i = 0; $i < count($topics); $i++){
+				?>
+				<option value='{$topics[$i].id}'>{$topics[$i].name}</option>
+				<?php
+				  }
+				?>
+			</select> &nbsp;&nbsp;
+			时间：
+			<input type="text" name="start_time" class="js-datetime" value="{$formget.start_time|default=''}" style="width: 120px;" autocomplete="off">-
+			<input type="text" class="js-datetime" name="end_time" value="{$formget.end_time|default=''}" style="width: 120px;" autocomplete="off"> &nbsp; &nbsp;
+			关键字： 
+			<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword|default=''}" placeholder="请输入关键字...">
+			<input type="submit" class="btn btn-primary" value="搜索" />
+			<a class="btn btn-danger" href="{:U('AdminReply/index')}">清空</a>
+		</form>
+		<form class="js-ajax-form" action="" method="post">
 			<div class="table-actions">
-				<button type="submit" class="btn btn-primary btn-small js-ajax-submit">{:L('SORT')}</button>
+				<button class="btn btn-danger btn-small js-ajax-submit" type="submit" data-action="{:U('AdminReply/delete')}" data-subcheck="true" data-msg="您确定删除吗？">{:L('DELETE')}</button>
 			</div>
 			<table class="table table-hover table-bordered table-list">
 				<thead>
 					<tr>
-						<th width="50">{:L('SORT')}</th>
+						<th width="15"><label><input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x"></label></th>
 						<th width="50">ID</th>
-						<th>{:L('NAME')}</th>
-						<th>{:L('CATEGORY_TYPE')}</th>
-						<th>{:L('ACTIONS')}</th>
+						<th width="50">会员名</th>
+						<th width="50">所属话题</th>
+						<th width="50">内容</th>
+						<th width="100">创建日期</th>
+						<th width="50">状态</th>
+						<th width="70">操作</th>
 					</tr>
 				</thead>
-				<tbody>
-					{$taxonomys}
-				</tbody>
-				<tfoot>
-					<tr>
-						<th width="50">{:L('SORT')}</th>
-						<th width="50">ID</th>
-						<th>{:L('NAME')}</th>
-						<th>{:L('CATEGORY_TYPE')}</th>
-						<th>{:L('ACTIONS')}</th>
-					</tr>
-				</tfoot>
+				<foreach name="posts" item="vo">
+				<tr>
+					<td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="{$vo.id}" title="ID:{$vo.id}"></td>
+                    <td><b>{$vo.id}</b></td>
+					<td>{$vo.user_nicename|default=$vo.user_login}</td>
+					<td>{$vo.name}</td>
+					<td>
+						<span>{$vo.content}</span>
+					</td>
+					<td>{:date('Y-m-d H:i',strtotime($vo['time']))}</td>
+					<td>
+						<notempty name="vo.status">
+							<a data-toggle="tooltip" title="已审核"><i class="fa fa-check">已审核</i></a>
+							<else/>
+							<a data-toggle="tooltip" title="未审核"><i class="fa fa-close">未审核</i></a>
+						</notempty>
+					</td>
+					<td>
+						<a href="{:U('AdminReply/edit',array('id'=>$vo['id']))}">{:L('EDIT')}</a> | 
+						<a href="{:U('AdminReply/delete',array('id'=>$vo['id']))}" class="js-ajax-delete">{:L('DELETE')}</a>
+					</td>
+				</tr>
+				</foreach>
 			</table>
-			<div class="table-actions">
-				<button type="submit" class="btn btn-primary btn-small js-ajax-submit">{:L('SORT')}</button>
-			</div>
+			<div class="pagination">{$page}</div>
 		</form>
 	</div>
 	<script src="__PUBLIC__/js/common.js"></script>
+	<script>
+		function refersh_window() {
+			var refersh_time = getCookie('refersh_time');
+			if (refersh_time == 1) {
+				window.location = "{:U('AdminReply/index',$formget)}";
+			}
+		}
+		setInterval(function() {
+			refersh_window();
+		}, 2000);
+		$(function() {
+			setCookie("refersh_time", 0);
+			Wind.use('ajaxForm', 'artDialog', 'iframeTools', function() {
+				//批量复制
+				$('.js-articles-copy').click(function(e) {
+					var ids=[];
+					$("input[name='ids[]']").each(function() {
+						if ($(this).is(':checked')) {
+							ids.push($(this).val());
+						}
+					});
+					
+					if (ids.length == 0) {
+						art.dialog.through({
+							id : 'error',
+							icon : 'error',
+							content : '您没有勾选信息，无法进行操作！',
+							cancelVal : '关闭',
+							cancel : true
+						});
+						return false;
+					}
+					
+					ids= ids.join(',');
+					art.dialog.open("__ROOT__/index.php?g=portal&m=AdminReply&a=copy&ids="+ ids, {
+						title : "批量复制",
+						width : "300px"
+					});
+				});
+				//批量移动
+				$('.js-articles-move').click(function(e) {
+					var ids=[];
+					$("input[name='ids[]']").each(function() {
+						if ($(this).is(':checked')) {
+							ids.push($(this).val());
+						}
+					});
+					
+					if (ids.length == 0) {
+						art.dialog.through({
+							id : 'error',
+							icon : 'error',
+							content : '您没有勾选信息，无法进行操作！',
+							cancelVal : '关闭',
+							cancel : true
+						});
+						return false;
+					}
+					
+					ids= ids.join(',');
+					art.dialog.open("__ROOT__/index.php?g=portal&m=Reply&a=move&old_term_id={$term.term_id|default=0}&ids="+ ids, {
+						title : "批量移动",
+						width : "300px"
+					});
+				});
+			});
+		});
+	</script>
 </body>
 </html>
