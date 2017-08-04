@@ -1,115 +1,243 @@
 <admintpl file="header" />
+<style type="text/css">
+.pic-list li {
+	margin-bottom: 5px;
+}
+</style>
 </head>
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-	        <li class="active"><a href="#A" data-toggle="tab">{:L('GENERAL_SETTING')}</a></li>
-	        <li><a href="#B" data-toggle="tab">{:L('SEO_SETTING')}</a></li>
-	        <li><a href="#C" data-toggle="tab">{:L('TEMPLATE_SETTING')}</a></li>
-	    </ul>
-		<form class="form-horizontal js-ajax-form" action="{:U('AdminTerm/add_post')}" method="post">
-			<div class="tabbable">
-		        <div class="tab-content">
-		          <div class="tab-pane active" id="A">
-						<fieldset>
-							<div class="control-group">
-								<label class="control-label">{:L('PARENT')}</label>
-								<div class="controls">
-									<select name="parent">
-										<option value="0">{:L('ROOT')}</option>
-										{$terms_tree}
-									</select>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">{:L('NAME')}</label>
-								<div class="controls">
-									<input type="text" name="name" value=""><span class="form-required">*</span>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">{:L('CATEGORY_DESCRIPTION')}</label>
-								<div class="controls">
-									<textarea name="description" rows="5" cols="57"></textarea>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">{:L('CATEGORY_TYPE')}</label>
-								<div class="controls">
-									<select name="taxonomy">
-										<foreach name="taxonomys" item="vo">
-								        	<option value="{$key}">{$vo}</option>
-										</foreach>
-									</select>
-								</div>
-							</div>
-						</fieldset>
-		          </div>
-		          <div class="tab-pane" id="B">
-						<fieldset>
-							<div class="control-group">
-								<label class="control-label">{:L('SEO_TITLE')}</label>
-								<div class="controls">
-									<input type="text" name="seo_title" value="">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">{:L('SEO_KEYWORDS')}</label>
-								<div class="controls">
-									<input type="text" name="seo_keywords" value="">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">{:L('SEO_DESCRIPTION')}</label>
-								<div class="controls">
-									<textarea name="seo_description" rows="5" cols="57"></textarea>
-								</div>
-							</div>
-						</fieldset>
-		          </div>
-		          <div class="tab-pane" id="C">
-						<php>$tpl_list=sp_admin_get_tpl_file_list();</php>
-						<fieldset>
-							<div class="control-group">
-								<label class="control-label">{:L('LIST_TEMPLATE')}</label>
-								<div class="controls">
-									<php>
-										$list_tpls=$tpl_list;
-										unset($list_tpls['list']);
-									</php>
-				              		<select  name="list_tpl">
-				              			<option value="list">list{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-				              			<foreach name="list_tpls" item="vo">
-				              				<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-				              			</foreach>
-				              		</select>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">{:L('ARTICLE_TEMPLATE')}</label>
-								<div class="controls">
-									<php>
-										$article_tpls=$tpl_list;
-										unset($article_tpls['article']);
-									</php>
-				              		<select  name="one_tpl">
-				              			<option value="article">article{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-				              			<foreach name="article_tpls" item="vo">
-				              				<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-				              			</foreach>
-				              		</select>
-								</div>
-							</div>
-						</fieldset>
-		          </div>
-		        </div>
-		    </div>
-		    <div class="form-actions">
-		     	<button class="btn btn-primary js-ajax-submit"type="submit">{:L('ADD')}</button>
-		      	<a class="btn" href="javascript:history.back(-1);">{:L('BACK')}</a>
-		    </div>
+			<li><a href="{:U('AdminReply/index')}">话题回复管理</a></li>
+			<li class="active"><a href="{:U('AdminReply/add')}" target="_self">添加回复</a></li>
+		</ul>
+		<form action="{:U('AdminReply/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
+			<div class="row-fluid">
+				<div class="span9">
+					<table class="table table-bordered">
+						<tr>
+							<th width="140">话题</th>
+							<td>
+								<select style="max-height: 100px;" name="post[tid]">
+									<option value=''>全部</option>
+									<?php
+										for($i = 0; $i < count($topics); $i++){
+									?>
+									<option value='{$topics[$i].id}'>{$topics[$i].name}</option>
+									<?php
+									  }
+									?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>内容</th>
+							<td>
+								<script type="text/plain" id="content" name="post[content]"></script>
+							</td>
+						</tr>
+						<tr>
+							<th><b>发布时间</b></th>
+						</tr>
+						<tr>
+							<td><input type="text" name="post[time]" value="{:date('Y-m-d H:i:s',time())}" class="js-datetime" style="width: 160px;"></td>
+						</tr>
+						<tr>
+							<th><b>状态</b></th>
+						</tr>
+						<tr>
+							<td>
+								<label class="radio"><input type="radio" name="post[status]" value="1" checked>审核通过</label>
+								<label class="radio"><input type="radio" name="post[status]" value="0">待审核</label>
+							</td>
+						</tr>
+						<tr>
+							<th>产品模板</th>
+						</tr>
+						<tr>
+							<td>
+								<php>
+									$tpl_list=sp_admin_get_tpl_file_list();
+									unset($tpl_list['page']);
+								</php>
+								<select style="min-width: 190px;" name="smeta[template]">
+									<option value="">请选择模板</option>
+									<foreach name="tpl_list" item="vo">
+										<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
+									</foreach>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
+				<a class="btn" href="{:U('AdminReply/index')}">返回</a>
+			</div>
 		</form>
 	</div>
 	<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">
+		//编辑器路径定义
+		var editorURL = GV.WEB_ROOT;
+	</script>
+	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".js-ajax-close-btn").on('click', function(e) {
+				e.preventDefault();
+				Wind.use("artDialog", function() {
+					art.dialog({
+						id : "question",
+						icon : "question",
+						fixed : true,
+						lock : true,
+						background : "#CCCCCC",
+						opacity : 0,
+						content : "您确定需要关闭当前页面嘛？",
+						ok : function() {
+							setCookie("refersh_time", 1);
+							window.close();
+							return true;
+						}
+					});
+				});
+			});
+
+			Wind.use('validate', 'ajaxForm', 'artDialog', function() {
+				//javascript
+
+				//编辑器
+				editorcontent = new baidu.editor.ui.Editor();
+				editorcontent.render('content');
+				try {
+					editorcontent.sync();
+				} catch (err) {
+				}
+				//增加编辑器验证规则
+				jQuery.validator.addMethod('editorcontent', function() {
+					try {
+						editorcontent.sync();
+					} catch (err) {
+					}
+					return editorcontent.hasContents();
+				});
+				var form = $('form.js-ajax-forms');
+				//ie处理placeholder提交问题
+				if ($.browser && $.browser.msie) {
+					form.find('[placeholder]').each(function() {
+						var input = $(this);
+						if (input.val() == input.attr('placeholder')) {
+							input.val('');
+						}
+					});
+				}
+
+				var formloading = false;
+				//表单验证开始
+				form.validate({
+					//是否在获取焦点时验证
+					onfocusout : false,
+					//是否在敲击键盘时验证
+					onkeyup : false,
+					//当鼠标掉级时验证
+					onclick : false,
+					//验证错误
+					showErrors : function(errorMap, errorArr) {
+						//errorMap {'name':'错误信息'}
+						//errorArr [{'message':'错误信息',element:({})}]
+						try {
+							$(errorArr[0].element).focus();
+							art.dialog({
+								id : 'error',
+								icon : 'error',
+								lock : true,
+								fixed : true,
+								background : "#CCCCCC",
+								opacity : 0,
+								content : errorArr[0].message,
+								cancelVal : '确定',
+								cancel : function() {
+									$(errorArr[0].element).focus();
+								}
+							});
+						} catch (err) {
+						}
+					},
+					//验证规则
+					rules : {
+						'post[tid]' : {
+							required : 1
+						},
+						'post[content]' : {
+							required : 1
+						}
+					},
+					//验证未通过提示消息
+					messages : {
+						'post[tid]' : {
+							required : '请选择话题'
+						},
+						'post[content]' : {
+							required : '内容不能为空'
+						}
+					},
+					//给未通过验证的元素加效果,闪烁等
+					highlight : false,
+					//是否在获取焦点时验证
+					onfocusout : false,
+					//验证通过，提交表单
+					submitHandler : function(forms) {
+						if (formloading)
+							return;
+						$(forms).ajaxSubmit({
+							url : form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+							dataType : 'json',
+							beforeSubmit : function(arr, $form, options) {
+								formloading = false;
+							},
+							success : function(data, statusText, xhr, $form) {
+								formloading = false;
+								if (data.status) {
+									setCookie("refersh_time", 1);
+									//添加成功
+									Wind.use("artDialog", function() {
+										art.dialog({
+											id : "succeed",
+											icon : "succeed",
+											fixed : true,
+											lock : true,
+											background : "#CCCCCC",
+											opacity : 0,
+											content : data.info,
+											button : [ {
+												name : '继续添加？',
+												callback : function() {
+													reloadPage(window);
+													return true;
+												},
+												focus : true
+											}, {
+												name : '返回列表页',
+												callback : function() {
+													location = "{:U('AdminReply/index')}";
+													return true;
+												}
+											} ]
+										});
+									});
+								} else {
+									artdialog_alert(data.info);
+								}
+							}
+						});
+					}
+				});
+			});
+			////-------------------------
+		});
+	</script>
 </body>
 </html>

@@ -11,156 +11,161 @@ namespace Portal\Controller;
 use Common\Controller\AdminbaseController;
 
 class AdminReplyController extends AdminbaseController {
-	
+
 	protected $terms_model;
-	protected $taxonomys=array("article"=>"文章","picture"=>"图片");
-	
+
 	function _initialize() {
 		parent::_initialize();
-		$this->terms_model = D("Portal/Terms");
-		$this->assign("taxonomys",$this->taxonomys);
+		$this->topic_model = D("/Portal/Topic");
+		$this->reply_model = D("/Portal/Reply");
+		$this->user_model = D("/Portal/Reply");
 	}
-	
-	// 后台文章分类列表
+
+	// 后台话题回复列表
     public function index(){
-		$result = $this->terms_model->order(array("listorder"=>"asc"))->select();
-		
-		$tree = new \Tree();
-		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminTerm/add", array("parent" => $r['term_id'])) . '">'.L('ADD_SUB_CATEGORY').'</a> | <a href="' . U("AdminTerm/edit", array("id" => $r['term_id'])) . '">'.L('EDIT').'</a> | <a class="js-ajax-delete" href="' . U("AdminTerm/delete", array("id" => $r['term_id'])) . '">'.L('DELETE').'</a> ';
-			// $url=U('portal/list/index',array('id'=>$r['term_id']));
-			$url="javascript:;";
-			$r['url'] = $url;
-			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
-			$r['id']=$r['term_id'];
-			$r['parentid']=$r['parent'];
-			$array[] = $r;
+      $topics = $this->topic_model->order(array("listorder"=>"asc"))->select();
+
+      $this->assign("topics", $topics);
+      $term_id=I('request.term',0,'intval');
+
+		if(!empty($term_id)){
+		    $where['a.tid']=$term_id;
+			$term=$this->topic_model->where(array('id'=>$term_id))->find();
+			$this->assign("term",$term);
 		}
-		
-		$tree->init($array);
-		$str = "<tr>
-					<td><input name='listorders[\$id]' type='text' size='3' value='\$listorder' class='input input-order'></td>
-					<td>\$id</td>
-					<td>\$spacer <a href='\$url' target='_blank'>\$name</a></td>
-	    			<td>\$taxonomys</td>
-					<td>\$str_manage</td>
-				</tr>";
-		$taxonomys = $tree->get_tree(0, $str);
-		$this->assign("taxonomys", $taxonomys);
-		$this->display();
+
+		$start_time=I('request.start_time');
+		if(!empty($start_time)){
+		    $where['time']=array(
+		        array('EGT',$start_time)
+		    );
+		}
+
+		$end_time=I('request.end_time');
+		if(!empty($end_time)){
+		    if(empty($where['time'])){
+		        $where['time']=array();
+		    }
+		    array_push($where['time'], array('ELT',$end_time));
+		}
+
+		$keyword=I('request.keyword');
+		if(!empty($keyword)){
+		    $where['content']=array('like',"%$keyword%");
+		}
+
+		$this->reply_model
+		->alias("a")
+		->where($where);
+
+		if(!empty($term_id)){
+		    $this->reply_model->join("__TOPIC__ b ON a.tid = b.id");
+		}
+
+		$count=$this->reply_model->count();
+
+		$page = $this->page($count, 20);
+
+		$this->reply_model
+		->alias("a")
+		->join("__USERS__ c ON a.uid = c.id")
+		->where($where)
+		->limit($page->firstRow , $page->listRows)
+		->order("a.time DESC");
+
+	    $this->reply_model->field('a.*,c.user_login,c.user_nicename,b.name as name');
+	    $this->reply_model->join("__TOPIC__ b ON a.tid = b.id");
+	
+		$posts=$this->reply_model->select();
+
+		$this->assign("posts", $posts);
+        $this->display();
 	}
-	
-	 
-	
 
-	// 文章分类添加
+
+
+
+	// 话题回复添加
 	public function add(){
-	 	$parentid = I("get.parent",0,'intval');
-	 	$tree = new \Tree();
-	 	$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-	 	$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-	 	$terms = $this->terms_model->order(array("path"=>"asc"))->select();
-	 	
-	 	$new_terms=array();
-	 	foreach ($terms as $r) {
-	 		$r['id']=$r['term_id'];
-	 		$r['parentid']=$r['parent'];
-	 		$r['selected']= (!empty($parentid) && $r['term_id']==$parentid)? "selected":"";
-	 		$new_terms[] = $r;
-	 	}
-	 	$tree->init($new_terms);
-	 	$tree_tpl="<option value='\$id' \$selected>\$spacer\$name</option>";
-	 	$tree=$tree->get_tree(0,$tree_tpl);
-
-	 	$this->assign("terms_tree",$tree);
-	 	$this->assign("parent",$parentid);
+		$topics = $this->topic_model->order(array("listorder"=>"asc"))->select();
+        $this->assign("topics", $topics);
 	 	$this->display();
 	}
-	
-	// 文章分类添加提交
+
+	// 话题回复添加提交
 	public function add_post(){
 		if (IS_POST) {
-			if ($this->terms_model->create()!==false) {
-				if ($this->terms_model->add()!==false) {
-				    F('all_terms',null);
-					$this->success("添加成功！",U("AdminTerm/index"));
+			$reply = $_POST['post'];
+			$smeta = $_POST['smeta'];
+			$reply['introduce'] = '';
+			$reply['uid'] = 1;
+			$reply['content'] = htmlspecialchars_decode($reply['content']);
+			$reply['smeta'] = json_encode($smeta);
+			try{
+				$result = $this->reply_model->add($reply);
+				if (result) {
+				  $this->success("添加成功！",U("AdminReply/index"));
 				} else {
-					$this->error("添加失败！");
+					$this->error("添加失败");
 				}
-			} else {
-				$this->error($this->terms_model->getError());
+			}catch(Exception $e){
+				$this->error($e->getMessage());
 			}
 		}
 	}
-	
-	// 文章分类编辑
+
+	// 话题回复编辑
 	public function edit(){
-		$id = I("get.id",0,'intval');
-		$data=$this->terms_model->where(array("term_id" => $id))->find();
-		$tree = new \Tree();
-		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		$terms = $this->terms_model->where(array("term_id" => array("NEQ",$id), "path"=>array("notlike","%-$id-%")))->order(array("path"=>"asc"))->select();
-		
-		$new_terms=array();
-		foreach ($terms as $r) {
-			$r['id']=$r['term_id'];
-			$r['parentid']=$r['parent'];
-			$r['selected']=$data['parent']==$r['term_id']?"selected":"";
-			$new_terms[] = $r;
-		}
-		
-		$tree->init($new_terms);
-		$tree_tpl="<option value='\$id' \$selected>\$spacer\$name</option>";
-		$tree=$tree->get_tree(0,$tree_tpl);
-		
-		$this->assign("terms_tree",$tree);
-		$this->assign("data",$data);
-		$this->display();
+		$id=  I("get.id",0,'intval');
+		$topics = $this->topic_model->order(array("listorder"=>"asc"))->select();
+		$posts = $this->reply_model->where("id=$id")->find();
+		$users_model=M("Users");
+		$uid = $posts['uid'];
+		$user = $users_model->where("id=$uid")->find();
+        $this->assign("topics", $topics);
+        $this->assign("post", $posts);
+        $this->assign("user", $user);
+        $smeta = json_decode($posts['smeta'], true);
+        $this->assign("smeta", $smeta);
+	 	$this->display();
 	}
-	
-	// 文章分类编辑提交
+
+	// 话题回复编辑提交
 	public function edit_post(){
 		if (IS_POST) {
-			if ($this->terms_model->create()!==false) {
-				if ($this->terms_model->save()!==false) {
-				    F('all_terms',null);
-					$this->success("修改成功！");
-				} else {
-					$this->error("修改失败！");
-				}
+			$reply = $_POST['post'];
+			$smeta = $_POST['smeta'];
+			$reply['content']=htmlspecialchars_decode($reply['content']);
+			$reply['smeta'] = json_encode($smeta);
+			$result=$this->reply_model->save($reply);
+			if ($result!==false) {
+				$this->success("保存成功！");
 			} else {
-				$this->error($this->terms_model->getError());
+				$this->error("保存失败！");
 			}
 		}
 	}
-	
-	// 文章分类排序
-	public function listorders() {
-		$status = parent::_listorders($this->terms_model);
-		if ($status) {
-			$this->success("排序更新成功！");
-		} else {
-			$this->error("排序更新失败！");
-		}
-	}
-	
-	// 删除文章分类
+
+	// 话题回复删除
 	public function delete() {
-		$id = I("get.id",0,'intval');
-		$count = $this->terms_model->where(array("parent" => $id))->count();
-		
-		if ($count > 0) {
-			$this->error("该菜单下还有子类，无法删除！");
+		if(isset($_GET['id'])){
+			$id = I("get.id",0,'intval');
+			if ($this->reply_model->where(array('id'=>$id))->delete()!==false) {
+				$this->success("删除成功！");
+			} else {
+				$this->error("删除失败！");
+			}
 		}
-		
-		if ($this->terms_model->delete($id)!==false) {
-			$this->success("删除成功！");
-		} else {
-			$this->error("删除失败！");
+
+		if(isset($_POST['ids'])){
+			$ids = I('post.ids/a');
+
+			if ($this->reply_model->where(array('id'=>array('in',$ids)))->delete()!==false) {
+				$this->success("删除成功！");
+			} else {
+				$this->error("删除失败！");
+			}
 		}
 	}
-	
+
 }
