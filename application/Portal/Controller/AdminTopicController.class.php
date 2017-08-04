@@ -224,7 +224,7 @@ class AdminTopicController extends AdminbaseController {
 	public function delete(){
 		if(isset($_GET['id'])){
 			$id = I("get.id",0,'intval');
-			if ($this->posts_model->where(array('id'=>$id))->save(array('status'=>3)) !==false) {
+			if ($this->posts_model->where(array('id'=>$id))->delete() !==false) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");
@@ -234,7 +234,7 @@ class AdminTopicController extends AdminbaseController {
 		if(isset($_POST['ids'])){
 			$ids = I('post.ids/a');
 
-			if ($this->posts_model->where(array('id'=>array('in',$ids)))->save(array('status'=>3))!==false) {
+			if ($this->posts_model->where(array('id'=>array('in',$ids)))->delete()!==false) {
 				$this->success("删除成功！");
 			} else {
 				$this->error("删除失败！");

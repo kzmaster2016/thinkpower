@@ -21,17 +21,18 @@
 							<td>
 								<select style="max-height: 100px;" name="post[tid]">
 									<option value=''>全部</option>
-									<?php
+									{$taxonomys}
+									<!-- <?php
 										for($i = 0; $i < count($topics); $i++){
 										    $selected = '';
 											if($post['tid'] == $topics[$i].id){
 											    $selected = 'selected';
 											}
 									?>
-									<option value='{$topics[$i].id}' selected="{$selected}">{$topics[$i].name}</option>
+									<option value='{$topics[$i].id}' selected="{$selected}">{$post['tid']} {$topics[$i].name}</option>
 									<?php
 										}
-									?>
+									?> -->
 								</select>
 							</td>
 						</tr>
@@ -42,11 +43,23 @@
 							</td>
 						</tr>
 						<tr>
+							<th>标题：</th>
+							<td>
+								<input type="text" name="post[title]" value="{$post.title}" />
+							</td>
+						</tr>
+						<tr>
 							<th>内容</th>
 							<td>
 								<script type="text/plain" id="content" name="post[content]">{$post.content}</script>
 							</td>
 						</tr>
+						
+						 
+					</table>
+				</div>
+				<div class="span3">
+					<table class="table table-bordered">
 						<tr>
 							<th><b>发布时间</b></th>
 						</tr>
@@ -64,24 +77,6 @@
 								?>
 								<label class="radio"><input type="radio" name="post[status]" value="1" {$a_status}>审核通过</label>
 								<label class="radio"><input type="radio" name="post[status]" value="0" {$b_status}>待审核</label>
-							</td>
-						</tr>
-						<tr>
-							<th>产品模板</th>
-						</tr>
-						<tr>
-							<td>
-								<php>
-									$tpl_list=sp_admin_get_tpl_file_list();
-									unset($tpl_list['page']);
-								</php>
-								<select style="min-width: 190px;" name="smeta[template]">
-									<option value="">请选择模板</option>
-									<foreach name="tpl_list" item="vo">
-										<php>$template_selected=$smeta['template']==$vo?"selected":"";</php>
-										<option value="{$vo}"{$template_selected}>{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-									</foreach>
-								</select>
 							</td>
 						</tr>
 					</table>

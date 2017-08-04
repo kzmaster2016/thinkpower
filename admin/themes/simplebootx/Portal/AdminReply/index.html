@@ -34,13 +34,14 @@
 				<thead>
 					<tr>
 						<th width="15"><label><input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x"></label></th>
-						<th width="50">ID</th>
+						<th width="30">ID</th>
 						<th width="50">会员名</th>
-						<th width="50">所属话题</th>
-						<th width="50">内容</th>
+						<th width="100">所属话题</th>
+						<th width="150">标题</th>
+						<th>内容</th>
 						<th width="100">创建日期</th>
 						<th width="50">状态</th>
-						<th width="70">操作</th>
+						<th width="60">操作</th>
 					</tr>
 				</thead>
 				<foreach name="posts" item="vo">
@@ -49,6 +50,7 @@
                     <td><b>{$vo.id}</b></td>
 					<td>{$vo.user_nicename|default=$vo.user_login}</td>
 					<td>{$vo.name}</td>
+					<td>{$vo.title}</td>
 					<td>
 						<span>{$vo.content}</span>
 					</td>
@@ -61,7 +63,7 @@
 						</notempty>
 					</td>
 					<td>
-						<a href="{:U('AdminReply/edit',array('id'=>$vo['id']))}">{:L('EDIT')}</a> | 
+						<a href="{:U('AdminReply/edit',array('id'=>$vo['id'],'tid'=>$vo['tid']))}">{:L('EDIT')}</a> | 
 						<a href="{:U('AdminReply/delete',array('id'=>$vo['id']))}" class="js-ajax-delete">{:L('DELETE')}</a>
 					</td>
 				</tr>

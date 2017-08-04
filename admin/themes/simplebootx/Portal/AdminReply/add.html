@@ -20,22 +20,35 @@
 							<td>
 								<select style="max-height: 100px;" name="post[tid]">
 									<option value=''>全部</option>
-									<?php
+									{$taxonomys}
+									<!-- <?php
 										for($i = 0; $i < count($topics); $i++){
 									?>
 									<option value='{$topics[$i].id}'>{$topics[$i].name}</option>
 									<?php
 									  }
-									?>
+									?> -->
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<th>内容</th>
+							<th>标题：</th>
+							<td>
+								<input type="text" name="post[title]"/>
+							</td>
+						</tr>
+						<tr>
+							<th>内容：</th>
 							<td>
 								<script type="text/plain" id="content" name="post[content]"></script>
 							</td>
 						</tr>
+						
+						 
+					</table>
+				</div>
+				<div class="span3">
+					<table class="table table-bordered">
 						<tr>
 							<th><b>发布时间</b></th>
 						</tr>
@@ -49,23 +62,6 @@
 							<td>
 								<label class="radio"><input type="radio" name="post[status]" value="1" checked>审核通过</label>
 								<label class="radio"><input type="radio" name="post[status]" value="0">待审核</label>
-							</td>
-						</tr>
-						<tr>
-							<th>产品模板</th>
-						</tr>
-						<tr>
-							<td>
-								<php>
-									$tpl_list=sp_admin_get_tpl_file_list();
-									unset($tpl_list['page']);
-								</php>
-								<select style="min-width: 190px;" name="smeta[template]">
-									<option value="">请选择模板</option>
-									<foreach name="tpl_list" item="vo">
-										<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-									</foreach>
-								</select>
 							</td>
 						</tr>
 					</table>

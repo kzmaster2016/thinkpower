@@ -51,7 +51,7 @@ class AdminReplyController extends AdminbaseController {
 
 		$keyword=I('request.keyword');
 		if(!empty($keyword)){
-		    $where['content']=array('like',"%$keyword%");
+		    $where['title']=array('like',"%$keyword%");
 		}
 
 		$this->reply_model
@@ -77,7 +77,7 @@ class AdminReplyController extends AdminbaseController {
 	    $this->reply_model->join("__TOPIC__ b ON a.tid = b.id");
 	
 		$posts=$this->reply_model->select();
-
+		$this->assign("page", $page->show('Admin'));
 		$this->assign("posts", $posts);
         $this->display();
 	}
@@ -89,6 +89,7 @@ class AdminReplyController extends AdminbaseController {
 	public function add(){
 		$topics = $this->topic_model->order(array("listorder"=>"asc"))->select();
         $this->assign("topics", $topics);
+        $this->_getTermTree();
 	 	$this->display();
 	}
 
@@ -97,8 +98,7 @@ class AdminReplyController extends AdminbaseController {
 		if (IS_POST) {
 			$reply = $_POST['post'];
 			$smeta = $_POST['smeta'];
-			$reply['introduce'] = '';
-			$reply['uid'] = 1;
+			$reply['uid'] =get_current_admin_id();
 			$reply['content'] = htmlspecialchars_decode($reply['content']);
 			$reply['smeta'] = json_encode($smeta);
 			try{
@@ -125,8 +125,8 @@ class AdminReplyController extends AdminbaseController {
         $this->assign("topics", $topics);
         $this->assign("post", $posts);
         $this->assign("user", $user);
-        $smeta = json_decode($posts['smeta'], true);
-        $this->assign("smeta", $smeta);
+       
+        $this->_getTermTree();
 	 	$this->display();
 	}
 
@@ -144,6 +144,33 @@ class AdminReplyController extends AdminbaseController {
 				$this->error("保存失败！");
 			}
 		}
+	}
+
+	// 获取分类树结构
+	private function _getTermTree($term=array()){
+
+		$term_id=empty($_REQUEST['tid'])?0:intval($_REQUEST['tid']);
+
+		$result = $this->topic_model->order(array("listorder"=>"asc"))->select();
+
+		$tree = new \Tree();
+		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
+		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+		foreach ($result as $r) {
+			/*$r['str_manage'] = '<a href="' . U("AdminForum/add", array("parent" => $r['term_id'])) . '">添加子类</a> | <a href="' . U("AdminForum/edit", array("id" => $r['term_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminForum/delete", array("id" => $r['term_id'])) . '">删除</a> ';
+			$r['visit'] = "<a href='#'>访问</a>";
+			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];*/
+			$r['id']=$r['id'];
+			$r['parentid']=$r['parent'];
+			$r['selected']=$term_id==$r['id']?"selected":"";			 
+			$r['checked'] =in_array($r['id'], $term)?"checked":"";
+			$array[] = $r;
+		}
+
+		$tree->init($array);
+		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
+		$taxonomys = $tree->get_tree(0, $str);
+		$this->assign("taxonomys", $taxonomys);
 	}
 
 	// 话题回复删除
