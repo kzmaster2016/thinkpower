@@ -101,6 +101,7 @@ class AdminReplyController extends AdminbaseController {
 			$reply['uid'] =get_current_admin_id();
 			$reply['content'] = htmlspecialchars_decode($reply['content']);
 			$reply['smeta'] = json_encode($smeta);
+			$reply['type'] = 2;   //表示是管理员添加的回复
 			try{
 				$result = $this->reply_model->add($reply);
 				if (result) {

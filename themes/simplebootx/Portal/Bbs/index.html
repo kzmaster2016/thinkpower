@@ -31,8 +31,9 @@
 		     <div class="container">
 		       	<div class="row">
 
-			     	<h4 class="brand col-sm-6"><a class="" href="javascript:;"><strong>ThinkPower BBS</strong></a> </h4>
-			        <div class="nav-collapse col-sm-6" id="main-menu">			
+			     	<h4 class="brand col-sm-3"><a href="javascript:;"><strong>Support Center</strong></a> </h4>
+			     	<p class="bbstop-tip col-sm-6">The forum for you to find solutions for our devices</p>
+			        <div class="nav-collapse col-sm-3" id="main-menu">			
 						<ul class="nav clearfix fr" id="main-menu-user">
 							<li class="dropdown user login fl" style="display: none;">
 					            <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
@@ -67,7 +68,7 @@
 		<div class="container">
 
 			<div class="row"> 
-				<div class="col-sm-9">
+				<div class="col-sm-8">
 					<div class="bbd-page-head">
 						<h3><i class="fa fa-home"></i>&nbsp;Board index</h3>
 						
@@ -99,27 +100,73 @@
 						 
 					</div>
 				</div>
-				<div class="col-sm-3">			
+				<div class="col-sm-4">	
+					 
+					<div class="bbs-rightcon">
+						<div class="recent-topic">
+							<h4 class="hd">RECENT TOPICS</h4>
+							<div class="bd">
+								<ul class="newest-topics">
+									<volist name="newTopics" id="vo"> 
+									<li class="item">								 
+										<a href="{:U('Bbs/topicDetail',array('topicid'=>$vo['id']))}" class="title surp-elli">
+										<i class="fa fa-caret-right"></i> {$vo.name}</a>
+										<div class="info">
+											<span><i class="fa fa-user"></i><em> {$vo.uname}</em></span>&emsp;
+											<span><i class="fa fa-calendar"></i><em> {$vo.time}</em></span>
+											
+										</div>
+									</li>
+									</volist>
+								</ul>
+							</div>
+						</div>
+						<div class="recent-topic forum-rightlist">
+							<h4 class="hd">FORUMS</h4>
+							<div class="bd">
+								
+								<ul class="right-forums">
+								<volist name="forumList" id="vo" key='j'>
+									<if condition="(sizeof($vo))!=0">
+									<li class="fchd">{$Think.lang.$key}</li>
+									<volist	name="vo" id="forum">
+									<li class="item">								 
+										<a href="{:U('Bbs/topicList',array('forumid'=>$forum['id']))}" class="title surp-elli">
+										<i class="fa fa-caret-right"></i> {$forum['name']}</a>
+										 
+									</li>
+									</volist>
+									</if>
+								</volist>
+								</ul>
+							</div>
+						</div>
+					</div>	
 				</div>
 			</div>			 	 
 		</div>		 		
 	</div>
 	 
 	<tc_include file="Public:footer"/>
+	<php>
+		$uname=empty($_SESSION['user']["user_nicename"])?$_SESSION['user']["user_login"]:$_SESSION['user']["user_nicename"]
+	</php>
+	<assign name="uname" value='$uname'/>
+
 	<script type="text/javascript" src="__PUBLIC__/js/cookie.js"></script>
 	<script type="text/javascript">
 	$(function(){
 
-		var uname='{$_SESSION['user']["user_login"]}';
-		console.log(uname);
+		var uname='{$uname}';
+		 
+  		console.log("{$_SESSION['user']['id']}");
 		if(uname){
 	    	$('.login').show();
 	    	$('.offline').remove();
 	    	$('.user-nicename').html(uname);
 	    }else{
 	    	$('.offline').show();
-	    	$('.login').remove();
-	    	
+	    	$('.login').remove();   	
 	    }
 
 	    

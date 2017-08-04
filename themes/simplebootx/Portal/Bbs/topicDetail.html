@@ -31,8 +31,9 @@
 		     <div class="container">
 		       	<div class="row">
 
-			     	<h4 class="brand col-sm-6"><a class="" href="javascript:;"><strong>ThinkPower BBS</strong></a> </h4>
-			        <div class="nav-collapse col-sm-6" id="main-menu">			
+			     	<h4 class="brand col-sm-3"><a href="javascript:;"><strong>Support Center</strong></a> </h4>
+			     	<p class="bbstop-tip col-sm-6">The forum for you to find solutions for our devices</p>
+			        <div class="nav-collapse col-sm-3" id="main-menu">			
 						<ul class="nav clearfix fr" id="main-menu-user">
 							<li class="dropdown user login fl" style="display: none;">
 					            <a class="dropdown-toggle user" data-toggle="dropdown" href="#">
@@ -67,89 +68,112 @@
 		<div class="container">
 
 			<div class="row"> 
-				<div class="col-sm-9">
+				<div class="col-sm-8">
 					<div class="bbd-page-head">
-						<h3 class="mbx"><i class="fa fa-home"></i>&nbsp;Board index <i class="fa fa-angle-right"></i><em>TP603</em></h3>
+						<h3 class="mbx surp-elli"><a href="{:U('Bbs/index')}"><i class="fa fa-home"></i>&nbsp;Board index </a><i class="fa fa-angle-right"></i>&nbsp;<a href="{:U('Bbs/topicList',array('forumid'=>$forum['id']))}">{$forum['name']}</a>&nbsp;<i class="fa fa-angle-right"></i><em>{$topic.name}</em></h3>
 						<div class="topic-title">
-							<p>How to configure GT06N with a Mac?</p>
-							<strong>Moderator:</strong> poster user
+							<p>{$topic.name}</p>
+							<strong>Moderator:</strong>{$topic.uname}
 						</div>
 						<a href="javascript:;" class="btn btn-primary goreply-btn"><i class="fa fa-pencil"></i>&nbsp;Post Reply</a>
 					</div>
 					<div class="bbs-page-body bbs-topic-detail">
+						<volist	name="replyList" id="vo">
 						<div class="replay-item row">
 							<div class="col-sm-9 replay-info">
 								<div class="title">
-									<h4>Gnar, Pranck, Tippler and Samuel Germany</h4>
+									<h4>{$vo.title}</h4>
 									<p class="date">
-										Wed Jul 12, 2017 10:39 pm
+										{$vo.time}
 									</p>
 								</div>
 								<div class="content">
-									Pro those belief the effects of congestion, Dollar General offers a diversification of OTC allergy medicines that include enunciated tablets and liquids to working order whatever ails you. Call in our collection today, or call (317) 477-6463 to turn up in how we can cure you. D) and by Clement (c cardinal A order 25mg clomid amex menopause vaginal itching. I read your note closed and over, but its stuck on medicament cannot purge my breast. No waiting: our Medical Equipment Rental Program has greater than 4,000 pieces of appurtenances readily obtainable concerning rental or allowance while you're waiting in search funding okay or a repair. 
+									{$vo.content}
 								</div>
 							</div>
 							<div class="col-sm-3 replay-user">
 								<div class="img">
-									Ad
+									{$vo.uname|substr=0,2}
 								</div>
 								<div class="info">
-									<p class="name">Admin</p>
-									<p class="time">Joined: Thu May 04, 2017 1:43 pm</p>
+									<p class="name">{$vo.uname}</p>
+									<p class="time">Joined:{$vo.utime}</p>
 								</div>
 							</div>
 						</div>
-						<div class="replay-item row">
-							<div class="col-sm-9 replay-info">
-								<div class="title">
-									<h4>Gnar, Pranck, Tippler and Samuel Germany</h4>
-									<p class="date">
-										Wed Jul 12, 2017 10:39 pm
-									</p>
-								</div>
-								<div class="content">
-									Pro those belief the effects of congestion, Dollar General offers a diversification of OTC allergy medicines that include enunciated tablets and liquids to working order whatever ails you. Call in our collection today, or call (317) 477-6463 to turn up in how we can cure you. D) and by Clement (c cardinal A order 25mg clomid amex menopause vaginal itching. I read your note closed and over, but its stuck on medicament cannot purge my breast. No waiting: our Medical Equipment Rental Program has greater than 4,000 pieces of appurtenances readily obtainable concerning rental or allowance while you're waiting in search funding okay or a repair. 
-								</div>
-							</div>
-							<div class="col-sm-3 replay-user">
-								<div class="img">
-									Ad
-								</div>
-								<div class="info">
-									<p class="name">Admin</p>
-									<p class="time">Joined: Thu May 04, 2017 1:43 pm</p>
-								</div>
-							</div>
-						</div>					 
-						
+						</volist>							
 					</div>
-
+					<div class="container-fluid pagepagination-wrap">
+						<ul class="pagination">{$page}</ul>
+					</div>
 					<div class="reply-con" id="reply-con">
 						<h4 class="hd">POST A REPLY</h4>
-						<form action="###" method="post" class="form-horizontal">
+						<form action="{:U('Bbs/post_reply')}" method="post" class="form-horizontal addreply-form">
+							<input type="hidden" name="tid" value="{$topic.id}">
+							<input type="hidden" name="uid" value="{$_SESSION['user']['id']}">
 							<div class="form-group form-group-sm">
-						    <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
-						    <div class="col-sm-10">
-						      <input type="text" name="title" class="form-control" id="inputEmail3" placeholder="">
-						    </div>
-						  </div>
-						  <div class="form-group form-group-sm">
-						    <label for="inputPassword3" class="col-sm-2 control-label">Content</label>
-						    <div class="col-sm-10">
-						      <textarea class="form-control" rows="3"></textarea>
+							    <label class="col-sm-2 control-label">Title:</label>
+							    <div class="col-sm-10">
+							      <input type="text" name="title" class="form-control" required>
+							    </div>
+							</div>
+							<div class="form-group form-group-sm">
+							    <label for="inputPassword3" class="col-sm-2 control-label">Content:</label>
+							    <div class="col-sm-10">
+							      <textarea name="content" class="form-control" rows="3" required></textarea>
 
-						    </div>
-						  </div>
-						   
-						  <div class="form-group form-group-sm">
-						    <div class="col-sm-offset-2 col-sm-10">
-						      <button type="submit" class="btn btn-primary">Submit</button>
-						    </div>
-						  </div>
+								</div>
+							</div>					   
+							<div class="form-group form-group-sm">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <button type="submit" class="btn btn-primary">Submit</button>
+							    </div>
+							</div>
 						</form>
 					</div>
+
 				</div>
-				<div class="col-sm-3">			
+				<div class="col-sm-4">		
+					<div class="bbs-rightcon">
+						<div class="recent-topic">
+							<h4 class="hd">RECENT TOPICS</h4>
+							<div class="bd">
+								<ul class="newest-topics">
+									<volist name="newTopics" id="vo"> 
+									<li class="item">								 
+										<a href="{:U('Bbs/topicDetail',array('topicid'=>$vo['id']))}" class="title surp-elli">
+										<i class="fa fa-caret-right"></i> {$vo.name}</a>
+										<div class="info">
+											<span><i class="fa fa-user"></i><em> {$vo.uname}</em></span>&emsp;
+											<span><i class="fa fa-calendar"></i><em> {$vo.time}</em></span>
+											
+										</div>
+									</li>
+									</volist>
+								</ul>
+							</div>
+						</div>
+						<div class="recent-topic forum-rightlist">
+							<h4 class="hd">FORUMS</h4>
+							<div class="bd">
+								
+								<ul class="right-forums">
+								<volist name="forumList" id="vo" key='j'>
+									<if condition="(sizeof($vo))!=0">
+									<li class="fchd">{$Think.lang.$key}</li>
+									<volist	name="vo" id="forum">
+									<li class="item">								 
+										<a href="{:U('Bbs/topicList',array('forumid'=>$forum['id']))}" class="title surp-elli">
+										<i class="fa fa-caret-right"></i> {$forum['name']}</a>
+										 
+									</li>
+									</volist>
+									</if>
+								</volist>
+								</ul>
+							</div>
+						</div>
+					</div>		
 				</div>
 
 			</div>			 	 
@@ -157,6 +181,11 @@
 	</div>
 	 
 	<tc_include file="Public:footer"/>
+	<php>
+		$uname=empty($_SESSION['user']["user_nicename"])?$_SESSION['user']["user_login"]:$_SESSION['user']["user_nicename"]
+	</php>
+	<assign name="uname" value='$uname'/>
+
 	<script type="text/javascript">
 		$(function(){
 			$(".goreply-btn").click(function() {
@@ -167,20 +196,53 @@
 		})
 	</script>
 	<script type="text/javascript" src="__PUBLIC__/js/cookie.js"></script>
+	<script type="text/javascript" src="plugins/layer/layer.js"></script>
+	<script src="plugins/jqueryValidate/jquery.validate.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
 
-		var uname='{$_SESSION['user']["user_login"]}';
+		var uname='{$uname}';
 		console.log(uname);
+  		console.log("{$_SESSION['user']['id']}");
 		if(uname){
 	    	$('.login').show();
 	    	$('.offline').remove();
 	    	$('.user-nicename').html(uname);
 	    }else{
 	    	$('.offline').show();
-	    	$('.login').remove();
-	    	
+	    	$('.login').remove();   	
 	    }
+
+	    // 新增topic
+	    $(".addreply-form").validate({
+			rules:{
+				title: {
+				    required: true			    
+			    },
+			    content: {
+				    required: true			    
+			    }
+			},
+			messages:{
+				title: "Please input reply name",
+				content: "Please input detail content"
+			},
+			submitHandler:function(form){
+	            if ($(".addreply-form input[name='uid']").val()!=="") {
+	            	console.log($(".addreply-form input[name='uid']").val());
+					form.submit();
+	            }else{
+	            	layer.msg('Please login in', {
+					  icon: 1,
+					  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+					}, function(){
+					  window.location="{:U('User/Login/index')}";
+					});  
+	            	
+	            }
+	            
+	        }    	
+		});
 
 	})
 	</script>
