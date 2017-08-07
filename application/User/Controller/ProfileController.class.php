@@ -23,9 +23,9 @@ class ProfileController extends MemberbaseController {
 				if ($this->users_model->save()!==false) {
 					$this->user=$this->users_model->find($this->userid);
 					sp_update_current_user($this->user);
-					$this->success("保存成功！",U("user/profile/edit"));
+					$this->success("saved successfully!",U("user/profile/edit"));
 				} else {
-					$this->error("保存失败！");
+					$this->error("saved failure!");
 				}
 			} else {
 				$this->error($this->users_model->getError());
@@ -45,12 +45,12 @@ class ProfileController extends MemberbaseController {
     	if (IS_POST) {
     	    $old_password=I('post.old_password');
     		if(empty($old_password)){
-    			$this->error("原始密码不能为空！");
+    			$this->error("The original password cannot be empty!");
     		}
     		
     		$password=I('post.password');
     		if(empty($password)){
-    			$this->error("新密码不能为空！");
+    			$this->error("The new password cannot be empty!");
     		}
     		
     		$uid=sp_get_current_userid();
@@ -58,23 +58,23 @@ class ProfileController extends MemberbaseController {
     		if(sp_compare_password($old_password, $admin['user_pass'])){
     			if($password==I('post.repassword')){
     				if(sp_compare_password($password, $admin['user_pass'])){
-    					$this->error("新密码不能和原始密码相同！");
+    					$this->error("The new password cannot be the same as the original password!");
     				}else{
     					$data['user_pass']=sp_password($password);
     					$data['id']=$uid;
     					$r=$this->users_model->save($data);
     					if ($r!==false) {
-    						$this->success("修改成功！");
+    						$this->success("Modify successfully!");
     					} else {
-    						$this->error("修改失败！");
+    						$this->error("Modify failed!");
     					}
     				}
     			}else{
-    				$this->error("密码输入不一致！");
+    				$this->error("Password input inconsistent!");
     			}
     	
     		}else{
-    			$this->error("原始密码不正确！");
+    			$this->error("The original password is incorrect!");
     		}
     	}
     	 

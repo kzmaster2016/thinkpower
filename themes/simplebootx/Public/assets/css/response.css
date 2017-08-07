@@ -15,9 +15,11 @@
 .header .con2 .main-l .link-app{margin-top: 20px;}
 .header .con2 .main-r .phone-wrap .phone1 {left: 100px;width: 180px;}
 .header .con2 .main-r .phone-wrap .phone2 {top: 40px;width: 200px;}
+.index-con1 .index-productcon>div:first-child .wenzi{line-height: 22px;padding-right: 0;}
 .other-prod .other-prod-list .prod-item{width: 150px;height: 150px;}
 .other-prod .other-prod-list .prod-item a h4{font-size: 22px; line-height: 30px;margin: 40px 0 0;}
 .other-prod .other-prod-list .prod-item a p{font-size: 12px;padding: 0;}
+.index-con1>.container-fluid{margin:0 auto;width: 970px;}
 /*.container{width: 100%;}*/
 .header .con2>.container{width: 970px;}
 .intro-wrap .intro-con .section{width: 1000px;}
@@ -46,10 +48,14 @@
 .intro-wrap .intro-con .list2.active .img-2{ left: 0;}
 .intro-wrap .intro-con .list2.active .img-3{ top: 0;}
 .intro-wrap .intro-con .list3.active .img-1,.intro-wrap .intro-con .list3.active .img-2{left: 0;}
-
+}
+@media screen and (max-width: 991px){
+.index-con1>.container-fluid{margin:0 auto;width: 750px;}
+.index-con1 .index-productcon>div:first-child .title{font-size: 20px;line-height: 30px;}
+.index-con1 .index-productcon>div:first-child .wenzi{line-height: 22px;padding-right: 0;}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
 /*body{min-width: 768px;margin: 0 auto;overflow: auto;}*/
 .phone-body{min-width:320px;}
 .header .con1{min-width: 500px;}
@@ -63,11 +69,14 @@
 .header .main-nav li a{line-height: 40px;}
 .header .top-logo{padding: 5px 0;position: relative;z-index: 100;}
 .header .top-logo img{width: auto;height: 40px;}
+.footer-con2 .bd p{line-height: 35px;}
 .index-con1 .index-productcon>div:first-child .title{font-size: 14px;line-height: 26px;}
 .index-con1 .index-productcon>div:first-child .alink{padding: 0 6px;font-size: 12px;}
 .index-con1 .index-productcon>div .intro span{font-size: 12px;}
 .navbar-header.navbar-default{position: relative;}
 .navbar-header.navbar-default .navbar-toggle{position: absolute;right: 0;top: 0;}
+.index-con1>.container-fluid{margin:0 auto;width: auto;}
+.index-con1 .index-product .title p{font: 12px;}
 .index-con1 .index-product .title img{width: 40px;}
 .index-con1 .index-product .title h1{font-size: 20px;}
 .company-nav{white-space: nowrap;overflow: auto;}

@@ -30,8 +30,7 @@
   	<style type="text/css">
 		.index-page>.header{position: absolute;top: 0;left: 0;width: 100%;background:rgba(0,0,0,0.7);}
   	</style>
-  	<script type="text/javascript">
-  	</script>
+  	 
 	
 </head>
 <body class="pcbody index-page"> 
@@ -46,7 +45,7 @@
 	</div>
 
 	<div class="index-con1">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-12 index-product">
 					<header class="title">
@@ -56,7 +55,7 @@
 					</header>
 					<div class="index-productcon clearfix">
 						<div class="hd inblockm">
-							<h2 class="title">WHAT ARE YOU WAITING FOR?</h2>
+							<h2 class="title">WHAT ARE YOU <br/>WAITING<br/>FOR?</h2>
 							<p class="wenzi hidden-xs">Why not checking our  product information  for more ideas? </p>
 							<a href="{:U('Product/productList',array('term_id'=>1))}" class="alink surp-elli">See More</a>
 						</div>
@@ -74,10 +73,10 @@
 						<div class="bd inblockm">
 							<div class="img-cover">
 								<img src="images/picjpg/case2.jpg" alt="">
-								<a href="{:U('Product/productList',array('term_id'=>12))}">See More</a>
+								<a href="{:U('Company/successfulCase')}">See More</a>
 							</div>
 							<div class="intro">
-								<a href="{:U('Product/productList',array('term_id'=>12))}">
+								<a href="{:U('Company/successfulCase')}">
 								<span class="inblockm">IOT Equipment</span>
 								</a>
 								 
@@ -162,7 +161,7 @@
 					<div class="img-cover"><img src="{:sp_get_asset_upload_path($smeta['thumb'])}" alt=""></div>
 					<h5><a href="{:U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">{$vo.post_title}</a></h5>
 					<p>{$vo.post_excerpt|msubstr=0,256}</p>
-					<a href="{:U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">More&emsp;<i class="fa fa-arrow-right"></i></a>
+					<a href="{:U('News/article',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}">More&emsp;<img src="images/tippng/tip_9.png" alt=""></a>
 				</div>
 				</volist>
 				 

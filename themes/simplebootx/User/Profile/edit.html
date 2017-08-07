@@ -1,83 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{$site_name}</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="{$site_seo_keywords}" />
 <meta name="description" content="{$site_seo_description}">
 <meta name="author" content="ThinkCMF">
-<tc_include file="Public:head" />
+<base href="__TMPL__Public/assets/">
+<title>{$site_name}</title>
+<!--common-->
+  <link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/common.css">
+  <link rel="stylesheet" type="text/css" href="css/response.css">
+  <!-- slick -->
+  <!-- <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css"> -->
+  <!-- fullpage -->
+  <!-- <link rel="stylesheet" type="text/css" href="plugins/fullpage/fullpage.css"> -->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="plugins/html5shiv.js"></script>
+    <script src="plugins/respond.min.js"></script>
+    <![endif]-->
+ 
 </head>
 <body class="body-white" id="top">
-	<tc_include file="Public:nav" />
+  <tc_include file="Public:nav" />
 
-		<div class="container tc-main">
-                <div class="row">
-                    <div class="span3">
-	                    <tc_include file="Public:usernav"/>
-                    </div>
-                    <div class="span9">
-                           <div class="tabs">
-                               <ul class="nav nav-tabs">
-                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list-alt"></i> 修改资料</a></li>
-                               </ul>
-                               <div class="tab-content">
-                                   <div class="tab-pane active" id="one">
-                                   		<form class="form-horizontal js-ajax-form" action="{:U('profile/edit_post')}" method="post">
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-user_nicename">昵称</label>
-                                   				<div class="controls">
-                                   					<input type="text" id="input-user_nicename" placeholder="昵称" name="user_nicename" value="{$user_nicename}">
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-sex">性别</label>
-                                   				<div class="controls">
-                                   					<php>
-	                                   				$sexs=array("0"=>"保密","1"=>"程序猿","2"=>"程序媛");
-	                                   				</php>
-                                   					<select id="input-sex" name="sex">
-                                   						<foreach name="sexs" item="vo">
-                                   						<php>$sexselected=$key==$sex?"selected":"";</php>
-                                   							<option value="{$key}" {$sexselected}>{$vo}</option>
-                                   						</foreach>
-                                   					</select>
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-birthday">生日</label>
-                                   				<div class="controls">
-                                   					<input class="js-date" type="text" id="input-birthday" placeholder="2013-01-04" name="birthday" value="{$birthday}">
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-user_url">个人网址</label>
-                                   				<div class="controls">
-                                   					<input type="text" id="input-user_url" placeholder="http://thinkcmf.com" name="user_url" value="{$user_url}">
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<label class="control-label" for="input-signature">个性签名</label>
-                                   				<div class="controls">
-                                   					<textarea id="input-signature" placeholder="个性签名" name="signature">{$signature}</textarea>
-                                   				</div>
-                                   			</div>
-                                   			<div class="control-group">
-                                   				<div class="controls">
-                                   					<button type="submit" class="btn js-ajax-submit">保存</button>
-                                   				</div>
-                                   			</div>
-                                   		</form>
-                                   </div>
-                               </div>							
-                           </div>
-                    </div>
-                </div>
-
-		<tc_include file="Public:footer" />
-
+		<div class="container user-main">
+      <div class="row">
+          <div class="col-sm-3">
+            <tc_include file="Public:usernav"/>
+          </div>
+          <div class="col-sm-9 user-center">
+             <div class="user-info">
+                <div class="hd">
+                 <ul class="nav nav-tabs">
+                     <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list-alt"></i>user center</a></li>
+                 </ul>
+                 </div>
+                 <div class="tab-content">
+                     
+                     		<form class="form-horizontal js-ajax-form" action="{:U('profile/edit_post')}" method="post">
+                          <table class="table">
+                            <tr>
+                              <td style="width: 30%;"><label class="control-label" for="input-user_nicename">nicename:</label></td>
+                              <td style="width: 70%;">
+                                <div class="controls">
+                                  <input type="text" class="form-control" placeholder="nicename" name="user_nicename" value="{$user_nicename}">
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><label class="control-label" for="input-sex">gender:</label></td>
+                              <td>
+                                <div class="controls">
+                                  <php>
+                                    $sexs=array("0"=>"secret","1"=>"male","2"=>"female");
+                                  </php>
+                                  <select name="sex" class="form-control" >
+                                    <foreach name="sexs" item="vo">
+                                      <php>$sexselected=$key==$sex?"selected":"";</php>
+                                      <option value="{$key}" {$sexselected}>{$vo}</option>
+                                    </foreach>
+                                  </select>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><label class="control-label" for="input-signature">signature:</label></td>
+                              <td>
+                                <div class="controls">
+                                  <textarea class="form-control" name="signature">{$signature}</textarea>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                               
+                              <td colspan="2">
+                                 <div class="controls">
+                                    <input type="submit" class="btn btn-default" value="submit"/>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                     		 
+                     		</form>
+                     
+                 </div>							
+             </div>
+          </div>
+      </div>
 	</div>
-	<!-- /container -->
+ 
+<tc_include file="Public:message"/>
 
-	<tc_include file="Public:scripts" />
+<tc_include file="Public:footer"/>
 </body>
 </html>

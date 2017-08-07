@@ -110,7 +110,10 @@
 
 					<div class="col-sm-4 reason-item">
 						<h4>{$vo.post_title}</h4>
-						<a href="{:U('News/article',array('cid'=>$vo['term_id'],'id'=>$vo['object_id']))}">
+						<a <if condition="$vo['object_id']==10">href="{:U('Company/leader')}"</if>
+						   <if condition="$vo['object_id']==9">href="{:U('Company/successfulCase')}"</if>
+						   <if condition="$vo['object_id']==8">href="{:U('Product/productList',array('term_id'=>1))}"</if>
+						>
 							<img src="images/tippng/tip_3.png" alt="">
 						</a>
 						<div class="resimg-con">

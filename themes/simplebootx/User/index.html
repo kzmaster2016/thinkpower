@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>{$site_name}</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="{$site_seo_keywords}" />
 <meta name="description" content="{$site_seo_description}">
 <meta name="author" content="ThinkCMF">
-<tc_include file="Public:head" />
+<base href="__TMPL__Public/assets/">
+<title>{$site_name}</title>
+<!--common-->
+	<link rel="stylesheet" type="text/css" href="plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="plugins/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/response.css">
+	<!-- slick -->
+	<!-- <link rel="stylesheet" type="text/css" href="plugins/slick/slick.css"> -->
+	<!-- fullpage -->
+	<!-- <link rel="stylesheet" type="text/css" href="plugins/fullpage/fullpage.css"> -->
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  	<!--[if lt IE 9]>
+  	<script src="plugins/html5shiv.js"></script>
+  	<script src="plugins/respond.min.js"></script>
+  	<![endif]-->
+ 
 <style>
 .control-label{
 	font-weight: bold;
@@ -18,69 +39,65 @@
 	<tc_include file="Public:nav" />
 
 		<div class="container tc-main">
-                <div class="row">
-                
-                <div class="tabs offset2 span8">
-                               <!-- <ul class="nav nav-tabs">
-                                   <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list-alt"></i>个人中心</a></li>
-                               </ul> -->
-                               <div class="tab-content">
-                                   <div class="tab-pane active" id="one">
-                                   		<div class="span3">
-						                	<a href="javascript:;">
-						                	<if condition="empty($avatar)">
-								            <img src="__TMPL__Public/assets/images/headicon_128.png" class="headicon"/>
-								            <else/>
-								            <img src="{:sp_get_user_avatar_url($avatar)}" class="headicon"/>
-								            </if>
-								          	</a>
-							          	</div>
-							          	<div class="span3">
-					               			<div class="control-group">
-					               				<label class="control-label" for="input-user_nicename">昵称</label>
-					               				<div class="controls">
-					               					{$user_nicename|default='未填写'}
-					               				</div>
-					               			</div>
-					               			<div class="control-group">
-					               				<label class="control-label" for="input-sex">性别</label>
-					               				<div class="controls">
-					               				<php>
-					               				$sexs=array("0"=>"保密","1"=>"程序猿","2"=>"程序媛");
-					               				
-					               				</php>
-					               					{$sexs[$sex]}
-					               				</div>
-					               			</div>
-					               			<div class="control-group">
-					               				<label class="control-label" for="input-birthday">生日</label>
-					               				<div class="controls">
-					               					{$birthday|default='未填写'}
-					               				</div>
-					               			</div>
-					               			<div class="control-group">
-					               				<label class="control-label" for="input-user_url">个人网址</label>
-					               				<div class="controls">
-					               					{$user_url|default='未填写'}
-					               				</div>
-					               			</div>
-					               			<div class="control-group">
-					               				<label class="control-label" for="input-signature">个性签名</label>
-					               				<div class="controls">
-					               					{$signature|default='未填写'}
-					               				</div>
-					               			</div>
-					               		</div>
-                                   </div>
-                               </div>							
-                 </div>
-                </div>
+            <div class="row">          
+             <div class="tabs offset2 span8">
+                           <!-- <ul class="nav nav-tabs">
+                               <li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-list-alt"></i>个人中心</a></li>
+                           </ul> -->
+                           <div class="tab-content">
+                               <div class="tab-pane active" id="one">
+                               		<div class="span3">
+					                	<a href="javascript:;">
+					                	<if condition="empty($avatar)">
+							            <img src="__TMPL__Public/assets/images/headicon_128.png" class="headicon"/>
+							            <else/>
+							            <img src="{:sp_get_user_avatar_url($avatar)}" class="headicon"/>
+							            </if>
+							          	</a>
+						          	</div>
+						          	<div class="span3">
+				               			<div class="control-group">
+				               				<label class="control-label" for="input-user_nicename">昵称</label>
+				               				<div class="controls">
+				               					{$user_nicename|default='未填写'}
+				               				</div>
+				               			</div>
+				               			<div class="control-group">
+				               				<label class="control-label" for="input-sex">性别</label>
+				               				<div class="controls">
+				               				<php>
+				               				$sexs=array("0"=>"保密","1"=>"程序猿","2"=>"程序媛");
+				               				
+				               				</php>
+				               					{$sexs[$sex]}
+				               				</div>
+				               			</div>
+				               			<div class="control-group">
+				               				<label class="control-label" for="input-birthday">生日</label>
+				               				<div class="controls">
+				               					{$birthday|default='未填写'}
+				               				</div>
+				               			</div>
+				               			<div class="control-group">
+				               				<label class="control-label" for="input-user_url">个人网址</label>
+				               				<div class="controls">
+				               					{$user_url|default='未填写'}
+				               				</div>
+				               			</div>
+				               			<div class="control-group">
+				               				<label class="control-label" for="input-signature">个性签名</label>
+				               				<div class="controls">
+				               					{$signature|default='未填写'}
+				               				</div>
+				               			</div>
+				               		</div>
+                               </div>
+                           </div>							
+             </div>
+            </div>
+		</div>
+	<tc_include file="Public:message"/>
 
-		<tc_include file="Public:footer" />
-
-	</div>
-	<!-- /container -->
-
-	<tc_include file="Public:scripts" />
+	<tc_include file="Public:footer"/>
 </body>
 </html>
