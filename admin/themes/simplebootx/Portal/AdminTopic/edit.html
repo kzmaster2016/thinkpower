@@ -20,7 +20,31 @@
 						<tr>
 							<th width="80">分类</th>
 							<td>
-								<select style="max-height:100px;" name="cid">{$taxonomys}</select>						 
+								<!-- <select style="max-height:100px;" name="cid">{$taxonomys}</select>						  -->
+
+								ForumCat: 
+								<select name="termcat" style="width: 120px;" id="termcat-select">
+									<option value='0'>全部</option>
+									<volist name="forumCat" id="vo">
+									 	<if condition="$vo['id']==$term['cid']">
+									 		<option value='{$vo.id}' selected="selected">{$vo.name}</option>
+									 	<else/>
+									 		<option value='{$vo.id}'>{$vo.name}</option>
+									 	</if>
+										
+									</volist>
+								</select>
+								Forum:
+								<select style="width: 120px;" name="cid" id="forum-select">
+									<option value='0'>全部</option>
+									<volist name="forum" id='vo'>
+										<if condition="$vo['id']==$term['id']">
+									 		<option value='{$vo.id}' selected="selected">{$vo.name}</option>
+									 	<else/>
+									 		<option value='{$vo.id}'>{$vo.name}</option>
+									 	</if>
+									</volist>
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -82,7 +106,37 @@
  
 	<script type="text/javascript">
 		$(function() {
-			 
+			  $('#termcat-select').on('change',function(event) {
+				event.preventDefault();
+				console.log($(this).val());
+
+				$.ajax({
+					url: "{:U('AdminTopic/getAjaxForum')}",
+					type: 'GET',
+					dataType: 'json',
+					data: {termcatid: $(this).val()},
+				})
+				.done(function(data) {
+				 
+					// console.log(data);
+					$('#forum-select').empty();
+
+					var _html='';
+					_html+="<option value='0'>全部</option>";
+					for (var i = 0; i < data.length; i++) {
+						// console.log(data[i]['id']+data[i].name);
+						_html+="<option value="+data[i]['id']+">"+data[i].name+"</option>";
+					}
+					$('#forum-select').append(_html);
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
+			});
 		});
 	</script>
 </body>

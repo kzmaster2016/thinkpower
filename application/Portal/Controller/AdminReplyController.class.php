@@ -79,6 +79,11 @@ class AdminReplyController extends AdminbaseController {
 		$posts=$this->reply_model->select();
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("posts", $posts);
+
+
+		$forumCat=M('ForumCat')->where(array("status"=>1))->order(array("listorder"=>"asc"))->select();
+		// dump($forumCat);
+		$this->assign("forumCat", $forumCat);
         $this->display();
 	}
 
@@ -96,8 +101,12 @@ class AdminReplyController extends AdminbaseController {
 	// 话题回复添加提交
 	public function add_post(){
 		if (IS_POST) {
+			if(empty($_POST['tid'])){
+				$this->error("请至少选择一个分类sdf！");
+			}
 			$reply = $_POST['post'];
 			$smeta = $_POST['smeta'];
+			$reply['tid'] =$_POST['tid'];
 			$reply['uid'] =get_current_admin_id();
 			$reply['content'] = htmlspecialchars_decode($reply['content']);
 			$reply['smeta'] = json_encode($smeta);
@@ -105,7 +114,7 @@ class AdminReplyController extends AdminbaseController {
 			try{
 				$result = $this->reply_model->add($reply);
 				if (result) {
-				  $this->success("添加成功！",U("AdminReply/index"));
+				  $this->success("添加成功sdfsa！");
 				} else {
 					$this->error("添加失败");
 				}
@@ -172,6 +181,10 @@ class AdminReplyController extends AdminbaseController {
 		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
 		$taxonomys = $tree->get_tree(0, $str);
 		$this->assign("taxonomys", $taxonomys);
+
+		$forumCat=M('ForumCat')->where(array("status"=>1))->order(array("listorder"=>"asc"))->select();
+		// dump($forumCat);
+		$this->assign("forumCat", $forumCat);
 	}
 
 	// 话题回复删除

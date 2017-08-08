@@ -3,10 +3,30 @@
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="javascript:;">话题回复管理</a></li>
+			<li class="active"><a href="javascript:;">回复管理</a></li>
 			<li><a href="{:U('AdminReply/add',array('term'=>empty($term['term_id'])?'':$term['term_id']))}" target="_self">添加回复</a></li>
 		</ul>
 		<form class="well form-search" method="post" action="{:U('AdminReply/index')}">
+
+			<div style="margin-bottom:10px;">
+			选择分类:&emsp;
+			ForumCat:
+			<select name="forumcat" style="width: 120px;" id="termcat-select">
+				<option value='0'>全部</option>
+				<volist name="forumCat" id="vo">
+				<option value='{$vo.id}'>{$vo.name}</option>
+				</volist>
+			</select>&nbsp; &nbsp;
+			Forum:
+			<select name="forum" style="width: 120px;" id="forum-select">
+				<option value='0'>全部</option>
+			</select>&nbsp; &nbsp;
+			Topic:
+			<select name="term" style="width: 120px;" id="topic-select">
+				<option value='0'>全部</option>
+			</select>
+
+			<!-- 
 			话题： 
 			<select name="term" style="width: 120px;">
 				<option value='0'>全部</option>
@@ -17,7 +37,9 @@
 				<?php
 				  }
 				?>
-			</select> &nbsp;&nbsp;
+			</select>  -->
+			</div>
+
 			时间：
 			<input type="text" name="start_time" class="js-datetime" value="{$formget.start_time|default=''}" style="width: 120px;" autocomplete="off">-
 			<input type="text" class="js-datetime" name="end_time" value="{$formget.end_time|default=''}" style="width: 120px;" autocomplete="off"> &nbsp; &nbsp;
@@ -84,6 +106,60 @@
 			refersh_window();
 		}, 2000);
 		$(function() {
+
+
+			$('#termcat-select').on('change',function(event) {
+				event.preventDefault();
+				console.log($(this).val());
+
+				$.ajax({
+					url: "{:U('AdminTopic/getAjaxForum')}",
+					type: 'GET',
+					dataType: 'json',
+					data: {termcatid: $(this).val()},
+				})
+				.done(function(data) {
+				 
+					// console.log(data);
+					$('#forum-select').empty();
+
+					var _html='';
+					_html+="<option value='0'>全部</option>";
+					for (var i = 0; i < data.length; i++) {
+						// console.log(data[i]['id']+data[i].name);
+						_html+="<option value="+data[i]['id']+">"+data[i].name+"</option>";
+					}
+					$('#forum-select').append(_html);
+				});
+				
+			});
+
+			$('#forum-select').on('change',function(event) {
+				event.preventDefault();
+				console.log($(this).val());
+
+				$.ajax({
+					url: "{:U('AdminTopic/getAjaxTopic')}",
+					type: 'GET',
+					dataType: 'json',
+					data: {forumid: $(this).val()},
+				})
+				.done(function(data) {
+				 
+					// console.log(data);
+					$('#topic-select').empty();
+
+					var _html='';
+					_html+="<option value='0'>全部</option>";
+					for (var i = 0; i < data.length; i++) {
+						// console.log(data[i]['id']+data[i].name);
+						_html+="<option value="+data[i]['id']+">"+data[i].name+"</option>";
+					}
+					$('#topic-select').append(_html);
+				});
+				
+			});
+
 			setCookie("refersh_time", 0);
 			Wind.use('ajaxForm', 'artDialog', 'iframeTools', function() {
 				//批量复制

@@ -8,7 +8,7 @@
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li><a href="{:U('AdminReply/index')}">话题回复管理</a></li>
+			<li><a href="{:U('AdminReply/index')}">回复管理</a></li>
 			<li class="active"><a href="{:U('AdminReply/add')}" target="_self">添加回复</a></li>
 		</ul>
 		<form action="{:U('AdminReply/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
@@ -18,9 +18,9 @@
 						<tr>
 							<th width="140">话题</th>
 							<td>
-								<select style="max-height: 100px;" name="post[tid]">
+								<!-- <select style="max-height: 100px;" name="post[tid]">
 									<option value=''>全部</option>
-									{$taxonomys}
+									{$taxonomys} -->
 									<!-- <?php
 										for($i = 0; $i < count($topics); $i++){
 									?>
@@ -28,7 +28,24 @@
 									<?php
 									  }
 									?> -->
+								<!-- </select> -->
+
+								ForumCat:
+								<select style="width: 120px;" id="termcat-select">
+									<option value='0'>全部</option>
+									<volist name="forumCat" id="vo">
+									<option value='{$vo.id}'>{$vo.name}</option>
+									</volist>
+								</select>&nbsp; &nbsp;
+								Forum:
+								<select style="width: 120px;" id="forum-select">
+									<option value='0'>全部</option>
+								</select>&nbsp; &nbsp;
+								Topic:
+								<select name="tid" style="width: 120px;" id="topic-select">
+									<option value='0'>全部</option>
 								</select>
+								
 							</td>
 						</tr>
 						<tr>
@@ -82,6 +99,59 @@
 	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
+
+			$('#termcat-select').on('change',function(event) {
+				event.preventDefault();
+				console.log($(this).val());
+
+				$.ajax({
+					url: "{:U('AdminTopic/getAjaxForum')}",
+					type: 'GET',
+					dataType: 'json',
+					data: {termcatid: $(this).val()},
+				})
+				.done(function(data) {
+				 
+					// console.log(data);
+					$('#forum-select').empty();
+
+					var _html='';
+					_html+="<option value='0'>全部</option>";
+					for (var i = 0; i < data.length; i++) {
+						// console.log(data[i]['id']+data[i].name);
+						_html+="<option value="+data[i]['id']+">"+data[i].name+"</option>";
+					}
+					$('#forum-select').append(_html);
+				});
+				
+			});
+
+			$('#forum-select').on('change',function(event) {
+				event.preventDefault();
+				console.log($(this).val());
+
+				$.ajax({
+					url: "{:U('AdminTopic/getAjaxTopic')}",
+					type: 'GET',
+					dataType: 'json',
+					data: {forumid: $(this).val()},
+				})
+				.done(function(data) {
+				 
+					// console.log(data);
+					$('#topic-select').empty();
+
+					var _html='';
+					_html+="<option value='0'>全部</option>";
+					for (var i = 0; i < data.length; i++) {
+						// console.log(data[i]['id']+data[i].name);
+						_html+="<option value="+data[i]['id']+">"+data[i].name+"</option>";
+					}
+					$('#topic-select').append(_html);
+				});
+				
+			});
+
 			$(".js-ajax-close-btn").on('click', function(e) {
 				e.preventDefault();
 				Wind.use("artDialog", function() {
@@ -164,7 +234,7 @@
 					},
 					//验证规则
 					rules : {
-						'post[tid]' : {
+						'tid' : {
 							required : 1
 						},
 						'post[content]' : {
@@ -173,7 +243,7 @@
 					},
 					//验证未通过提示消息
 					messages : {
-						'post[tid]' : {
+						'tid' : {
 							required : '请选择话题'
 						},
 						'post[content]' : {

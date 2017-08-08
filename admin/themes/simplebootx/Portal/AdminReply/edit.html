@@ -8,7 +8,7 @@
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li><a href="{:U('AdminReply/index')}">话题回复管理</a></li>
+			<li><a href="{:U('AdminReply/index')}">回复管理</a></li>
 			<li class="active"><a href="{:U('AdminReply/edit',array('id'=>empty($post['id'])?'':$post['id']))}" target="_self">编辑回复</a></li>
 		</ul>
 		<form action="{:U('AdminReply/edit_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
@@ -19,7 +19,7 @@
 						<tr>
 							<th width="140">话题</th>
 							<td>
-								<select style="max-height: 100px;" name="post[tid]">
+								<select style="max-height: 100px;" name="post[tid]" disabled="disabled">
 									<option value=''>全部</option>
 									{$taxonomys}
 									<!-- <?php
@@ -34,6 +34,7 @@
 										}
 									?> -->
 								</select>
+								编辑回复时，不能修改该回复所属的话题；您可以在相应的话题下添加新回复
 							</td>
 						</tr>
 						<tr>

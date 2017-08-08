@@ -70,12 +70,17 @@ class AdminTopicController extends AdminbaseController {
 		$id=  I("get.id",0,'intval');
 
 		$post = $this->posts_model->where(array("id"=>$id))->select();
-		$term_id = I("get.term",0,'intval');
+		$term_id = I("get.cid",0,'intval');
 
 		// dump($post);
 		$this->_getTermTree();
 		$term=$this->terms_model->where(array('id'=>$term_id))->find();
+		// dump($term);
+
+		$forum=M('Forum')->where(array('status'=>array('neq',3),'cid'=>$term['cid']))->order("time DESC")->select();
+
 		$this->assign("term",$term);
+		$this->assign("forum",$forum);
 		$this->assign("post",$post[0]);
 		$this->display();
 	}
@@ -189,9 +194,13 @@ class AdminTopicController extends AdminbaseController {
 		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
 		$taxonomys = $tree->get_tree(0, $str);
 		$this->assign("taxonomys", $taxonomys);
+
+		$forumCat=M('ForumCat')->where(array("status"=>1))->order(array("listorder"=>"asc"))->select();
+		// dump($forumCat);
+		$this->assign("forumCat", $forumCat);
+
+
 	}
-
-
 
 	// 获取分类树结构
 	private function _getTermTree($term=array()){
@@ -218,6 +227,35 @@ class AdminTopicController extends AdminbaseController {
 		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
 		$taxonomys = $tree->get_tree(0, $str);
 		$this->assign("taxonomys", $taxonomys);
+
+		$forumCat=M('ForumCat')->where(array("status"=>1))->order(array("listorder"=>"asc"))->select();
+		// dump($forumCat);
+		$this->assign("forumCat", $forumCat);
+	}
+
+	//练级选择topic
+	public function getAjaxForum(){
+		if (IS_AJAX) {
+
+			$forumCatId=I("get.termcatid");
+
+			$forum=M('Forum')->where(array('status'=>array('neq',3),'cid'=>$forumCatId))->order("time DESC")->select();
+
+			$data['status']  = 1;
+			$data['content'] = $forum;
+			exit(json_encode($forum));
+		}
+	}
+	//练级选择topic和reply
+	public function getAjaxTopic(){
+		if (IS_AJAX) {
+
+			$forumId=I("get.forumid");
+
+			$topic=M('Topic')->where(array('status'=>array('neq',3),'cid'=>$forumId))->order("time DESC")->select();
+ 
+			exit(json_encode($topic));
+		}
 	}
 
 	// 删除
