@@ -83,6 +83,8 @@ input:-ms-input-placeholder{color: #f1f1f1;}
 .header .main-nav li.active a{color: #c52720;}
 .header .main-nav li.active a:hover{}
 .header .navbar-collapse{margin: 0 -15px;}
+.top-links{padding: 4px 30px 0 0;}
+.top-links a{display: inline-block;margin: 0 1px;}
 
 /*header2*/
 .head2-page .header{position: static;background: #fff;}
